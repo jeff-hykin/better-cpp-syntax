@@ -5,7 +5,7 @@
     - storage.modifier.static
 - source: void
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: a
@@ -115,12 +115,17 @@
 - source: a
   scopesBegin:
     - meta.body.function.definition
+    - meta.declaration
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: a
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -132,54 +137,63 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: )
   scopes:
@@ -189,7 +203,8 @@
     - punctuation.terminator.statement
 - source: a
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.a
 - source: '->'
   scopes:
     - punctuation.separator.pointer-access
@@ -204,6 +219,7 @@
     - keyword.operator.bitwise
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: )
   scopes:
@@ -223,7 +239,7 @@
   scopesBegin:
     - meta.parens.control.for
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: a
@@ -234,6 +250,7 @@
     - punctuation.separator.colon.range-based
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
   scopesEnd:
     - meta.parens.control.for
@@ -248,51 +265,71 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: auto
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '&'
   scopes:
     - storage.modifier.reference
 - source: a
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: a
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.a
 - source: .
   scopes:
     - punctuation.separator.dot-access
 - source: a
   scopes:
     - variable.other.property
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: auto
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: a
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: a
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.a
 - source: .
   scopes:
     - punctuation.separator.dot-access
 - source: a
   scopes:
     - variable.other.property
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -306,12 +343,14 @@
     - punctuation.section.parens.begin.bracket.round
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: '&&'
   scopes:
     - keyword.operator.logical
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: )
   scopes:
@@ -336,6 +375,7 @@
     - punctuation.section.parens.begin.bracket.round.conditional.switch
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: )
   scopes:
@@ -355,6 +395,7 @@
     - keyword.control.case
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ':'
   scopes:
@@ -363,7 +404,8 @@
     - meta.conditional.case
 - source: a
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.a
 - source: '->'
   scopes:
     - punctuation.separator.pointer-access
@@ -375,7 +417,8 @@
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: a
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.a
 - source: '->'
   scopes:
     - punctuation.separator.pointer-access
@@ -407,6 +450,7 @@
     - keyword.control.case
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ':'
   scopes:
@@ -415,7 +459,8 @@
     - meta.conditional.case
 - source: a
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.a
 - source: '->'
   scopes:
     - punctuation.separator.pointer-access
@@ -427,7 +472,8 @@
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: a
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.a
 - source: '->'
   scopes:
     - punctuation.separator.pointer-access
@@ -459,6 +505,7 @@
     - keyword.control.case
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ':'
   scopes:
@@ -467,7 +514,8 @@
     - meta.conditional.case
 - source: a
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.a
 - source: '->'
   scopes:
     - punctuation.separator.pointer-access
@@ -479,7 +527,8 @@
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: a
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.a
 - source: '->'
   scopes:
     - punctuation.separator.pointer-access
@@ -511,6 +560,7 @@
     - keyword.control.case
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ':'
   scopes:
@@ -519,7 +569,8 @@
     - meta.conditional.case
 - source: a
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.a
 - source: '->'
   scopes:
     - punctuation.separator.pointer-access
@@ -531,7 +582,8 @@
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: a
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.a
 - source: '->'
   scopes:
     - punctuation.separator.pointer-access
@@ -575,54 +627,63 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: )
   scopes:
@@ -645,7 +706,7 @@
     - storage.modifier.static
 - source: void
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: a
@@ -706,34 +767,49 @@
 - source: a
   scopesBegin:
     - meta.body.function.definition
+    - meta.declaration
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: a
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: a
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: a
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: '0'
   scopes:
     - constant.numeric.decimal
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: a
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.a
 - source: '->'
   scopes:
     - punctuation.separator.pointer-access
@@ -769,7 +845,8 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: a
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.a
 - source: '->'
   scopes:
     - punctuation.separator.pointer-access
@@ -790,7 +867,8 @@
     - punctuation.terminator.statement
 - source: a
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.a
 - source: '->'
   scopes:
     - punctuation.separator.pointer-access
@@ -802,6 +880,7 @@
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: )
   scopes:
@@ -811,7 +890,8 @@
     - punctuation.terminator.statement
 - source: a
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.a
 - source: '->'
   scopes:
     - punctuation.separator.pointer-access
@@ -823,6 +903,7 @@
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: )
   scopes:
@@ -838,30 +919,35 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: )
   scopes:
@@ -871,7 +957,8 @@
     - punctuation.terminator.statement
 - source: a
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.a
 - source: '->'
   scopes:
     - punctuation.separator.pointer-access
@@ -886,6 +973,7 @@
     - keyword.operator.bitwise
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: )
   scopes:
@@ -905,7 +993,7 @@
   scopesBegin:
     - meta.parens.control.for
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: a
@@ -916,6 +1004,7 @@
     - punctuation.separator.colon.range-based
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
   scopesEnd:
     - meta.parens.control.for
@@ -937,7 +1026,8 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: a
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.a
 - source: '->'
   scopes:
     - punctuation.separator.pointer-access
@@ -955,18 +1045,21 @@
     - punctuation.separator.delimiter.comma
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: )
   scopes:

@@ -13,9 +13,11 @@
     - punctuation.separator.scope-resolution
 - source: string
   scopes:
+    - variable.lower-case
     - variable.other.unknown.string
 - source: led_paths
   scopes:
+    - variable.snake-case
     - variable.other.unknown.led_paths
 - source: '[] '
 - source: '{'
@@ -30,6 +32,7 @@
     - punctuation.definition.begin.bracket.square
 - source: RED
   scopes:
+    - variable.upper-case
     - variable.other.unknown.RED
 - source: ']'
   scopes:
@@ -41,10 +44,12 @@
     - keyword.operator.assignment
 - source: LED_PATH
   scopes:
+    - entity.name.function.call.upper-case
     - entity.name.function.call
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: '"'
   scopesBegin:
     - string.quoted.double
@@ -59,6 +64,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -69,6 +75,7 @@
     - punctuation.definition.begin.bracket.square
 - source: GREEN
   scopes:
+    - variable.upper-case
     - variable.other.unknown.GREEN
 - source: ']'
   scopes:
@@ -80,10 +87,12 @@
     - keyword.operator.assignment
 - source: LED_PATH
   scopes:
+    - entity.name.function.call.upper-case
     - entity.name.function.call
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: '"'
   scopesBegin:
     - string.quoted.double
@@ -98,6 +107,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -108,6 +118,7 @@
     - punctuation.definition.begin.bracket.square
 - source: BLUE
   scopes:
+    - variable.upper-case
     - variable.other.unknown.BLUE
 - source: ']'
   scopes:
@@ -119,10 +130,12 @@
     - keyword.operator.assignment
 - source: LED_PATH
   scopes:
+    - entity.name.function.call.upper-case
     - entity.name.function.call
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: '"'
   scopesBegin:
     - string.quoted.double
@@ -137,6 +150,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -147,6 +161,7 @@
     - punctuation.definition.begin.bracket.square
 - source: WHITE
   scopes:
+    - variable.upper-case
     - variable.other.unknown.WHITE
 - source: ']'
   scopes:
@@ -158,10 +173,12 @@
     - keyword.operator.assignment
 - source: LED_PATH
   scopes:
+    - entity.name.function.call.upper-case
     - entity.name.function.call
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: '"'
   scopesBegin:
     - string.quoted.double
@@ -176,6 +193,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma

@@ -71,6 +71,7 @@
     - punctuation.section.parens.begin.bracket.round
 - source: edited
   scopes:
+    - variable.lower-case
     - variable.other.unknown.edited
 - source: )
   scopes:
@@ -95,6 +96,7 @@
     - punctuation.section.parens.begin.bracket.round
 - source: ampersand
   scopes:
+    - variable.lower-case
     - variable.other.unknown.ampersand
 - source: )
   scopes:
@@ -117,6 +119,7 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: string
   scopes:
+    - variable.lower-case
     - variable.other.unknown.string
 - source: ','
   scopes:
@@ -178,12 +181,14 @@
     - constant.character.escape.line-continuation
 - source: ampersand
   scopes:
+    - variable.lower-case
     - variable.other.unknown.ampersand
 - source: '='
   scopes:
     - keyword.operator.assignment
 - source: 'TRUE'
   scopes:
+    - variable.upper-case
     - variable.other.unknown.TRUE
 - source: ;
   scopes:
@@ -199,6 +204,7 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: string
   scopes:
+    - variable.lower-case
     - variable.other.unknown.string
 - source: ','
   scopes:

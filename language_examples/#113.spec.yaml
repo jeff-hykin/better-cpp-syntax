@@ -2,7 +2,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: function
@@ -33,7 +33,8 @@
     - punctuation.section.parens.begin.bracket.round
 - source: files
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.files
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -75,7 +76,7 @@
     - punctuation.separator.scope-resolution.template.call
 - source: runtime_error
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '>'
   scopes:

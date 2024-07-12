@@ -63,7 +63,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: test
@@ -200,6 +200,7 @@
     - storage.type.built-in.primitive
 - source: var
   scopes:
+    - variable.lower-case
     - variable.other.unknown.var
 - source: ;
   scopes:
@@ -257,7 +258,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: cstyle
@@ -330,7 +331,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: javadocBanner
@@ -447,7 +448,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: doxygenBanner
@@ -642,6 +643,7 @@
     - keyword.operator.arithmetic
 - source: enumPtr
   scopes:
+    - variable.camel-case
     - variable.other.unknown.enumPtr
 - source: ','
   scopes:
@@ -667,6 +669,7 @@
     - comment.block.documentation
 - source: enumVar
   scopes:
+    - variable.camel-case
     - variable.other.unknown.enumVar
   scopesEnd:
     - meta.tail.enum
@@ -796,7 +799,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: testMe
@@ -888,7 +891,7 @@
     - storage.modifier.virtual
 - source: void
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: testMeToo
@@ -957,13 +960,19 @@
   scopesEnd:
     - comment.block.documentation
 - source: int
+  scopesBegin:
+    - meta.declaration
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: publicVar
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.camel-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -988,7 +997,7 @@
     - comment.block.documentation
 - source: int
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: (

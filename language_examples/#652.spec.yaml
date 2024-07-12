@@ -15,7 +15,7 @@
   scopesBegin:
     - meta.body.struct
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: (
@@ -44,7 +44,7 @@
     - punctuation.terminator.statement
 - source: void
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: (
@@ -73,7 +73,7 @@
     - punctuation.terminator.statement
 - source: void
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: (
@@ -114,7 +114,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: baz
@@ -137,16 +137,16 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
-    - keyword.other.static_assert
+    - keyword.other.static-assert
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.static_assert
+    - punctuation.section.arguments.begin.bracket.round.static-assert
 - source: 'false'
   scopes:
     - constant.language.false
 - source: ','
   scopesBegin:
-    - meta.static_assert.message
+    - meta.static-assert.message
   scopes:
     - punctuation.separator.delimiter.comma
 - source: '"'
@@ -159,28 +159,37 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
-    - meta.static_assert.message
+    - meta.static-assert.message
     - string.quoted.double
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.static_assert
+    - punctuation.section.arguments.end.bracket.round.static-assert
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: x
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: '0'
   scopes:
     - constant.numeric.decimal
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement

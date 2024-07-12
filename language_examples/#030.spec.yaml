@@ -91,7 +91,7 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: __VA_ARGS__
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '>'
   scopes:
@@ -112,6 +112,8 @@
   scopes:
     - constant.character.escape.line-continuation
 - source: static
+  scopesBegin:
+    - meta.assignment
   scopes:
     - storage.modifier.specifier.static
 - source: const
@@ -119,18 +121,25 @@
     - storage.modifier.specifier.const
 - source: bool
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: isPoint
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.camel-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: 'true'
   scopes:
     - constant.language.true
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -175,6 +184,7 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: T
   scopes:
+    - variable.upper-case
     - variable.other.unknown.T
 - source: )
   scopes:
@@ -218,7 +228,7 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: T
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '>'
   scopes:
@@ -231,7 +241,7 @@
     - storage.type.modifier.access.public
 - source: std
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -242,7 +252,7 @@
   scopes:
     - entity.name.type
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
 - source: \
   scopes:
     - constant.character.escape.line-continuation
@@ -292,6 +302,7 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: T
   scopes:
+    - variable.upper-case
     - variable.other.unknown.T
 - source: )
   scopes:
@@ -335,7 +346,7 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: T
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '>'
   scopes:
@@ -348,7 +359,7 @@
     - storage.type.modifier.access.public
 - source: std
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -359,7 +370,7 @@
   scopes:
     - entity.name.type
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
 - source: \
   scopes:
     - constant.character.escape.line-continuation
@@ -428,7 +439,7 @@
     - storage.modifier
 - source: std
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -455,7 +466,7 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: T
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '>'
   scopes:
@@ -469,7 +480,7 @@
     - punctuation.separator.scope-resolution.template.call
 - source: isPoint
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '>'
   scopes:
@@ -485,7 +496,7 @@
   scopes:
     - entity.name.type
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -500,7 +511,7 @@
     - storage.modifier
 - source: std
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -527,7 +538,7 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: U
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '>'
   scopes:
@@ -541,7 +552,7 @@
     - punctuation.separator.scope-resolution.template.call
 - source: isPoint
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '>'
   scopes:
@@ -558,7 +569,7 @@
     - entity.name.type
   scopesEnd:
     - meta.template.definition
-    - meta.qualified_type
+    - meta.qualified-type
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.definition
@@ -632,6 +643,7 @@
 - source: static
   scopesBegin:
     - meta.body.struct
+    - meta.assignment
   scopes:
     - storage.modifier.specifier.static
 - source: const
@@ -639,18 +651,25 @@
     - storage.modifier.specifier.const
 - source: bool
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: isPoint
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.camel-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: 'false'
   scopes:
     - constant.language.false
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -699,6 +718,7 @@
 - source: static
   scopesBegin:
     - meta.body.struct
+    - meta.assignment
   scopes:
     - storage.modifier.specifier.static
 - source: const
@@ -706,18 +726,25 @@
     - storage.modifier.specifier.const
 - source: bool
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: value
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: 'false'
   scopes:
     - constant.language.false
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -766,6 +793,7 @@
 - source: static
   scopesBegin:
     - meta.body.struct
+    - meta.assignment
   scopes:
     - storage.modifier.specifier.static
 - source: const
@@ -773,18 +801,25 @@
     - storage.modifier.specifier.const
 - source: bool
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: value
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: 'false'
   scopes:
     - constant.language.false
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement

@@ -4,6 +4,7 @@
     - storage.type.built-in.primitive
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: '='
   scopes:
@@ -29,6 +30,7 @@
     - keyword.operator.arithmetic
 - source: b
   scopes:
+    - variable.lower-case
     - variable.other.unknown.b
 - source: '='
   scopes:

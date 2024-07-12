@@ -2,7 +2,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: func
@@ -50,6 +50,7 @@
     - punctuation.separator.delimiter.comma
 - source: 'N'
   scopes:
+    - variable.upper-case
     - variable.other.unknown.N
 - source: )
   scopes:
@@ -73,6 +74,7 @@
     - storage.type.built-in.primitive
 - source: i
   scopes:
+    - variable.lower-case
     - variable.other.unknown.i
 - source: '='
   scopes:
@@ -85,12 +87,14 @@
     - punctuation.terminator.statement
 - source: i
   scopes:
+    - variable.lower-case
     - variable.other.unknown.i
 - source: <=
   scopes:
     - keyword.operator.comparison
 - source: 'N'
   scopes:
+    - variable.upper-case
     - variable.other.unknown.N
 - source: ;
   scopes:
@@ -100,6 +104,7 @@
     - keyword.operator.increment
 - source: i
   scopes:
+    - variable.lower-case
     - variable.other.unknown.i
   scopesEnd:
     - meta.parens.control.for
@@ -174,12 +179,14 @@
     - punctuation.definition.begin.bracket.square
 - source: i
   scopes:
+    - variable.lower-case
     - variable.other.unknown.i
 - source: '=='
   scopes:
     - keyword.operator.comparison
 - source: 'N'
   scopes:
+    - variable.upper-case
     - variable.other.unknown.N
 - source: ']'
   scopes:
@@ -209,6 +216,7 @@
     - punctuation.definition.begin.bracket.square
 - source: 'N'
   scopes:
+    - variable.upper-case
     - variable.other.unknown.N
 - source: +
   scopes:
@@ -240,6 +248,7 @@
     - storage.type.built-in.primitive
 - source: i
   scopes:
+    - variable.lower-case
     - variable.other.unknown.i
 - source: '='
   scopes:
@@ -252,12 +261,14 @@
     - punctuation.terminator.statement
 - source: i
   scopes:
+    - variable.lower-case
     - variable.other.unknown.i
 - source: <=
   scopes:
     - keyword.operator.comparison
 - source: 'N'
   scopes:
+    - variable.upper-case
     - variable.other.unknown.N
 - source: ;
   scopes:
@@ -267,6 +278,7 @@
     - keyword.operator.increment
 - source: i
   scopes:
+    - variable.lower-case
     - variable.other.unknown.i
   scopesEnd:
     - meta.parens.control.for
@@ -285,6 +297,7 @@
     - punctuation.definition.begin.bracket.square
 - source: i
   scopes:
+    - variable.lower-case
     - variable.other.unknown.i
 - source: ']'
   scopes:
@@ -296,6 +309,7 @@
     - keyword.operator.assignment
 - source: i
   scopes:
+    - variable.lower-case
     - variable.other.unknown.i
 - source: ;
   scopes:
@@ -315,6 +329,7 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: perm
   scopes:
+    - variable.lower-case
     - variable.other.unknown.perm
 - source: +
   scopes:
@@ -327,6 +342,7 @@
     - punctuation.separator.delimiter.comma
 - source: perm
   scopes:
+    - variable.lower-case
     - variable.other.unknown.perm
 - source: +
   scopes:
@@ -339,12 +355,14 @@
     - keyword.operator.arithmetic
 - source: 'N'
   scopes:
+    - variable.upper-case
     - variable.other.unknown.N
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: gen
   scopes:
+    - variable.lower-case
     - variable.other.unknown.gen
 - source: )
   scopes:

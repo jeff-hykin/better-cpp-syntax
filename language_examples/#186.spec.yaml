@@ -7,12 +7,14 @@
     - punctuation.separator.scope-resolution
 - source: vector
   scopes:
+    - variable.lower-case
     - variable.other.unknown.vector
 - source: <
   scopes:
     - keyword.operator.comparison
 - source: pair
   scopes:
+    - variable.lower-case
     - variable.other.unknown.pair
 - source: <
   scopes:
@@ -36,6 +38,7 @@
     - keyword.operator.arithmetic
 - source: g
   scopes:
+    - variable.lower-case
     - variable.other.unknown.g
 - source: '='
   scopes:
@@ -53,12 +56,14 @@
     - punctuation.separator.scope-resolution
 - source: vector
   scopes:
+    - variable.lower-case
     - variable.other.unknown.vector
 - source: <
   scopes:
     - keyword.operator.comparison
 - source: pair
   scopes:
+    - variable.lower-case
     - variable.other.unknown.pair
 - source: <
   scopes:
@@ -84,6 +89,7 @@
     - punctuation.definition.begin.bracket.square
 - source: 'n'
   scopes:
+    - variable.lower-case
     - variable.other.unknown.n
 - source: ']'
   scopes:

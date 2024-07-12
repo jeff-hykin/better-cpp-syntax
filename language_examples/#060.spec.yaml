@@ -2,7 +2,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: func
@@ -25,6 +25,7 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
+    - variable.lower-case
     - variable.other.unknown.stream
 - source: '<<'
   scopes:
@@ -50,6 +51,7 @@
     - punctuation.section.parens.begin.bracket.round
 - source: val
   scopes:
+    - variable.lower-case
     - variable.other.unknown.val
 - source: '>>'
   scopes:
@@ -86,6 +88,7 @@
     - punctuation.section.parens.begin.bracket.round
 - source: val
   scopes:
+    - variable.lower-case
     - variable.other.unknown.val
 - source: '>>'
   scopes:
@@ -122,6 +125,7 @@
     - punctuation.section.parens.begin.bracket.round
 - source: val
   scopes:
+    - variable.lower-case
     - variable.other.unknown.val
 - source: '>>'
   scopes:
@@ -158,6 +162,7 @@
     - punctuation.section.parens.begin.bracket.round
 - source: val
   scopes:
+    - variable.lower-case
     - variable.other.unknown.val
 - source: '>>'
   scopes:
@@ -194,6 +199,7 @@
     - punctuation.section.parens.begin.bracket.round
 - source: val
   scopes:
+    - variable.lower-case
     - variable.other.unknown.val
 - source: '>>'
   scopes:
@@ -230,6 +236,7 @@
     - punctuation.section.parens.begin.bracket.round
 - source: val
   scopes:
+    - variable.lower-case
     - variable.other.unknown.val
 - source: '>>'
   scopes:
@@ -266,6 +273,7 @@
     - punctuation.section.parens.begin.bracket.round
 - source: val
   scopes:
+    - variable.lower-case
     - variable.other.unknown.val
 - source: '>>'
   scopes:
@@ -302,6 +310,7 @@
     - punctuation.section.parens.begin.bracket.round
 - source: val
   scopes:
+    - variable.lower-case
     - variable.other.unknown.val
 - source: )
   scopes:

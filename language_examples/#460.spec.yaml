@@ -29,7 +29,7 @@
     - punctuation.separator.scope-resolution.template.call
 - source: pair
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.type
 - source: <
@@ -46,7 +46,7 @@
     - punctuation.separator.scope-resolution.template.call
 - source: xml_node
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: ','
   scopes:
@@ -60,7 +60,7 @@
     - punctuation.separator.scope-resolution.template.call
 - source: map
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.type
 - source: <
@@ -77,7 +77,7 @@
     - punctuation.separator.scope-resolution.template.call
 - source: basic_string
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.type
 - source: <
@@ -93,7 +93,7 @@
   scopes:
     - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
     - meta.template.call
 - source: ','
   scopes:
@@ -107,7 +107,7 @@
     - punctuation.separator.scope-resolution.template.call
 - source: xml_node
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: ','
   scopes:
@@ -121,7 +121,7 @@
     - punctuation.separator.scope-resolution.template.call
 - source: less
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.type
 - source: <
@@ -138,7 +138,7 @@
     - punctuation.separator.scope-resolution.template.call
 - source: basic_string
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.type
 - source: <
@@ -154,13 +154,13 @@
   scopes:
     - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
     - meta.template.call
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
     - meta.template.call
 - source: ','
   scopes:
@@ -174,7 +174,7 @@
     - punctuation.separator.scope-resolution.template.call
 - source: allocator
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.type
 - source: <
@@ -191,7 +191,7 @@
     - punctuation.separator.scope-resolution.template.call
 - source: pair
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.type
 - source: <
@@ -211,7 +211,7 @@
     - punctuation.separator.scope-resolution.template.call
 - source: basic_string
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.type
 - source: <
@@ -227,7 +227,7 @@
   scopes:
     - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
     - meta.template.call
 - source: ','
   scopes:
@@ -241,31 +241,31 @@
     - punctuation.separator.scope-resolution.template.call
 - source: xml_node
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
     - meta.template.call
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
     - meta.template.call
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
     - meta.template.call
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
     - meta.template.call
 - source: '>'
   scopes:
@@ -278,6 +278,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: type
+  scopesBegin:
+    - variable.lower-case
   scopes:
     - variable.other.unknown.type
 - source: dnode

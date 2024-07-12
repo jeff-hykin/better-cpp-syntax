@@ -43,6 +43,7 @@
     - punctuation.section.parens.begin.bracket.round
 - source: addr
   scopes:
+    - variable.lower-case
     - variable.other.unknown.addr
 - source: )
   scopes:
@@ -54,12 +55,14 @@
     - keyword.operator.comparison
 - source: UPGRADE_BASE_ADDR
   scopes:
+    - variable.upper-case
     - variable.other.unknown.UPGRADE_BASE_ADDR
 - source: +
   scopes:
     - keyword.operator.arithmetic
 - source: UPGRADE_SPACE_SIZE
   scopes:
+    - variable.upper-case
     - variable.other.unknown.UPGRADE_SPACE_SIZE
 - source: )
   scopes:

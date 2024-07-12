@@ -14,16 +14,22 @@
 - source: int
   scopesBegin:
     - meta.body.struct
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: x
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: f
   scopes:
     - entity.name.function.call
@@ -48,43 +54,61 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: 'y'
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: '100'
   scopes:
     - constant.numeric.decimal
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: const
+  scopesBegin:
+    - meta.assignment
   scopes:
     - storage.modifier.specifier.const
 - source: char
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '*'
   scopes:
     - storage.modifier.pointer
 - source: z
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: '"'
   scopesBegin:
     - string.quoted.double
@@ -95,6 +119,7 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
+    - meta.assignment
     - string.quoted.double
 - source: ;
   scopes:
@@ -121,16 +146,22 @@
 - source: int
   scopesBegin:
     - meta.body.struct
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: x1
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: f
   scopes:
     - entity.name.function.call
@@ -155,20 +186,29 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: x2
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: f
   scopes:
     - entity.name.function.call
@@ -193,20 +233,29 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: x3
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: f
   scopes:
     - entity.name.function.call
@@ -239,44 +288,61 @@
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: )
   scopesEnd:
+    - meta.assignment
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: 'y'
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: '100'
   scopes:
     - constant.numeric.decimal
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: const
+  scopesBegin:
+    - meta.assignment
   scopes:
     - storage.modifier.specifier.const
 - source: char
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '*'
   scopes:
     - storage.modifier.pointer
 - source: z
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: '"'
   scopesBegin:
     - string.quoted.double
@@ -287,6 +353,7 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
+    - meta.assignment
     - string.quoted.double
 - source: ;
   scopes:

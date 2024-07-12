@@ -2,7 +2,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: func
@@ -38,6 +38,7 @@
     - punctuation.separator.scope-resolution
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
@@ -52,6 +53,7 @@
 - source: T
   scopes:
     - meta.arguments.operator.typeid
+    - variable.upper-case
     - variable.other.unknown.T
 - source: )
   scopes:
@@ -86,6 +88,7 @@
     - keyword.operator.bitwise.shift
 - source: valueT
   scopes:
+    - variable.camel-case
     - variable.other.unknown.valueT
 - source: '<<'
   scopes:
@@ -99,6 +102,7 @@
     - punctuation.separator.scope-resolution
 - source: endl
   scopes:
+    - variable.lower-case
     - variable.other.unknown.endl
 - source: ;
   scopes:
@@ -145,7 +149,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: func
@@ -181,6 +185,7 @@
     - punctuation.separator.scope-resolution
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
@@ -195,6 +200,7 @@
 - source: T
   scopes:
     - meta.arguments.operator.typeid
+    - variable.upper-case
     - variable.other.unknown.T
 - source: )
   scopes:
@@ -229,6 +235,7 @@
     - keyword.operator.bitwise.shift
 - source: valueT
   scopes:
+    - variable.camel-case
     - variable.other.unknown.valueT
 - source: '<<'
   scopes:
@@ -242,6 +249,7 @@
     - punctuation.separator.scope-resolution
 - source: endl
   scopes:
+    - variable.lower-case
     - variable.other.unknown.endl
 - source: ;
   scopes:

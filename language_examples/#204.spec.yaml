@@ -2,7 +2,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: fun
@@ -39,7 +39,7 @@
     - meta.body.function.definition
 - source: int
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: main
@@ -61,30 +61,38 @@
 - source: int
   scopesBegin:
     - meta.body.function.definition
+    - meta.declaration
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: a
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: b
   scopes:
+    - variable.lower-case
     - variable.other.unknown.b
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: '='
   scopes:
     - keyword.operator.assignment
 - source: b
   scopes:
+    - variable.lower-case
     - variable.other.unknown.b
 - source: '*'
   scopes:

@@ -99,7 +99,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: test_stress_balls
@@ -122,6 +122,7 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
+    - variable.upper-case
     - variable.other.unknown.A
 - source: ;
   scopes:
@@ -160,7 +161,7 @@
     - comment.line.double-slash
 - source: ifstream
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: input_file1
   scopes:
@@ -198,6 +199,7 @@
     - keyword.operator.logical
 - source: input_file1
   scopes:
+    - variable.snake-case
     - variable.other.unknown.input_file1
 - source: )
   scopes:
@@ -211,6 +213,7 @@
     - punctuation.section.block.begin.bracket.curly
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
@@ -254,7 +257,7 @@
     - meta.block
 - source: ifstream
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: input_file2
   scopes:
@@ -292,6 +295,7 @@
     - keyword.operator.logical
 - source: input_file2
   scopes:
+    - variable.snake-case
     - variable.other.unknown.input_file2
 - source: )
   scopes:
@@ -305,6 +309,7 @@
     - punctuation.section.block.begin.bracket.curly
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
@@ -355,45 +360,61 @@
   scopesEnd:
     - comment.line.double-slash
 - source: CollectionSB
+  scopesBegin:
+    - meta.declaration
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: c1
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: input_file1
   scopes:
+    - variable.snake-case
     - variable.other.unknown.input_file1
 - source: '>>'
   scopes:
     - keyword.operator.bitwise.shift
 - source: c1
   scopes:
+    - variable.lower-case
     - variable.other.unknown.c1
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: CollectionSB
+  scopesBegin:
+    - meta.declaration
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: c2
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: input_file2
   scopes:
+    - variable.snake-case
     - variable.other.unknown.input_file2
 - source: '>>'
   scopes:
     - keyword.operator.bitwise.shift
 - source: c2
   scopes:
+    - variable.lower-case
     - variable.other.unknown.c2
 - source: ;
   scopes:
@@ -420,12 +441,14 @@
     - comment.line.double-slash
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
 - source: endl
   scopes:
+    - variable.lower-case
     - variable.other.unknown.endl
 - source: '<<'
   scopes:
@@ -449,7 +472,8 @@
     - punctuation.terminator.statement
 - source: c1
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.c1
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -467,12 +491,14 @@
     - punctuation.terminator.statement
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
 - source: endl
   scopes:
+    - variable.lower-case
     - variable.other.unknown.endl
 - source: '<<'
   scopes:
@@ -496,7 +522,8 @@
     - punctuation.terminator.statement
 - source: c2
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.c2
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -514,26 +541,35 @@
     - punctuation.terminator.statement
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
 - source: endl
   scopes:
+    - variable.lower-case
     - variable.other.unknown.endl
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: CollectionSB
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: c3
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: make_union
   scopes:
     - entity.name.function.call
@@ -542,27 +578,33 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: c1
   scopes:
+    - variable.lower-case
     - variable.other.unknown.c1
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: c2
   scopes:
+    - variable.lower-case
     - variable.other.unknown.c2
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
 - source: endl
   scopes:
+    - variable.lower-case
     - variable.other.unknown.endl
 - source: '<<'
   scopes:
@@ -586,24 +628,28 @@
     - punctuation.terminator.statement
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
 - source: c3
   scopes:
+    - variable.lower-case
     - variable.other.unknown.c3
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
 - source: endl
   scopes:
+    - variable.lower-case
     - variable.other.unknown.endl
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
@@ -624,7 +670,8 @@
     - keyword.operator.bitwise.shift
 - source: c3
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.c3
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -642,12 +689,14 @@
     - keyword.operator.bitwise.shift
 - source: endl
   scopes:
+    - variable.lower-case
     - variable.other.unknown.endl
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
@@ -668,7 +717,8 @@
     - keyword.operator.bitwise.shift
 - source: c3
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.c3
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -687,6 +737,7 @@
     - punctuation.separator.scope-resolution
 - source: small
   scopes:
+    - variable.lower-case
     - variable.other.unknown.small
 - source: )
   scopes:
@@ -696,12 +747,14 @@
     - keyword.operator.bitwise.shift
 - source: endl
   scopes:
+    - variable.lower-case
     - variable.other.unknown.endl
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
@@ -722,7 +775,8 @@
     - keyword.operator.bitwise.shift
 - source: c3
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.c3
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -741,6 +795,7 @@
     - punctuation.separator.scope-resolution
 - source: medium
   scopes:
+    - variable.lower-case
     - variable.other.unknown.medium
 - source: )
   scopes:
@@ -750,12 +805,14 @@
     - keyword.operator.bitwise.shift
 - source: endl
   scopes:
+    - variable.lower-case
     - variable.other.unknown.endl
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
@@ -776,7 +833,8 @@
     - keyword.operator.bitwise.shift
 - source: c3
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.c3
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -795,6 +853,7 @@
     - punctuation.separator.scope-resolution
 - source: large
   scopes:
+    - variable.lower-case
     - variable.other.unknown.large
 - source: )
   scopes:
@@ -804,12 +863,14 @@
     - keyword.operator.bitwise.shift
 - source: endl
   scopes:
+    - variable.lower-case
     - variable.other.unknown.endl
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
@@ -830,7 +891,8 @@
     - keyword.operator.bitwise.shift
 - source: c3
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.c3
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -849,6 +911,7 @@
     - punctuation.separator.scope-resolution
 - source: red
   scopes:
+    - variable.lower-case
     - variable.other.unknown.red
 - source: )
   scopes:
@@ -858,13 +921,14 @@
     - keyword.operator.bitwise.shift
 - source: endl
   scopes:
+    - variable.lower-case
     - variable.other.unknown.endl
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: Stress_ball
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: sb
   scopes:
@@ -881,6 +945,7 @@
     - punctuation.separator.scope-resolution
 - source: green
   scopes:
+    - variable.lower-case
     - variable.other.unknown.green
 - source: ','
   scopes:
@@ -894,6 +959,7 @@
     - punctuation.separator.scope-resolution
 - source: small
   scopes:
+    - variable.lower-case
     - variable.other.unknown.small
 - source: )
   scopes:
@@ -911,7 +977,8 @@
     - punctuation.section.parens.begin.bracket.round
 - source: c3
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.c3
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -923,6 +990,7 @@
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: sb
   scopes:
+    - variable.lower-case
     - variable.other.unknown.sb
 - source: )
   scopes:
@@ -934,6 +1002,7 @@
     - meta.parens
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
@@ -960,6 +1029,7 @@
     - keyword.control.else
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
@@ -983,6 +1053,7 @@
     - punctuation.terminator.statement
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
@@ -1017,7 +1088,8 @@
     - punctuation.section.parens.begin.bracket.round
 - source: c3
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.c3
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -1029,6 +1101,7 @@
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: sb
   scopes:
+    - variable.lower-case
     - variable.other.unknown.sb
 - source: )
   scopes:
@@ -1040,7 +1113,8 @@
     - meta.parens
 - source: c3
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.c3
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -1052,6 +1126,7 @@
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: sb
   scopes:
+    - variable.lower-case
     - variable.other.unknown.sb
 - source: )
   scopes:
@@ -1061,6 +1136,7 @@
     - punctuation.terminator.statement
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
@@ -1081,7 +1157,8 @@
     - keyword.operator.bitwise.shift
 - source: c3
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.c3
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -1099,6 +1176,7 @@
     - keyword.operator.bitwise.shift
 - source: endl
   scopes:
+    - variable.lower-case
     - variable.other.unknown.endl
 - source: ;
   scopes:
@@ -1113,7 +1191,8 @@
     - punctuation.section.parens.begin.bracket.round
 - source: c3
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.c3
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -1125,6 +1204,7 @@
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: sb
   scopes:
+    - variable.lower-case
     - variable.other.unknown.sb
 - source: )
   scopes:
@@ -1136,6 +1216,7 @@
     - meta.parens
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
@@ -1162,6 +1243,7 @@
     - keyword.control.else
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
@@ -1185,6 +1267,7 @@
     - punctuation.terminator.statement
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
@@ -1208,7 +1291,8 @@
     - punctuation.terminator.statement
 - source: c3
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.c3
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -1220,6 +1304,7 @@
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: sb
   scopes:
+    - variable.lower-case
     - variable.other.unknown.sb
 - source: )
   scopes:
@@ -1237,7 +1322,8 @@
     - punctuation.section.parens.begin.bracket.round
 - source: c3
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.c3
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -1249,6 +1335,7 @@
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: sb
   scopes:
+    - variable.lower-case
     - variable.other.unknown.sb
 - source: )
   scopes:
@@ -1260,6 +1347,7 @@
     - meta.parens
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
@@ -1286,6 +1374,7 @@
     - keyword.control.else
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
@@ -1309,7 +1398,7 @@
     - punctuation.terminator.statement
 - source: CollectionSB
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: c4
   scopes:
@@ -1319,6 +1408,7 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: c3
   scopes:
+    - variable.lower-case
     - variable.other.unknown.c3
 - source: )
   scopes:
@@ -1342,6 +1432,7 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: c3
   scopes:
+    - variable.lower-case
     - variable.other.unknown.c3
 - source: ','
   scopes:
@@ -1355,6 +1446,7 @@
     - punctuation.separator.scope-resolution
 - source: bubble_sort
   scopes:
+    - variable.snake-case
     - variable.other.unknown.bubble_sort
 - source: )
   scopes:
@@ -1364,12 +1456,14 @@
     - punctuation.terminator.statement
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
 - source: endl
   scopes:
+    - variable.lower-case
     - variable.other.unknown.endl
 - source: '<<'
   scopes:
@@ -1393,24 +1487,28 @@
     - punctuation.terminator.statement
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
 - source: c3
   scopes:
+    - variable.lower-case
     - variable.other.unknown.c3
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: c3
   scopes:
+    - variable.lower-case
     - variable.other.unknown.c3
 - source: '='
   scopes:
     - keyword.operator.assignment
 - source: c4
   scopes:
+    - variable.lower-case
     - variable.other.unknown.c4
 - source: ;
   scopes:
@@ -1423,6 +1521,7 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: c3
   scopes:
+    - variable.lower-case
     - variable.other.unknown.c3
 - source: ','
   scopes:
@@ -1436,6 +1535,7 @@
     - punctuation.separator.scope-resolution
 - source: quick_sort
   scopes:
+    - variable.snake-case
     - variable.other.unknown.quick_sort
 - source: )
   scopes:
@@ -1445,12 +1545,14 @@
     - punctuation.terminator.statement
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
 - source: endl
   scopes:
+    - variable.lower-case
     - variable.other.unknown.endl
 - source: '<<'
   scopes:
@@ -1474,30 +1576,35 @@
     - punctuation.terminator.statement
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
 - source: c3
   scopes:
+    - variable.lower-case
     - variable.other.unknown.c3
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
 - source: endl
   scopes:
+    - variable.lower-case
     - variable.other.unknown.endl
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: c3
   scopes:
+    - variable.lower-case
     - variable.other.unknown.c3
 - source: '='
   scopes:
     - keyword.operator.assignment
 - source: c4
   scopes:
+    - variable.lower-case
     - variable.other.unknown.c4
 - source: ;
   scopes:
@@ -1510,6 +1617,7 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: c3
   scopes:
+    - variable.lower-case
     - variable.other.unknown.c3
 - source: ','
   scopes:
@@ -1523,6 +1631,7 @@
     - punctuation.separator.scope-resolution
 - source: merge_sort
   scopes:
+    - variable.snake-case
     - variable.other.unknown.merge_sort
 - source: )
   scopes:
@@ -1532,12 +1641,14 @@
     - punctuation.terminator.statement
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
 - source: endl
   scopes:
+    - variable.lower-case
     - variable.other.unknown.endl
 - source: '<<'
   scopes:
@@ -1561,24 +1672,28 @@
     - punctuation.terminator.statement
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
 - source: c3
   scopes:
+    - variable.lower-case
     - variable.other.unknown.c3
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
 - source: endl
   scopes:
+    - variable.lower-case
     - variable.other.unknown.endl
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
@@ -1602,7 +1717,8 @@
     - punctuation.terminator.statement
 - source: c3
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.c3
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -1628,7 +1744,8 @@
     - punctuation.section.parens.begin.bracket.round
 - source: c3
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.c3
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -1648,6 +1765,7 @@
     - meta.parens
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
@@ -1671,12 +1789,14 @@
     - punctuation.terminator.statement
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
 - source: endl
   scopes:
+    - variable.lower-case
     - variable.other.unknown.endl
 - source: '<<'
   scopes:
@@ -1700,24 +1820,28 @@
     - punctuation.terminator.statement
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
 - source: c3
   scopes:
+    - variable.lower-case
     - variable.other.unknown.c3
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
 - source: endl
   scopes:
+    - variable.lower-case
     - variable.other.unknown.endl
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
@@ -1741,24 +1865,28 @@
     - punctuation.terminator.statement
 - source: c3
   scopes:
+    - variable.lower-case
     - variable.other.unknown.c3
 - source: '='
   scopes:
     - keyword.operator.assignment
 - source: c1
   scopes:
+    - variable.lower-case
     - variable.other.unknown.c1
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
 - source: endl
   scopes:
+    - variable.lower-case
     - variable.other.unknown.endl
 - source: '<<'
   scopes:
@@ -1782,24 +1910,28 @@
     - punctuation.terminator.statement
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
 - source: c3
   scopes:
+    - variable.lower-case
     - variable.other.unknown.c3
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
 - source: endl
   scopes:
+    - variable.lower-case
     - variable.other.unknown.endl
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
@@ -1829,12 +1961,14 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: c2
   scopes:
+    - variable.lower-case
     - variable.other.unknown.c2
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: c3
   scopes:
+    - variable.lower-case
     - variable.other.unknown.c3
 - source: )
   scopes:
@@ -1844,12 +1978,14 @@
     - punctuation.terminator.statement
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
 - source: endl
   scopes:
+    - variable.lower-case
     - variable.other.unknown.endl
 - source: '<<'
   scopes:
@@ -1873,18 +2009,21 @@
     - punctuation.terminator.statement
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
 - source: c3
   scopes:
+    - variable.lower-case
     - variable.other.unknown.c3
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
 - source: endl
   scopes:
+    - variable.lower-case
     - variable.other.unknown.endl
 - source: ;
   scopes:

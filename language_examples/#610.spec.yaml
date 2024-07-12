@@ -105,6 +105,7 @@
     - storage.type.built-in.primitive
 - source: view
   scopes:
+    - variable.lower-case
     - variable.other.unknown.view
 - source: '='
   scopes:
@@ -135,6 +136,7 @@
     - storage.type.built-in.primitive
 - source: owned
   scopes:
+    - variable.lower-case
     - variable.other.unknown.owned
 - source: '='
   scopes:
@@ -191,12 +193,17 @@
 - source: T
   scopesBegin:
     - meta.body.struct
+    - meta.declaration
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: content
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -216,7 +223,7 @@
 - source: Wrapper
   scopesBegin:
     - meta.function.definition.special.operator-overload
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.type
 - source: <
@@ -233,13 +240,13 @@
     - punctuation.separator.scope-resolution.template.call
 - source: wstring
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
     - meta.template.call
 - source: operator
   scopesBegin:
@@ -318,12 +325,14 @@
     - punctuation.section.block.begin.bracket.curly
 - source: s
   scopes:
+    - variable.lower-case
     - variable.other.unknown.s
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: 'n'
   scopes:
+    - variable.lower-case
     - variable.other.unknown.n
 - source: '}'
   scopes:
@@ -354,6 +363,7 @@
     - storage.type.built-in.primitive
 - source: wide_string
   scopes:
+    - variable.snake-case
     - variable.other.unknown.wide_string
 - source: '='
   scopes:
@@ -419,7 +429,7 @@
 - source: Wrapper
   scopesBegin:
     - meta.function.definition.special.operator-overload
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.type
 - source: <
@@ -435,7 +445,7 @@
   scopes:
     - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
     - meta.template.call
 - source: operator
   scopesBegin:
@@ -486,6 +496,7 @@
     - punctuation.section.block.begin.bracket.curly
 - source: c
   scopes:
+    - variable.lower-case
     - variable.other.unknown.c
 - source: '}'
   scopes:
@@ -511,6 +522,7 @@
     - storage.type.built-in.primitive
 - source: character
   scopes:
+    - variable.lower-case
     - variable.other.unknown.character
 - source: '='
   scopes:

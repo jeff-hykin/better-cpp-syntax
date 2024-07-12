@@ -96,6 +96,7 @@
 - source: argOne
   scopes:
     - meta.parameter.initialization
+    - variable.camel-case
     - variable.other.unknown.argOne
 - source: )
   scopes:
@@ -113,6 +114,7 @@
 - source: argOther
   scopes:
     - meta.parameter.initialization
+    - variable.camel-case
     - variable.other.unknown.argOther
 - source: )
   scopes:
@@ -131,19 +133,26 @@
   scopesEnd:
     - meta.function.definition.special.constructor
 - source: bool
+  scopesBegin:
+    - meta.declaration
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: m_one
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.snake-case
+    - variable.other.declare
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: m_other
   scopes:
+    - variable.snake-case
     - variable.other.unknown.m_other
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -172,7 +181,7 @@
     - storage.type.modifier.access.public
 - source: BaseClass
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.type
 - source: <
@@ -182,13 +191,13 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: ThisTest
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
     - meta.template.call
 - source: '{'
   scopes:
@@ -324,7 +333,7 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: ThisTest
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '>'
   scopes:
@@ -375,57 +384,87 @@
     - meta.function.definition.special.constructor
     - meta.body.function.definition.special.constructor
 - source: bool
+  scopesBegin:
+    - meta.declaration
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: someMember
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.camel-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: bool
+  scopesBegin:
+    - meta.declaration
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: anotherOne
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.camel-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: bool
+  scopesBegin:
+    - meta.declaration
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: quiteALotOfMembers
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.camel-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: bool
+  scopesBegin:
+    - meta.declaration
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: soManyThatTheConstructorIsLong
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.camel-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: bool
+  scopesBegin:
+    - meta.declaration
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: iMeanReallyLong
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.camel-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement

@@ -2,7 +2,7 @@
   scopesBegin:
     - meta.function.definition.special.operator-overload
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: operator
   scopesBegin:
@@ -73,7 +73,7 @@
   scopesBegin:
     - meta.function.definition.special.operator-overload
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: operator
   scopesBegin:
@@ -144,7 +144,7 @@
   scopesBegin:
     - meta.function.definition.special.operator-overload
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: operator
   scopesBegin:
@@ -215,7 +215,7 @@
   scopesBegin:
     - meta.function.definition.special.operator-overload
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: operator
   scopesBegin:
@@ -289,7 +289,7 @@
   scopesBegin:
     - meta.function.definition.special.operator-overload
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '&'
   scopes:
@@ -323,7 +323,7 @@
     - punctuation.separator.delimiter.comma
 - source: ostream
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '&'
   scopes:
@@ -411,14 +411,14 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: CharT
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.template.argument
 - source: Traits
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '>'
   scopes:
@@ -611,7 +611,7 @@
   scopesBegin:
     - meta.function.definition.special.operator-overload
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: operator
@@ -711,7 +711,8 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: lhs
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.lhs
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -723,7 +724,8 @@
     - punctuation.separator.delimiter.comma
 - source: rhs
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.rhs
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -744,7 +746,8 @@
   scopesBegin:
     - meta.arguments.operator.sizeof
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.lhs
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -787,7 +790,7 @@
   scopesBegin:
     - meta.function.definition.special.operator-overload
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: operator
@@ -830,7 +833,7 @@
   scopesBegin:
     - meta.function.definition.special.operator-overload
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: operator
@@ -872,7 +875,7 @@
 - source: std
   scopesBegin:
     - meta.function.definition.special.operator-overload
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -883,7 +886,7 @@
   scopes:
     - entity.name.type
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
 - source: operator
   scopesBegin:
     - meta.head.function.definition.special.operator-overload
@@ -942,7 +945,7 @@
   scopesBegin:
     - meta.function.definition.special.operator-overload
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: operator

@@ -13,7 +13,7 @@
 - source: task
   scopesBegin:
     - meta.function.definition
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.type
 - source: <
@@ -25,7 +25,7 @@
   scopes:
     - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
     - meta.template.call
 - source: tcp_echo_server
   scopesBegin:
@@ -95,22 +95,30 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: size_t
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type
     - storage.type.built-in
 - source: 'n'
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: co_await
   scopes:
     - keyword.control.co_await
 - source: socket
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.socket
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -128,6 +136,7 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: data
   scopes:
+    - variable.lower-case
     - variable.other.unknown.data
 - source: )
   scopes:
@@ -135,6 +144,8 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -149,6 +160,7 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: socket
   scopes:
+    - variable.lower-case
     - variable.other.unknown.socket
 - source: ','
   scopes:
@@ -161,12 +173,14 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: data
   scopes:
+    - variable.lower-case
     - variable.other.unknown.data
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: 'n'
   scopes:
+    - variable.lower-case
     - variable.other.unknown.n
 - source: )
   scopesBegin:
@@ -189,7 +203,7 @@
     - meta.body.function.definition
 - source: generator
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.type
 - source: <
@@ -205,7 +219,7 @@
   scopes:
     - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
     - meta.template.call
 - source: iota
   scopesBegin:
@@ -265,6 +279,7 @@
     - keyword.control.co_yield
 - source: 'n'
   scopes:
+    - variable.lower-case
     - variable.other.unknown.n
 - source: ++
   scopes:
@@ -279,7 +294,7 @@
     - meta.body.function.definition
 - source: lazy
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.type
 - source: <
@@ -295,7 +310,7 @@
   scopes:
     - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
     - meta.template.call
 - source: f
   scopesBegin:

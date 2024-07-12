@@ -78,13 +78,19 @@
   scopesEnd:
     - storage.type.modifier.access.control.public
 - source: int
+  scopesBegin:
+    - meta.declaration
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: a
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -117,13 +123,19 @@
   scopesEnd:
     - storage.type.modifier.access.control.public
 - source: int
+  scopesBegin:
+    - meta.declaration
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: a
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -140,14 +152,14 @@
 - source: class
   scopesBegin:
     - meta.function.definition
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - storage.type.class
 - source: Node
   scopes:
     - entity.name.type
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
 - source: '*'
   scopes:
     - storage.modifier.pointer
@@ -217,14 +229,14 @@
     - punctuation.section.block.end.bracket.curly.function.definition
 - source: class
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - storage.type.class
 - source: Node
   scopes:
     - entity.name.type
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
 - source: '*'
   scopes:
     - storage.modifier.pointer
@@ -309,7 +321,7 @@
     - punctuation.section.block.end.bracket.curly.function.definition
 - source: int
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: main

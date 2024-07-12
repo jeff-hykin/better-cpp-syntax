@@ -36,6 +36,7 @@
 - source: static
   scopesBegin:
     - meta.body.class
+    - meta.assignment
   scopes:
     - storage.modifier.specifier.static
 - source: const
@@ -43,15 +44,20 @@
     - storage.modifier.specifier.const
 - source: int
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: count
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: sizeof...
   scopes:
     - keyword.operator.functionlike
@@ -66,6 +72,8 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.operator.sizeof.variadic
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement

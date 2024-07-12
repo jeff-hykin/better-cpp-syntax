@@ -61,7 +61,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: aVar
   scopesBegin:
@@ -77,7 +77,7 @@
     - meta.parameter
     - meta.initialization
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '{'
   scopes:
@@ -117,7 +117,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: aVar
   scopesBegin:
@@ -138,7 +138,7 @@
   scopesBegin:
     - meta.initialization
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '{'
   scopes:
@@ -178,7 +178,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: aVar
   scopesBegin:
@@ -227,7 +227,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: aVar
   scopesBegin:
@@ -272,7 +272,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: gen
   scopesBegin:
@@ -337,7 +337,7 @@
 - source: std
   scopesBegin:
     - meta.function.definition
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -348,7 +348,7 @@
   scopes:
     - entity.name.type
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
 - source: eng1
   scopesBegin:
     - meta.head.function.definition
@@ -411,7 +411,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: main

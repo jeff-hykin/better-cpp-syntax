@@ -2,7 +2,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: f
@@ -42,7 +42,7 @@
     - meta.body.namespace
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: g
@@ -95,6 +95,7 @@
     - punctuation.separator.scope-resolution
 - source: f
   scopes:
+    - variable.lower-case
     - variable.other.unknown.f
 - source: ;
   scopes:
@@ -111,6 +112,7 @@
     - punctuation.separator.scope-resolution
 - source: g
   scopes:
+    - variable.lower-case
     - variable.other.unknown.g
 - source: ;
   scopes:

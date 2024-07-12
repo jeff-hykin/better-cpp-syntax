@@ -5,7 +5,7 @@
     - storage.modifier.constexpr
 - source: A
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '*'
   scopes:
@@ -33,13 +33,16 @@
     - keyword.control.return
 - source: A
   scopes:
+    - entity.name.function.call.upper-case
     - entity.name.function.call
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: '?'
   scopes:
     - keyword.operator.ternary
@@ -73,6 +76,7 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: A
   scopes:
+    - variable.upper-case
     - variable.other.unknown.A
 - source: )
   scopes:
@@ -82,7 +86,7 @@
     - punctuation.separator.dot-access
 - source: _l
   scopes:
-    - variable.other.object.property
+    - variable.other.unknown._l
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -101,10 +105,12 @@
     - punctuation.separator.scope-resolution
 - source: A
   scopes:
+    - entity.name.function.call.upper-case
     - entity.name.function.call
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: A
   scopes:
     - entity.name.scope-resolution.function.call
@@ -135,6 +141,7 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: A
   scopes:
+    - variable.upper-case
     - variable.other.unknown.A
 - source: )
   scopes:
@@ -144,7 +151,7 @@
     - punctuation.separator.dot-access
 - source: _s
   scopes:
-    - variable.other.object.property
+    - variable.other.unknown._s
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -167,6 +174,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -180,7 +188,7 @@
     - storage.modifier.constexpr
 - source: void
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: func

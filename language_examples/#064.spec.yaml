@@ -2,7 +2,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: function
@@ -24,19 +24,25 @@
 - source: int
   scopesBegin:
     - meta.body.function.definition
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '*'
   scopes:
     - storage.modifier.pointer
 - source: a
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: ' ::'
 - source: new
   scopes:
@@ -46,23 +52,32 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '*'
   scopes:
     - storage.modifier.pointer
 - source: a
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: new
   scopes:
     - keyword.operator.wordlike
@@ -71,23 +86,32 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '*'
   scopes:
     - storage.modifier.pointer
 - source: a
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: ' ::'
 - source: new
   scopes:
@@ -98,23 +122,32 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '*'
   scopes:
     - storage.modifier.pointer
 - source: a
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: new
   scopes:
     - keyword.operator.wordlike
@@ -124,23 +157,32 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '*'
   scopes:
     - storage.modifier.pointer
 - source: a
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: ' ::'
 - source: new
   scopes:
@@ -159,24 +201,32 @@
   scopes:
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
+    - meta.assignment
     - meta.parens
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '*'
   scopes:
     - storage.modifier.pointer
 - source: a
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: new
   scopes:
     - keyword.operator.wordlike
@@ -194,24 +244,32 @@
   scopes:
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
+    - meta.assignment
     - meta.parens
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '*'
   scopes:
     - storage.modifier.pointer
 - source: a
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: ' ::'
 - source: new
   scopes:
@@ -231,24 +289,32 @@
   scopes:
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
+    - meta.assignment
     - meta.parens
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '*'
   scopes:
     - storage.modifier.pointer
 - source: a
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: new
   scopes:
     - keyword.operator.wordlike
@@ -267,24 +333,32 @@
   scopes:
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
+    - meta.assignment
     - meta.parens
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '*'
   scopes:
     - storage.modifier.pointer
 - source: a
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: ' ::'
 - source: new
   scopes:
@@ -303,6 +377,7 @@
     - punctuation.separator.delimiter.comma
 - source: f
   scopes:
+    - variable.lower-case
     - variable.other.unknown.f
 - source: )
   scopes:
@@ -313,23 +388,32 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '*'
   scopes:
     - storage.modifier.pointer
 - source: a
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: new
   scopes:
     - keyword.operator.wordlike
@@ -347,6 +431,7 @@
     - punctuation.separator.delimiter.comma
 - source: f
   scopes:
+    - variable.lower-case
     - variable.other.unknown.f
 - source: )
   scopes:
@@ -357,23 +442,32 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '*'
   scopes:
     - storage.modifier.pointer
 - source: a
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: ' ::'
 - source: new
   scopes:
@@ -392,6 +486,7 @@
     - punctuation.separator.delimiter.comma
 - source: f
   scopes:
+    - variable.lower-case
     - variable.other.unknown.f
 - source: )
   scopes:
@@ -403,23 +498,32 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '*'
   scopes:
     - storage.modifier.pointer
 - source: a
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: new
   scopes:
     - keyword.operator.wordlike
@@ -437,6 +541,7 @@
     - punctuation.separator.delimiter.comma
 - source: f
   scopes:
+    - variable.lower-case
     - variable.other.unknown.f
 - source: )
   scopes:
@@ -448,23 +553,32 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '*'
   scopes:
     - storage.modifier.pointer
 - source: a
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: ' ::'
 - source: new
   scopes:
@@ -483,6 +597,7 @@
     - punctuation.separator.delimiter.comma
 - source: f
   scopes:
+    - variable.lower-case
     - variable.other.unknown.f
 - source: )
   scopes:
@@ -498,24 +613,32 @@
   scopes:
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
+    - meta.assignment
     - meta.parens
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '*'
   scopes:
     - storage.modifier.pointer
 - source: a
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: new
   scopes:
     - keyword.operator.wordlike
@@ -533,6 +656,7 @@
     - punctuation.separator.delimiter.comma
 - source: f
   scopes:
+    - variable.lower-case
     - variable.other.unknown.f
 - source: )
   scopes:
@@ -548,24 +672,32 @@
   scopes:
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
+    - meta.assignment
     - meta.parens
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '*'
   scopes:
     - storage.modifier.pointer
 - source: a
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: ' ::'
 - source: new
   scopes:
@@ -584,6 +716,7 @@
     - punctuation.separator.delimiter.comma
 - source: f
   scopes:
+    - variable.lower-case
     - variable.other.unknown.f
 - source: )
   scopes:
@@ -604,24 +737,32 @@
   scopes:
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
+    - meta.assignment
     - meta.parens
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '*'
   scopes:
     - storage.modifier.pointer
 - source: a
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: new
   scopes:
     - keyword.operator.wordlike
@@ -639,6 +780,7 @@
     - punctuation.separator.delimiter.comma
 - source: f
   scopes:
+    - variable.lower-case
     - variable.other.unknown.f
 - source: )
   scopes:
@@ -659,6 +801,7 @@
   scopes:
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
+    - meta.assignment
     - meta.parens
 - source: ;
   scopes:
@@ -670,6 +813,7 @@
     - keyword.operator.delete
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ;
   scopes:
@@ -680,6 +824,7 @@
     - keyword.operator.delete
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ;
   scopes:
@@ -697,6 +842,7 @@
     - keyword.operator.wordlike
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ;
   scopes:
@@ -713,6 +859,7 @@
     - keyword.operator.wordlike
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ;
   scopes:
@@ -729,6 +876,7 @@
     - punctuation.section.parens.begin.bracket.round
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: )
   scopes:
@@ -749,6 +897,7 @@
     - punctuation.section.parens.begin.bracket.round
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: )
   scopes:
@@ -776,6 +925,7 @@
     - punctuation.section.parens.begin.bracket.round
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: )
   scopes:
@@ -802,6 +952,7 @@
     - punctuation.section.parens.begin.bracket.round
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: )
   scopes:
@@ -823,12 +974,14 @@
     - punctuation.section.parens.begin.bracket.round
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: b
   scopes:
+    - variable.lower-case
     - variable.other.unknown.b
 - source: )
   scopes:
@@ -849,12 +1002,14 @@
     - punctuation.section.parens.begin.bracket.round
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: b
   scopes:
+    - variable.lower-case
     - variable.other.unknown.b
 - source: )
   scopes:
@@ -882,12 +1037,14 @@
     - punctuation.section.parens.begin.bracket.round
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: b
   scopes:
+    - variable.lower-case
     - variable.other.unknown.b
 - source: )
   scopes:
@@ -914,12 +1071,14 @@
     - punctuation.section.parens.begin.bracket.round
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: b
   scopes:
+    - variable.lower-case
     - variable.other.unknown.b
 - source: )
   scopes:

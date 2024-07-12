@@ -22,7 +22,7 @@
 - source: std
   scopesBegin:
     - meta.function.definition
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -45,7 +45,7 @@
   scopes:
     - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
     - meta.template.call
 - source: test
   scopesBegin:
@@ -83,7 +83,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: main
@@ -120,6 +120,7 @@
     - storage.type.built-in.primitive
 - source: i
   scopes:
+    - variable.lower-case
     - variable.other.unknown.i
 - source: '='
   scopes:
@@ -132,6 +133,7 @@
     - punctuation.terminator.statement
 - source: i
   scopes:
+    - variable.lower-case
     - variable.other.unknown.i
 - source: <
   scopes:
@@ -160,6 +162,7 @@
     - punctuation.terminator.statement
 - source: i
   scopes:
+    - variable.lower-case
     - variable.other.unknown.i
 - source: ++
   scopes:
@@ -186,6 +189,7 @@
     - punctuation.definition.begin.bracket.square
 - source: i
   scopes:
+    - variable.lower-case
     - variable.other.unknown.i
 - source: ']'
   scopes:
@@ -197,6 +201,7 @@
     - keyword.operator.assignment
 - source: i
   scopes:
+    - variable.lower-case
     - variable.other.unknown.i
 - source: ;
   scopes:

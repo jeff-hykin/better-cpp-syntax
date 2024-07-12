@@ -61,7 +61,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: main
@@ -112,7 +112,8 @@
 - source: std
   scopesBegin:
     - meta.body.function.definition
-    - meta.qualified_type
+    - meta.assignment
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -123,13 +124,18 @@
   scopes:
     - entity.name.type
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
 - source: plate
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: argv
   scopesBegin:
     - meta.bracket.square.access
@@ -145,23 +151,31 @@
   scopes:
     - punctuation.definition.end.bracket.square
   scopesEnd:
+    - meta.assignment
     - meta.bracket.square.access
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: AwesomeDBConnection
+  scopesBegin:
+    - meta.declaration
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: conn
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: conn
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.conn
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -189,19 +203,27 @@
   scopes:
     - punctuation.terminator.statement
 - source: auto
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: query
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: conn
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.conn
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -232,6 +254,7 @@
     - keyword.operator.arithmetic
 - source: plate
   scopes:
+    - variable.lower-case
     - variable.other.unknown.plate
 - source: +
   scopes:
@@ -250,6 +273,8 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -268,7 +293,7 @@
     - storage.modifier.specifier.const
 - source: auto
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '&'
@@ -282,6 +307,7 @@
     - punctuation.separator.colon.range-based
 - source: query
   scopes:
+    - variable.lower-case
     - variable.other.unknown.query
   scopesEnd:
     - meta.parens.control.for
@@ -304,6 +330,7 @@
     - punctuation.separator.scope-resolution
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
@@ -358,6 +385,7 @@
     - punctuation.separator.scope-resolution
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
@@ -412,6 +440,7 @@
     - punctuation.separator.scope-resolution
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
@@ -452,6 +481,7 @@
     - punctuation.separator.scope-resolution
 - source: endl
   scopes:
+    - variable.lower-case
     - variable.other.unknown.endl
 - source: ;
   scopes:
@@ -463,7 +493,8 @@
     - meta.block
 - source: conn
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.conn
 - source: .
   scopes:
     - punctuation.separator.dot-access

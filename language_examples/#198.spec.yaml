@@ -27,11 +27,15 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: string
+  scopesBegin:
+    - variable.lower-case
   scopes:
     - variable.other.unknown.string
 - source: s
   scopes:
     - variable.other.unknown.s
+  scopesEnd:
+    - variable.lower-case
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -52,7 +56,7 @@
 - source: std
   scopesBegin:
     - meta.function.definition
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -63,7 +67,7 @@
   scopes:
     - entity.name.type
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
 - source: s
   scopesBegin:
     - meta.head.function.definition
@@ -97,7 +101,7 @@
 - source: std
   scopesBegin:
     - meta.function.definition
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -108,7 +112,7 @@
   scopes:
     - entity.name.type
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
 - source: s
   scopesBegin:
     - meta.head.function.definition

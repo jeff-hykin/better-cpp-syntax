@@ -2,7 +2,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: bar
@@ -24,6 +24,7 @@
     - punctuation.terminator.statement
 - source: entries
   scopes:
+    - variable.lower-case
     - variable.other.unknown.entries
 - source: '='
   scopes:
@@ -34,6 +35,7 @@
     - keyword.operator.new
 - source: symbolTableEntry
   scopes:
+    - variable.camel-case
     - variable.other.unknown.symbolTableEntry
 - source: '*'
   scopes:
@@ -45,6 +47,7 @@
     - punctuation.definition.begin.bracket.square
 - source: entriesCount
   scopes:
+    - variable.camel-case
     - variable.other.unknown.entriesCount
 - source: ']'
   scopes:
@@ -58,7 +61,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: bar

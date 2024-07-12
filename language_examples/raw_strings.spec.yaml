@@ -2,7 +2,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: main
@@ -32,6 +32,7 @@
     - storage.modifier.specifier.const
 - source: vertexShader
   scopes:
+    - variable.camel-case
     - variable.other.unknown.vertexShader
 - source: '{'
   scopesBegin:
@@ -78,6 +79,7 @@
     - storage.modifier.specifier.const
 - source: sqlQuery
   scopes:
+    - variable.camel-case
     - variable.other.unknown.sqlQuery
 - source: '{'
   scopesBegin:
@@ -116,6 +118,7 @@
     - storage.modifier.specifier.const
 - source: regexExpression
   scopes:
+    - variable.camel-case
     - variable.other.unknown.regexExpression
 - source: '{'
   scopesBegin:

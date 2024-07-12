@@ -52,6 +52,7 @@
     - entity.name.function.preprocessor
 - source: thing
   scopes:
+    - variable.lower-case
     - variable.other.unknown.thing
 - source: '{'
   scopesBegin:
@@ -94,11 +95,15 @@
   scopes:
     - punctuation.definition.parameters.end.preprocessor
 - source: arg1
+  scopesBegin:
+    - variable.lower-case
   scopes:
     - variable.other.unknown.arg1
 - source: arg2
   scopes:
     - variable.other.unknown.arg2
+  scopesEnd:
+    - variable.lower-case
 - source: '#'
   scopesBegin:
     - keyword.control.directive.define
@@ -485,19 +490,26 @@
   scopes:
     - constant.character.escape.line-continuation
 - source: int
+  scopesBegin:
+    - meta.declaration
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: data
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: members
   scopes:
+    - variable.lower-case
     - variable.other.unknown.members
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -505,13 +517,19 @@
   scopes:
     - constant.character.escape.line-continuation
 - source: int
+  scopesBegin:
+    - meta.declaration
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: other
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -628,7 +646,7 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: __VA_ARGS__
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '>'
   scopes:
@@ -649,6 +667,8 @@
   scopes:
     - constant.character.escape.line-continuation
 - source: static
+  scopesBegin:
+    - meta.assignment
   scopes:
     - storage.modifier.specifier.static
 - source: const
@@ -656,18 +676,25 @@
     - storage.modifier.specifier.const
 - source: bool
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: isPoint
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.camel-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: 'true'
   scopes:
     - constant.language.true
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -712,6 +739,7 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: T
   scopes:
+    - variable.upper-case
     - variable.other.unknown.T
 - source: )
   scopes:
@@ -755,7 +783,7 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: T
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '>'
   scopes:
@@ -768,7 +796,7 @@
     - storage.type.modifier.access.public
 - source: std
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -779,7 +807,7 @@
   scopes:
     - entity.name.type
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
 - source: \
   scopes:
     - constant.character.escape.line-continuation
@@ -851,6 +879,7 @@
     - entity.name.function.preprocessor
 - source: test2
   scopes:
+    - variable.lower-case
     - variable.other.unknown.test2
 - source: /*
   scopesBegin:
@@ -924,6 +953,7 @@
 - source: BB
   scopes:
     - meta.tail.enum
+    - variable.upper-case
     - variable.other.unknown.BB
 - source: ;
   scopes:

@@ -23,7 +23,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: main
@@ -96,6 +96,7 @@
     - punctuation.separator.scope-resolution
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
@@ -123,6 +124,7 @@
     - punctuation.separator.scope-resolution
 - source: endl
   scopes:
+    - variable.lower-case
     - variable.other.unknown.endl
 - source: ;
   scopes:
@@ -147,6 +149,7 @@
     - punctuation.separator.scope-resolution
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
@@ -174,6 +177,7 @@
     - punctuation.separator.scope-resolution
 - source: endl
   scopes:
+    - variable.lower-case
     - variable.other.unknown.endl
 - source: ;
   scopes:

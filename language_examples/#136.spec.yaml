@@ -22,7 +22,7 @@
     - punctuation.definition.parameters.end.preprocessor
 - source: _ts
   scopes:
-    - variable.other.object.access
+    - variable.other.unknown._ts
 - source: '->'
   scopes:
     - punctuation.separator.pointer-access
@@ -34,6 +34,7 @@
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: name
   scopes:
+    - variable.lower-case
     - variable.other.unknown.name
 - source: )
   scopes:

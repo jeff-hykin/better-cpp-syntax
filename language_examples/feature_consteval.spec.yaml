@@ -17,7 +17,7 @@
     - storage.modifier.constexpr
 - source: int
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: sqr
@@ -56,12 +56,14 @@
     - keyword.control.return
 - source: 'n'
   scopes:
+    - variable.lower-case
     - variable.other.unknown.n
 - source: '*'
   scopes:
     - keyword.operator.arithmetic
 - source: 'n'
   scopes:
+    - variable.lower-case
     - variable.other.unknown.n
 - source: ;
   scopes:
@@ -76,7 +78,7 @@
     - storage.modifier.consteval
 - source: int
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: sqr2
@@ -115,12 +117,14 @@
     - keyword.control.return
 - source: 'n'
   scopes:
+    - variable.lower-case
     - variable.other.unknown.n
 - source: '*'
   scopes:
     - keyword.operator.arithmetic
 - source: 'n'
   scopes:
+    - variable.lower-case
     - variable.other.unknown.n
 - source: ;
   scopes:

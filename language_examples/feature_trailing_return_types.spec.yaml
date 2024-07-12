@@ -129,6 +129,7 @@
     - storage.type.built-in.primitive
 - source: Start_Value
   scopes:
+    - variable.snake-case
     - variable.other.unknown.Start_Value
 - source: '='
   scopes:
@@ -145,6 +146,7 @@
     - storage.type.built-in.primitive
 - source: End_Value
   scopes:
+    - variable.snake-case
     - variable.other.unknown.End_Value
 - source: '='
   scopes:
@@ -173,6 +175,7 @@
     - storage.type.built-in.primitive
 - source: Start_Value
   scopes:
+    - variable.snake-case
     - variable.other.unknown.Start_Value
 - source: '='
   scopes:
@@ -199,6 +202,7 @@
     - storage.type.built-in.primitive
 - source: End_Value
   scopes:
+    - variable.snake-case
     - variable.other.unknown.End_Value
 - source: '='
   scopes:
@@ -239,6 +243,7 @@
     - keyword.operator.assignment
 - source: Start_Value
   scopes:
+    - variable.snake-case
     - variable.other.unknown.Start_Value
 - source: ;
   scopes:
@@ -251,6 +256,7 @@
     - keyword.operator.comparison
 - source: End_Value
   scopes:
+    - variable.snake-case
     - variable.other.unknown.End_Value
 - source: ;
   scopes:
@@ -379,6 +385,7 @@
 - source: a
   scopes:
     - meta.arguments.decltype
+    - variable.lower-case
     - variable.other.unknown.a
 - source: )
   scopes:
@@ -397,6 +404,7 @@
 - source: b
   scopes:
     - meta.arguments.decltype
+    - variable.lower-case
     - variable.other.unknown.b
 - source: )
   scopes:
@@ -412,12 +420,14 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: b
   scopes:
+    - variable.lower-case
     - variable.other.unknown.b
 - source: )
   scopes:
@@ -428,7 +438,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: EndOfStream
@@ -474,7 +484,8 @@
     - punctuation.section.parens.begin.bracket.round
 - source: input_stream
   scopes:
-    - variable.other.object.access
+    - variable.snake-case
+    - variable.other.object.access.input_stream
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -552,6 +563,7 @@
     - storage.type.built-in.primitive
 - source: 'n'
   scopes:
+    - variable.lower-case
     - variable.other.unknown.n
 - source: ;
   scopes:
@@ -578,6 +590,7 @@
     - punctuation.definition.begin.bracket.square
 - source: MAX_N_SIZE
   scopes:
+    - variable.upper-case
     - variable.other.unknown.MAX_N_SIZE
 - source: ']'
   scopes:
@@ -587,6 +600,7 @@
     - punctuation.definition.begin.bracket.square
 - source: MAX_N_SIZE
   scopes:
+    - variable.upper-case
     - variable.other.unknown.MAX_N_SIZE
 - source: ']'
   scopes:
@@ -616,7 +630,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: U
@@ -661,69 +675,106 @@
 - source: double
   scopesBegin:
     - meta.body.function.definition
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: itemIndex
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.camel-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: r
   scopes:
+    - variable.lower-case
     - variable.other.unknown.r
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: double
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: itemRelativeRank
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.camel-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: s
   scopes:
+    - variable.lower-case
     - variable.other.unknown.s
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: double
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: totalNumberOfItems
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.camel-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: 'n'
   scopes:
+    - variable.lower-case
     - variable.other.unknown.n
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: double
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: nextItemIndex
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.camel-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: itemIndex
   scopes:
+    - variable.camel-case
     - variable.other.unknown.itemIndex
 - source: +
   scopes:
@@ -731,43 +782,63 @@
 - source: '1'
   scopes:
     - constant.numeric.decimal
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: double
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: numberOfRemainingItems
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.camel-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: totalNumberOfItems
   scopes:
+    - variable.camel-case
     - variable.other.unknown.totalNumberOfItems
 - source: '-'
   scopes:
     - keyword.operator.arithmetic
 - source: itemIndex
   scopes:
+    - variable.camel-case
     - variable.other.unknown.itemIndex
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: double
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: probabilityOfBeingBetterThanCurrentItem
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.camel-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: (
   scopesBegin:
     - meta.parens
@@ -775,34 +846,45 @@
     - punctuation.section.parens.begin.bracket.round
 - source: itemRelativeRank
   scopes:
+    - variable.camel-case
     - variable.other.unknown.itemRelativeRank
 - source: /
   scopes:
     - keyword.operator.arithmetic
 - source: nextItemIndex
   scopes:
+    - variable.camel-case
     - variable.other.unknown.nextItemIndex
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
+    - meta.assignment
     - meta.parens
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: double
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: numberOfSeenItemsThatAreBetterThanCurrentItem
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.camel-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: itemRelativeRank
   scopes:
+    - variable.camel-case
     - variable.other.unknown.itemRelativeRank
 - source: '-'
   scopes:
@@ -810,35 +892,49 @@
 - source: '0'
   scopes:
     - constant.numeric.decimal
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: double
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: expectedAverageRank
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.camel-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: numberOfRemainingItems
   scopes:
+    - variable.camel-case
     - variable.other.unknown.numberOfRemainingItems
 - source: '*'
   scopes:
     - keyword.operator.arithmetic
 - source: probabilityOfBeingBetterThanCurrentItem
   scopes:
+    - variable.camel-case
     - variable.other.unknown.probabilityOfBeingBetterThanCurrentItem
 - source: +
   scopes:
     - keyword.operator.arithmetic
 - source: numberOfSeenItemsThatAreBetterThanCurrentItem
   scopes:
+    - variable.camel-case
     - variable.other.unknown.numberOfSeenItemsThatAreBetterThanCurrentItem
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -860,6 +956,7 @@
     - punctuation.section.parens.begin.bracket.round
 - source: expectedAverageRank
   scopes:
+    - variable.camel-case
     - variable.other.unknown.expectedAverageRank
 - source: '=='
   scopes:
@@ -879,6 +976,7 @@
     - punctuation.section.block.begin.bracket.curly
 - source: expectedAverageRank
   scopes:
+    - variable.camel-case
     - variable.other.unknown.expectedAverageRank
 - source: '='
   scopes:
@@ -895,16 +993,23 @@
   scopesEnd:
     - meta.block
 - source: double
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: expectedValue
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.camel-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: (
   scopesBegin:
     - meta.parens
@@ -912,6 +1017,7 @@
     - punctuation.section.parens.begin.bracket.round
 - source: totalNumberOfItems
   scopes:
+    - variable.camel-case
     - variable.other.unknown.totalNumberOfItems
 - source: +
   scopes:
@@ -929,7 +1035,10 @@
     - keyword.operator.arithmetic
 - source: expectedAverageRank
   scopes:
+    - variable.camel-case
     - variable.other.unknown.expectedAverageRank
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -938,6 +1047,7 @@
     - keyword.control.return
 - source: expectedValue
   scopes:
+    - variable.camel-case
     - variable.other.unknown.expectedValue
 - source: ;
   scopes:
@@ -949,7 +1059,7 @@
     - meta.body.function.definition
 - source: double
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: V
@@ -1001,69 +1111,107 @@
   scopesEnd:
     - comment.line.double-slash
 - source: double
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: itemIndex
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.camel-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: r
   scopes:
+    - variable.lower-case
     - variable.other.unknown.r
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: double
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: itemRelativeRank
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.camel-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: s
   scopes:
+    - variable.lower-case
     - variable.other.unknown.s
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: double
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: totalNumberOfItems
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.camel-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: 'n'
   scopes:
+    - variable.lower-case
     - variable.other.unknown.n
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: double
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: nextItemIndex
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.camel-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: itemIndex
   scopes:
+    - variable.camel-case
     - variable.other.unknown.itemIndex
 - source: +
   scopes:
@@ -1071,20 +1219,29 @@
 - source: '1'
   scopes:
     - constant.numeric.decimal
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: double
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: output
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: '0'
   scopes:
     - constant.numeric.decimal
@@ -1093,6 +1250,7 @@
     - punctuation.separator.delimiter.comma
 - source: estimatedValueOfAccepting
   scopes:
+    - variable.camel-case
     - variable.other.unknown.estimatedValueOfAccepting
 - source: '='
   scopes:
@@ -1105,6 +1263,7 @@
     - punctuation.separator.delimiter.comma
 - source: estimatedValueOfRejecting
   scopes:
+    - variable.camel-case
     - variable.other.unknown.estimatedValueOfRejecting
 - source: '='
   scopes:
@@ -1117,6 +1276,7 @@
     - punctuation.separator.delimiter.comma
 - source: sum
   scopes:
+    - variable.lower-case
     - variable.other.unknown.sum
 - source: '='
   scopes:
@@ -1124,6 +1284,8 @@
 - source: '0'
   scopes:
     - constant.numeric.decimal
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1145,12 +1307,14 @@
     - punctuation.section.parens.begin.bracket.round
 - source: itemIndex
   scopes:
+    - variable.camel-case
     - variable.other.unknown.itemIndex
 - source: '>'
   scopes:
     - keyword.operator.comparison
 - source: totalNumberOfItems
   scopes:
+    - variable.camel-case
     - variable.other.unknown.totalNumberOfItems
 - source: )
   scopes:
@@ -1164,6 +1328,7 @@
     - punctuation.section.block.begin.bracket.curly
 - source: output
   scopes:
+    - variable.lower-case
     - variable.other.unknown.output
 - source: '='
   scopes:
@@ -1214,6 +1379,7 @@
     - punctuation.definition.begin.bracket.square
 - source: r
   scopes:
+    - variable.lower-case
     - variable.other.unknown.r
 - source: ']'
   scopes:
@@ -1223,6 +1389,7 @@
     - punctuation.definition.begin.bracket.square
 - source: s
   scopes:
+    - variable.lower-case
     - variable.other.unknown.s
 - source: ']'
   scopes:
@@ -1266,6 +1433,7 @@
     - punctuation.definition.begin.bracket.square
 - source: r
   scopes:
+    - variable.lower-case
     - variable.other.unknown.r
 - source: ']'
   scopes:
@@ -1275,6 +1443,7 @@
     - punctuation.definition.begin.bracket.square
 - source: s
   scopes:
+    - variable.lower-case
     - variable.other.unknown.s
 - source: ']'
   scopes:
@@ -1291,28 +1460,34 @@
     - meta.block
 - source: estimatedValueOfAccepting
   scopes:
+    - variable.camel-case
     - variable.other.unknown.estimatedValueOfAccepting
 - source: '='
   scopes:
     - keyword.operator.assignment
 - source: U
   scopes:
+    - entity.name.function.call.upper-case
     - entity.name.function.call
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: r
   scopes:
+    - variable.lower-case
     - variable.other.unknown.r
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: s
   scopes:
+    - variable.lower-case
     - variable.other.unknown.s
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1334,12 +1509,14 @@
     - punctuation.section.parens.begin.bracket.round
 - source: itemIndex
   scopes:
+    - variable.camel-case
     - variable.other.unknown.itemIndex
 - source: '=='
   scopes:
     - keyword.operator.comparison
 - source: totalNumberOfItems
   scopes:
+    - variable.camel-case
     - variable.other.unknown.totalNumberOfItems
 - source: )
   scopes:
@@ -1361,12 +1538,14 @@
     - comment.line.double-slash
 - source: output
   scopes:
+    - variable.lower-case
     - variable.other.unknown.output
 - source: '='
   scopes:
     - keyword.operator.assignment
 - source: estimatedValueOfAccepting
   scopes:
+    - variable.camel-case
     - variable.other.unknown.estimatedValueOfAccepting
 - source: ;
   scopes:
@@ -1395,6 +1574,7 @@
     - comment.line.double-slash
 - source: sum
   scopes:
+    - variable.lower-case
     - variable.other.unknown.sum
 - source: '='
   scopes:
@@ -1407,6 +1587,7 @@
     - punctuation.terminator.statement
 - source: LoopFrom_
   scopes:
+    - variable.snake-case
     - variable.other.unknown.LoopFrom_
 - source: '1'
   scopes:
@@ -1416,24 +1597,29 @@
     - variable.other.unknown._To_
 - source: nextItemIndex
   scopes:
+    - variable.camel-case
     - variable.other.unknown.nextItemIndex
 - source: _Times
   scopes:
     - variable.other.unknown._Times
 - source: sum
   scopes:
+    - variable.lower-case
     - variable.other.unknown.sum
 - source: +=
   scopes:
     - keyword.operator.assignment.compound
 - source: V
   scopes:
+    - entity.name.function.call.upper-case
     - entity.name.function.call
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: nextItemIndex
   scopes:
+    - variable.camel-case
     - variable.other.unknown.nextItemIndex
 - source: ','
   scopes:
@@ -1444,6 +1630,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1452,18 +1639,21 @@
     - variable.other.unknown.EndLoop
 - source: estimatedValueOfRejecting
   scopes:
+    - variable.camel-case
     - variable.other.unknown.estimatedValueOfRejecting
 - source: '='
   scopes:
     - keyword.operator.assignment
 - source: sum
   scopes:
+    - variable.lower-case
     - variable.other.unknown.sum
 - source: /
   scopes:
     - keyword.operator.arithmetic
 - source: nextItemIndex
   scopes:
+    - variable.camel-case
     - variable.other.unknown.nextItemIndex
 - source: ;
   scopes:
@@ -1478,6 +1668,7 @@
     - comment.line.double-slash
 - source: output
   scopes:
+    - variable.lower-case
     - variable.other.unknown.output
 - source: '='
   scopes:
@@ -1489,12 +1680,14 @@
     - punctuation.section.parens.begin.bracket.round
 - source: estimatedValueOfRejecting
   scopes:
+    - variable.camel-case
     - variable.other.unknown.estimatedValueOfRejecting
 - source: '>'
   scopes:
     - keyword.operator.comparison
 - source: estimatedValueOfAccepting
   scopes:
+    - variable.camel-case
     - variable.other.unknown.estimatedValueOfAccepting
 - source: )
   scopes:
@@ -1506,12 +1699,14 @@
     - keyword.operator.ternary
 - source: estimatedValueOfRejecting
   scopes:
+    - variable.camel-case
     - variable.other.unknown.estimatedValueOfRejecting
 - source: ':'
   scopes:
     - keyword.operator.ternary
 - source: estimatedValueOfAccepting
   scopes:
+    - variable.camel-case
     - variable.other.unknown.estimatedValueOfAccepting
 - source: ;
   scopes:
@@ -1540,6 +1735,7 @@
     - punctuation.definition.begin.bracket.square
 - source: r
   scopes:
+    - variable.lower-case
     - variable.other.unknown.r
 - source: ']'
   scopes:
@@ -1549,6 +1745,7 @@
     - punctuation.definition.begin.bracket.square
 - source: s
   scopes:
+    - variable.lower-case
     - variable.other.unknown.s
 - source: ']'
   scopes:
@@ -1560,6 +1757,7 @@
     - keyword.operator.assignment
 - source: output
   scopes:
+    - variable.lower-case
     - variable.other.unknown.output
 - source: ;
   scopes:
@@ -1569,6 +1767,7 @@
     - keyword.control.return
 - source: output
   scopes:
+    - variable.lower-case
     - variable.other.unknown.output
 - source: ;
   scopes:
@@ -1580,7 +1779,7 @@
     - meta.body.function.definition
 - source: auto
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: main
@@ -1634,7 +1833,7 @@
     - punctuation.definition.function.return-type
 - source: int
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '{'
@@ -1658,7 +1857,8 @@
     - keyword.operator.not
 - source: cin
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.cin
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -1691,6 +1891,7 @@
     - comment.line.double-slash
 - source: LoopFrom_
   scopes:
+    - variable.snake-case
     - variable.other.unknown.LoopFrom_
 - source: '1'
   scopes:
@@ -1700,21 +1901,29 @@
     - variable.other.unknown._To_
 - source: MAX_N_SIZE
   scopes:
+    - variable.upper-case
     - variable.other.unknown.MAX_N_SIZE
 - source: _Times
   scopes:
     - variable.other.unknown._Times
 - source: short
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: row
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: LoopNumber
   scopes:
     - variable.other.unknown.LoopNumber
@@ -1724,11 +1933,14 @@
 - source: '1'
   scopes:
     - constant.numeric.decimal
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: LoopFrom_
   scopes:
+    - variable.snake-case
     - variable.other.unknown.LoopFrom_
 - source: '1'
   scopes:
@@ -1738,21 +1950,29 @@
     - variable.other.unknown._To_
 - source: MAX_N_SIZE
   scopes:
+    - variable.upper-case
     - variable.other.unknown.MAX_N_SIZE
 - source: _Times
   scopes:
     - variable.other.unknown._Times
 - source: short
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: cell
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: LoopNumber
   scopes:
     - variable.other.unknown.LoopNumber
@@ -1762,6 +1982,8 @@
 - source: '1'
   scopes:
     - constant.numeric.decimal
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1775,6 +1997,7 @@
     - punctuation.definition.begin.bracket.square
 - source: row
   scopes:
+    - variable.lower-case
     - variable.other.unknown.row
 - source: ']'
   scopes:
@@ -1784,6 +2007,7 @@
     - punctuation.definition.begin.bracket.square
 - source: cell
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cell
 - source: ']'
   scopes:
@@ -1807,28 +2031,33 @@
     - variable.other.unknown.EndLoop
 - source: cin
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cin
 - source: '>>'
   scopes:
     - keyword.operator.bitwise.shift
 - source: 'n'
   scopes:
+    - variable.lower-case
     - variable.other.unknown.n
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
 - source: V
   scopes:
+    - entity.name.function.call.upper-case
     - entity.name.function.call
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: '1'
   scopes:
     - constant.numeric.decimal
@@ -1841,6 +2070,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift

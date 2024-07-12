@@ -136,18 +136,21 @@
     - comment.line.double-slash
 - source: B
   scopes:
+    - variable.upper-case
     - variable.other.unknown.B
 - source: <
   scopes:
     - keyword.operator.comparison
 - source: A
   scopes:
+    - variable.upper-case
     - variable.other.unknown.A
 - source: '>'
   scopes:
     - keyword.operator.comparison
 - source: b
   scopes:
+    - variable.lower-case
     - variable.other.unknown.b
 - source: ;
   scopes:

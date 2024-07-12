@@ -1,17 +1,20 @@
 - source: vector
   scopes:
+    - variable.lower-case
     - variable.other.unknown.vector
 - source: <
   scopes:
     - keyword.operator.comparison
 - source: vector
   scopes:
+    - variable.lower-case
     - variable.other.unknown.vector
 - source: <
   scopes:
     - keyword.operator.comparison
 - source: string
   scopes:
+    - variable.lower-case
     - variable.other.unknown.string
 - source: '>>'
   scopes:

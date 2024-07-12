@@ -3,33 +3,41 @@
     - keyword.other.module
 - source: example
   scopes:
+    - variable.lower-case
     - variable.other.unknown.example
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: import
   scopes:
+    - variable.lower-case
     - variable.other.unknown.import
 - source: <
   scopes:
     - keyword.operator.comparison
 - source: vector
   scopes:
+    - variable.lower-case
     - variable.other.unknown.vector
 - source: '>'
   scopes:
     - keyword.operator.comparison
 - source: import
+  scopesBegin:
+    - variable.lower-case
   scopes:
     - variable.other.unknown.import
 - source: some
   scopes:
-    - variable.other.object.access
+    - variable.other.object.access.some
+  scopesEnd:
+    - variable.lower-case
 - source: .
   scopes:
     - punctuation.separator.dot-access
 - source: other
   scopes:
+    - variable.lower-case
     - variable.other.object.property
 - source: .
   scopes:
@@ -76,6 +84,7 @@
     - keyword.other.concept
 - source: convertible_to
   scopes:
+    - variable.snake-case
     - variable.other.unknown.convertible_to
 - source: '='
   scopes:
@@ -129,6 +138,7 @@
     - keyword.operator.bitwise
 - source: f
   scopes:
+    - variable.lower-case
     - variable.other.unknown.f
 - source: )
   scopes:

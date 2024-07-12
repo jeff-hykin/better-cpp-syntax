@@ -14,44 +14,62 @@
 - source: int
   scopesBegin:
     - meta.body.struct
+    - meta.declaration
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: a
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
+  scopesBegin:
+    - meta.declaration
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: b
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: usertype
+  scopesBegin:
+    - meta.declaration
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: user_value
+  scopes:
+    - meta.declaration
+    - variable.snake-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: usertype
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: user_value
   scopes:
-    - variable.other.object.declare
-- source: ;
-  scopes:
-    - punctuation.terminator.statement
-- source: usertype
-  scopes:
-    - meta.qualified_type
-    - entity.name.type
-- source: user_value
-  scopes:
-    - entity.name.function.call.constructor
+    - variable.snake-case
+    - variable.other.object.construction
 - source: '{'
   scopesBegin:
     - meta.block
@@ -82,6 +100,7 @@
     - storage.type.built-in.primitive
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '['
   scopes:
@@ -122,7 +141,8 @@
     - punctuation.terminator.statement
 - source: scoped
   scopesBegin:
-    - meta.qualified_type
+    - meta.declaration
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -139,23 +159,28 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: type
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
     - meta.template.call
 - source: value
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: compound
   scopesBegin:
-    - meta.qualified_type
+    - meta.declaration
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: <
@@ -169,7 +194,7 @@
     - storage.modifier
 - source: templated
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -180,7 +205,7 @@
   scopes:
     - entity.name.type
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
 - source: '*'
   scopes:
     - keyword.operator.arithmetic
@@ -198,10 +223,14 @@
   scopes:
     - entity.name.type
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
 - source: value
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -221,6 +250,7 @@
     - storage.type.built-in.primitive
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.unknown.a
 - source: ;
   scopes:
@@ -231,26 +261,30 @@
     - storage.type.built-in.primitive
 - source: b
   scopes:
+    - variable.lower-case
     - variable.other.unknown.b
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: usertype
   scopes:
+    - variable.lower-case
     - variable.other.unknown.usertype
 - source: user_value
   scopes:
+    - variable.snake-case
     - variable.other.unknown.user_value
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: usertype
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: user_value
   scopes:
-    - entity.name.function.call.constructor
+    - variable.snake-case
+    - variable.other.object.construction
 - source: '{'
   scopesBegin:
     - meta.block
@@ -284,18 +318,21 @@
     - punctuation.separator.scope-resolution
 - source: templated
   scopes:
+    - variable.lower-case
     - variable.other.unknown.templated
 - source: <
   scopes:
     - keyword.operator.comparison
 - source: type
   scopes:
+    - variable.lower-case
     - variable.other.unknown.type
 - source: '>'
   scopes:
     - keyword.operator.comparison
 - source: value
   scopes:
+    - variable.lower-case
     - variable.other.unknown.value
 - source: ;
   scopes:
@@ -314,7 +351,7 @@
     - storage.modifier
 - source: templated
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -325,7 +362,7 @@
   scopes:
     - entity.name.type
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
 - source: '*'
   scopes:
     - keyword.operator.arithmetic
@@ -340,11 +377,15 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: type
+  scopesBegin:
+    - variable.lower-case
   scopes:
     - variable.other.unknown.type
 - source: value
   scopes:
     - variable.other.unknown.value
+  scopesEnd:
+    - variable.lower-case
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -354,6 +395,7 @@
     - storage.type.built-in.primitive
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '['
   scopes:
@@ -410,9 +452,11 @@
     - punctuation.separator.delimiter.comma
 - source: usertype
   scopes:
+    - variable.lower-case
     - variable.other.unknown.usertype
 - source: user_value
   scopes:
+    - variable.snake-case
     - variable.other.unknown.user_value
 - source: )
   scopes:
@@ -424,7 +468,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: main
@@ -446,44 +490,62 @@
 - source: int
   scopesBegin:
     - meta.body.function.definition
+    - meta.declaration
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: a
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
+  scopesBegin:
+    - meta.declaration
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: b
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: usertype
+  scopesBegin:
+    - meta.declaration
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: user_value
+  scopes:
+    - meta.declaration
+    - variable.snake-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: usertype
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: user_value
   scopes:
-    - variable.other.object.declare
-- source: ;
-  scopes:
-    - punctuation.terminator.statement
-- source: usertype
-  scopes:
-    - meta.qualified_type
-    - entity.name.type
-- source: user_value
-  scopes:
-    - entity.name.function.call.constructor
+    - variable.snake-case
+    - variable.other.object.construction
 - source: '{'
   scopesBegin:
     - meta.block
@@ -510,7 +572,8 @@
     - punctuation.terminator.statement
 - source: scoped
   scopesBegin:
-    - meta.qualified_type
+    - meta.declaration
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -527,23 +590,28 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: type
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
     - meta.template.call
 - source: value
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: compound
   scopesBegin:
-    - meta.qualified_type
+    - meta.declaration
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: <
@@ -557,7 +625,7 @@
     - storage.modifier
 - source: templated
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -568,7 +636,7 @@
   scopes:
     - entity.name.type
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
 - source: '*'
   scopes:
     - keyword.operator.arithmetic
@@ -586,10 +654,14 @@
   scopes:
     - entity.name.type
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
 - source: value
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -599,6 +671,7 @@
     - storage.type.built-in.primitive
 - source: a
   scopes:
+    - variable.lower-case
     - variable.other.assignment
 - source: '['
   scopes:
@@ -655,9 +728,11 @@
     - punctuation.separator.delimiter.comma
 - source: usertype
   scopes:
+    - variable.lower-case
     - variable.other.unknown.usertype
 - source: user_value
   scopes:
+    - variable.snake-case
     - variable.other.unknown.user_value
 - source: )
   scopes:

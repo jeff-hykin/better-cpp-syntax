@@ -10,7 +10,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: foo
@@ -46,6 +46,7 @@
     - keyword.operator.arithmetic
 - source: c
   scopes:
+    - variable.lower-case
     - variable.other.unknown.c
 - source: '='
   scopes:
@@ -86,6 +87,7 @@
     - storage.type.built-in.primitive
 - source: x
   scopes:
+    - variable.lower-case
     - variable.other.unknown.x
 - source: ;
   scopes:

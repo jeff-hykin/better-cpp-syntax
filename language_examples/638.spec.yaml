@@ -35,7 +35,7 @@
     - meta.body.struct
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: foo
@@ -60,6 +60,7 @@
   scopesBegin:
     - meta.arguments.requires
   scopes:
+    - variable.lower-case
     - variable.other.unknown.n
 - source: '=='
   scopes:
@@ -95,7 +96,7 @@
     - meta.body.function.definition
 - source: int
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: foo
@@ -120,6 +121,7 @@
   scopesBegin:
     - meta.arguments.requires
   scopes:
+    - variable.lower-case
     - variable.other.unknown.n
 - source: <
   scopes:
@@ -163,13 +165,19 @@
   scopesEnd:
     - storage.type.modifier.access.control.private
 - source: int
+  scopesBegin:
+    - meta.declaration
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: b
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement

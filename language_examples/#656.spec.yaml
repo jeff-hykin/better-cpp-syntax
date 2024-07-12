@@ -5,7 +5,7 @@
     - storage.modifier.static
 - source: QAccessibleInterface
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '*'
   scopes:
@@ -68,6 +68,7 @@
     - punctuation.section.parens.begin.bracket.round
 - source: classname
   scopes:
+    - variable.lower-case
     - variable.other.unknown.classname
 - source: '=='
   scopes:
@@ -97,13 +98,15 @@
     - keyword.operator.logical
 - source: object
   scopes:
+    - variable.lower-case
     - variable.other.unknown.object
 - source: '&&'
   scopes:
     - keyword.operator.logical
 - source: object
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.object
 - source: '->'
   scopes:
     - punctuation.separator.pointer-access
@@ -157,6 +160,7 @@
     - punctuation.section.parens.begin.bracket.round
 - source: object
   scopes:
+    - variable.lower-case
     - variable.other.unknown.object
 - source: )
   scopes:

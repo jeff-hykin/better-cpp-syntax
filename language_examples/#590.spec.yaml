@@ -80,7 +80,7 @@
     - storage.type.modifier.access.public
 - source: base
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: \
   scopes:
@@ -99,7 +99,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: f
@@ -142,7 +142,7 @@
     - storage.modifier.static
 - source: void
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: func
@@ -167,12 +167,18 @@
   scopes:
     - constant.character.escape.line-continuation
 - source: der
+  scopesBegin:
+    - meta.declaration
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: v
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -181,7 +187,8 @@
     - constant.character.escape.line-continuation
 - source: v
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.v
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -211,28 +218,34 @@
     - constant.character.escape.line-continuation
 - source: DOCTEST_REGISTER_FUNCTION
   scopes:
+    - entity.name.function.call.upper-case
     - entity.name.function.call
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: DOCTEST_EMPTY
   scopes:
+    - variable.snake-case
     - variable.other.unknown.DOCTEST_EMPTY
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: func
   scopes:
+    - variable.lower-case
     - variable.other.unknown.func
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: decorators
   scopes:
+    - variable.lower-case
     - variable.other.unknown.decorators
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: \
   scopes:
     - constant.character.escape.line-continuation
@@ -250,6 +263,7 @@
     - storage.modifier.specifier.functional.pre-parameters.inline
 - source: DOCTEST_NOINLINE
   scopes:
+    - variable.snake-case
     - variable.other.unknown.DOCTEST_NOINLINE
 - source: void
   scopes:

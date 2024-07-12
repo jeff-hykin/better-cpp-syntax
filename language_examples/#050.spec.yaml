@@ -2,7 +2,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: main
@@ -35,6 +35,7 @@
     - punctuation.section.parens.begin.bracket.round.conditional.switch
 - source: test
   scopes:
+    - variable.lower-case
     - variable.other.unknown.test
 - source: )
   scopes:

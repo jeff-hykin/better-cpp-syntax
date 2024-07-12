@@ -1066,10 +1066,27 @@ grammar = Grammar.new(
     constructor_call_base = lookAheadToAvoid(/class|struct|union|enum|explicit|new|delete|operator|template|throw|decltype|typename|override|final/).then(/\b/).then(
         qualified_type
     )
+    generateVariableVariations = ->(tag_name) do
+        Pattern.new(
+            tag_as: "variable.lower-case #{tag_name}",
+            match: /\b[a-z0-9]+\b/,
+        ).or(
+            tag_as: "variable.snake-case #{tag_name}",
+            match: /\b[a-zA-Z0-9]+_[a-zA-Z0-9]*\b/,
+        ).or(
+            tag_as: "variable.camel-case #{tag_name}",
+            match: /\b[a-z]+[A-Z][a-zA-Z0-9]*\b/,
+        ).or(
+            tag_as: "variable.upper-case #{tag_name}",
+            match: /\b[A-Z][A-Z_0-9]*\b/,
+        ).or(
+            tag_as: "variable.other.unknown.$match",
+            match: variable_name,
+        )
+    end
     grammar[:constructor_bracket_call] = Pattern.new(
         constructor_call_base.then(std_space).then(
-            match: variable_name,
-            tag_as: "entity.name.function.call.constructor",
+            generateVariableVariations["variable.other.object.construction"],
         ).then(std_space).lookAheadFor(/\{/)
     )
     grammar[:simple_constructor_call] = Pattern.new(
@@ -1079,8 +1096,7 @@ grammar = Grammar.new(
     )
     grammar[:simple_array_assignment] = Pattern.new(
         Pattern.new(
-            tag_as: "variable.other.assignment",
-            match: variable_name,
+            generateVariableVariations["variable.other.assignment"],
         ).then(
             match: /\[/,
             tag_as: "punctuation.definition.begin.bracket.square.array.type",
@@ -1093,29 +1109,30 @@ grammar = Grammar.new(
             assignment_operators
         )
     )
-    grammar[:unknown_variable] = Pattern.new(
-        Pattern.new(
-            tag_as: "variable.other.unknown.$match",
-            match: variable_name,
-        )
-    )
+    
+    grammar[:unknown_variable] = generateVariableVariations["variable.other.unknown.$match"]
     normal_type_pattern = maybe(declaration_storage_specifiers.then(std_space)).then(qualified_type.maybe(ref_deref[]))
     # normal variable assignment
     grammar[:variable_assignment] =  Pattern.new(
-        normal_type_pattern.then(std_space).then(
-            tag_as: "variable.other.assignment",
-            match: identifier,
-        ).then(std_space).then(
-            assignment_operators
+        tag_as: "meta.assignment",
+        match: Pattern.new(
+            normal_type_pattern.then(std_space).then(
+                generateVariableVariations["variable.other.assignment"],
+            ).then(std_space).then(
+                assignment_operators
+            )
         )
     )
     grammar[:variable_declare] = Pattern.new(
-        normal_type_pattern.then(std_space).then(
-            tag_as: "variable.other.object.declare",
-            match: identifier,
-        ).then(std_space).lookAheadFor(/;|,/)
+        tag_as: "meta.declaration",
+        match: Pattern.new(
+            normal_type_pattern.then(std_space).then(
+                generateVariableVariations["variable.other.declare"],
+            ).then(std_space).lookAheadFor(/;|,/)
+        )
     )
     grammar[:normal_variable_assignment] = PatternRange.new(
+        tag_as: "meta.assignment",
         start_pattern: Pattern.new(
             Pattern.new(/^/).then(std_space).then(
                 grammar[:variable_assignment]
@@ -1133,6 +1150,7 @@ grammar = Grammar.new(
         # missing array declarations
         # missing initalizer forms ( Thing somthin(); Thing somethin{};)
     grammar[:normal_variable_declaration] = PatternRange.new(
+        tag_as: "meta.declaration",
         start_pattern: Pattern.new(
             Pattern.new(/^/).then(std_space).then(
                 grammar[:variable_declare]
@@ -1410,26 +1428,49 @@ grammar = Grammar.new(
         ]
     )
     # a full match example of function call would be: aNameSpace::subClass<TemplateArg>FunctionName<5>(
-    grammar[:function_call] = PatternRange.new(
-        start_pattern: Pattern.new(
-                grammar[:scope_resolution_function_call]
-            ).then(
-                match: variable_name_without_bounds,
-                tag_as: "entity.name.function.call"
-            ).then(
-                avoid_invalid_function_names
-            ).then(std_space).maybe(
-                template_call
-            ).then(
-                match: /\(/,
-                tag_as: "punctuation.section.arguments.begin.bracket.round.function.call"
-            ),
-        end_pattern: Pattern.new(
-                match: /\)/,
-                tag_as: "punctuation.section.arguments.end.bracket.round.function.call"
-            ),
-        includes: [ :evaluation_context ]
-        )
+    grammar[:function_call] = [
+        PatternRange.new(
+            start_pattern: Pattern.new(
+                    grammar[:scope_resolution_function_call]
+                ).then(
+                    # same as normal function call, just detect if upper-case
+                    match: /[A-Z][A-Z_0-9]*/,
+                    tag_as: "entity.name.function.call.upper-case entity.name.function.call"
+                ).then(
+                    avoid_invalid_function_names
+                ).then(std_space).maybe(
+                    template_call
+                ).then(
+                    match: /\(/,
+                    tag_as: "punctuation.section.arguments.begin.bracket.round.function.call punctuation.section.arguments.begin.bracket.round.function.call.upper-case"
+                ),
+            end_pattern: Pattern.new(
+                    match: /\)/,
+                    tag_as: "punctuation.section.arguments.end.bracket.round.function.call punctuation.section.arguments.begin.bracket.round.function.call.upper-case"
+                ),
+            includes: [ :evaluation_context ]
+        ),
+        PatternRange.new(
+            start_pattern: Pattern.new(
+                    grammar[:scope_resolution_function_call]
+                ).then(
+                    match: variable_name_without_bounds,
+                    tag_as: "entity.name.function.call"
+                ).then(
+                    avoid_invalid_function_names
+                ).then(std_space).maybe(
+                    template_call
+                ).then(
+                    match: /\(/,
+                    tag_as: "punctuation.section.arguments.begin.bracket.round.function.call"
+                ),
+            end_pattern: Pattern.new(
+                    match: /\)/,
+                    tag_as: "punctuation.section.arguments.end.bracket.round.function.call"
+                ),
+            includes: [ :evaluation_context ]
+        ),
+    ]
 
 #
 # Initializers
@@ -2046,15 +2087,12 @@ grammar = Grammar.new(
     # TODO: member_access and method_access might also need additional matching to handle scope resolutions
     generatePartialMemberFinder = ->(tag_name) do
         the_this_keyword.or(
-            Pattern.new(
-                match: variable_name_without_bounds.or(lookBehindFor(/\]|\)/)).maybe(@spaces),
-                tag_as: tag_name,
-            )
+            generateVariableVariations[tag_name].or(lookBehindFor(/\]|\)/)).maybe(@spaces),
         ).then(
             member_operator
         )
     end
-    partial_member = generatePartialMemberFinder["variable.other.object.access"]
+    partial_member = generatePartialMemberFinder["variable.other.object.access.$match"]
     member_context = [
             mid_member = Pattern.new(
                 match: lookBehindFor(dot_or_arrow_operator).maybe(

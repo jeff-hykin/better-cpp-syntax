@@ -2,7 +2,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: main
@@ -39,7 +39,7 @@
     - storage.modifier.specifier.const
 - source: auto
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '&'
@@ -67,6 +67,7 @@
     - meta.binding
 - source: c
   scopes:
+    - variable.lower-case
     - variable.other.unknown.c
   scopesEnd:
     - meta.parens.control.for
@@ -77,7 +78,8 @@
     - meta.parens
 - source: a
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.a
 - source: '->'
   scopes:
     - punctuation.separator.pointer-access
@@ -89,6 +91,7 @@
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: bug
   scopes:
+    - variable.lower-case
     - variable.other.unknown.bug
 - source: )
   scopes:
@@ -120,7 +123,7 @@
     - storage.modifier.specifier.const
 - source: auto
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '['
@@ -145,6 +148,7 @@
     - meta.binding
 - source: c
   scopes:
+    - variable.lower-case
     - variable.other.unknown.c
   scopesEnd:
     - meta.parens.control.for
@@ -155,7 +159,8 @@
     - meta.parens
 - source: a
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.a
 - source: '->'
   scopes:
     - punctuation.separator.pointer-access
@@ -167,6 +172,7 @@
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: bug
   scopes:
+    - variable.lower-case
     - variable.other.unknown.bug
 - source: )
   scopes:

@@ -20,9 +20,11 @@
     - entity.name.function.preprocessor
 - source: cbuffer
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cbuffer
 - source: testCB
   scopes:
+    - variable.camel-case
     - variable.other.unknown.testCB
 - source: '#'
   scopesBegin:
@@ -66,13 +68,17 @@
 - source: float
   scopesBegin:
     - meta.body.struct
+    - meta.declaration
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: Brightness
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.other.unknown.Brightness
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement

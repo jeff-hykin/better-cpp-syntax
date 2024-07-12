@@ -2,7 +2,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: main
@@ -28,7 +28,7 @@
     - storage.modifier.specifier.functional.pre-parameters.constexpr
 - source: std
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -40,10 +40,11 @@
     - storage.type
     - storage.type.built-in
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
 - source: highlight
   scopes:
-    - entity.name.function.call.constructor
+    - variable.lower-case
+    - variable.other.object.construction
 - source: '{'
   scopesBegin:
     - meta.block
@@ -62,7 +63,7 @@
     - storage.modifier.specifier.const
 - source: '::'
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
@@ -78,10 +79,11 @@
     - storage.type
     - storage.type.built-in
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
 - source: highlight2
   scopes:
-    - entity.name.function.call.constructor
+    - variable.lower-case
+    - variable.other.object.construction
 - source: '{'
   scopesBegin:
     - meta.block
@@ -112,6 +114,7 @@
     - storage.modifier.specifier.const
 - source: highlight3
   scopes:
+    - variable.lower-case
     - variable.other.unknown.highlight3
 - source: '{'
   scopesBegin:
@@ -143,6 +146,7 @@
     - storage.modifier.specifier.functional.pre-parameters.constexpr
 - source: highlight4
   scopes:
+    - variable.lower-case
     - variable.other.unknown.highlight4
 - source: '{'
   scopesBegin:
@@ -162,7 +166,7 @@
     - storage.modifier.specifier.functional.pre-parameters.constexpr
 - source: '::'
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
@@ -178,10 +182,11 @@
     - storage.type
     - storage.type.built-in
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
 - source: no_highlight
   scopes:
-    - entity.name.function.call.constructor
+    - variable.snake-case
+    - variable.other.object.construction
 - source: '{'
   scopesBegin:
     - meta.block

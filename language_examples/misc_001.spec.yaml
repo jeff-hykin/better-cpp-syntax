@@ -83,6 +83,7 @@
     - punctuation.separator.scope-resolution
 - source: move
   scopes:
+    - variable.lower-case
     - variable.other.unknown.move
 - source: ;
   scopes:
@@ -99,6 +100,7 @@
     - punctuation.separator.scope-resolution
 - source: vector
   scopes:
+    - variable.lower-case
     - variable.other.unknown.vector
 - source: ;
   scopes:
@@ -115,6 +117,7 @@
     - punctuation.separator.scope-resolution
 - source: hash_combine
   scopes:
+    - variable.snake-case
     - variable.other.unknown.hash_combine
 - source: ;
   scopes:
@@ -143,6 +146,7 @@
     - keyword.operator.bitwise
 - source: other
   scopes:
+    - variable.lower-case
     - variable.other.unknown.other
 - source: )
   scopes:
@@ -192,6 +196,7 @@
     - keyword.operator.assignment
 - source: other
   scopes:
+    - variable.lower-case
     - variable.other.unknown.other
 - source: ;
   scopes:
@@ -208,7 +213,7 @@
     - storage.modifier.static
 - source: void
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: destroy_value
@@ -256,7 +261,8 @@
     - punctuation.section.parens.begin.bracket.round.conditional.switch
 - source: rule
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.rule
 - source: '->'
   scopes:
     - punctuation.separator.pointer-access
@@ -299,12 +305,14 @@
     - keyword.control.return
 - source: rule
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.rule
 - source: '->'
   scopes:
     - punctuation.separator.pointer-access
 - source: blank
   scopes:
+    - variable.lower-case
     - variable.other.object.property
 - source: .
   scopes:
@@ -337,7 +345,7 @@
   scopesBegin:
     - meta.function.definition.special.operator-overload
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '&'
   scopes:
@@ -407,13 +415,15 @@
     - punctuation.terminator.statement
 - source: type
   scopes:
+    - variable.lower-case
     - variable.other.unknown.type
 - source: '='
   scopes:
     - keyword.operator.assignment
 - source: other
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.other
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -436,6 +446,7 @@
     - punctuation.section.parens.begin.bracket.round.conditional.switch
 - source: type
   scopes:
+    - variable.lower-case
     - variable.other.unknown.type
 - source: )
   scopes:
@@ -475,6 +486,7 @@
     - keyword.operator.bitwise
 - source: blank_
   scopes:
+    - variable.snake-case
     - variable.other.unknown.blank_
 - source: )
   scopes:
@@ -489,7 +501,8 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: other
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.other
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -549,7 +562,8 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: other
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.other
 - source: .
   scopes:
     - punctuation.separator.dot-access

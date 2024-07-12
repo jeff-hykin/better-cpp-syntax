@@ -6,6 +6,7 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: msg3
   scopes:
+    - variable.lower-case
     - variable.other.unknown.msg3
 - source: ','
   scopes:
@@ -146,6 +147,7 @@
     - punctuation.separator.delimiter.comma
 - source: tmp_line2
   scopes:
+    - variable.snake-case
     - variable.other.unknown.tmp_line2
 - source: ','
   scopes:

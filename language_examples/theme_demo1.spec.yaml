@@ -38,7 +38,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: thing
@@ -122,7 +122,7 @@
   scopesBegin:
     - meta.function.definition.special.operator-overload
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: operator
@@ -173,6 +173,7 @@
   scopesBegin:
     - meta.body.function.definition.special.operator-overload
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
@@ -211,7 +212,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: main
@@ -286,6 +287,7 @@
     - meta.parens
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
@@ -329,6 +331,7 @@
     - punctuation.section.parens.begin.bracket.round
 - source: c
   scopes:
+    - variable.lower-case
     - variable.other.unknown.c
 - source: '>'
   scopes:
@@ -348,6 +351,7 @@
     - meta.parens
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:
@@ -401,6 +405,7 @@
     - punctuation.section.parens.begin.bracket.round
 - source: c
   scopes:
+    - variable.lower-case
     - variable.other.unknown.c
 - source: '>'
   scopes:
@@ -420,6 +425,7 @@
     - meta.parens
 - source: cout
   scopes:
+    - variable.lower-case
     - variable.other.unknown.cout
 - source: '<<'
   scopes:

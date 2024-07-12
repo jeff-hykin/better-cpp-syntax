@@ -81,6 +81,7 @@
 - source: size
   scopes:
     - meta.parameter.initialization
+    - variable.lower-case
     - variable.other.unknown.size
 - source: )
   scopes:
@@ -95,6 +96,7 @@
   scopesBegin:
     - meta.body.function.definition.special.constructor
   scopes:
+    - variable.lower-case
     - variable.other.unknown.container
 - source: '='
   scopes:
@@ -113,6 +115,7 @@
     - punctuation.definition.begin.bracket.square
 - source: size
   scopes:
+    - variable.lower-case
     - variable.other.unknown.size
 - source: ']'
   scopes:
@@ -162,6 +165,7 @@
     - keyword.operator.wordlike
 - source: container
   scopes:
+    - variable.lower-case
     - variable.other.unknown.container
 - source: ;
   scopes:
@@ -177,7 +181,7 @@
   scopesBegin:
     - meta.function.definition.special.operator-overload
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: operator
   scopesBegin:
@@ -234,6 +238,7 @@
     - storage.type.built-in.primitive
 - source: itr
   scopes:
+    - variable.lower-case
     - variable.other.unknown.itr
 - source: '='
   scopes:
@@ -246,18 +251,21 @@
     - punctuation.terminator.statement
 - source: itr
   scopes:
+    - variable.lower-case
     - variable.other.unknown.itr
 - source: +
   scopes:
     - keyword.operator.arithmetic
 - source: 'n'
   scopes:
+    - variable.lower-case
     - variable.other.unknown.n
 - source: <
   scopes:
     - keyword.operator.comparison
 - source: size
   scopes:
+    - variable.lower-case
     - variable.other.unknown.size
 - source: ;
   scopes:
@@ -267,6 +275,7 @@
     - keyword.operator.increment
 - source: itr
   scopes:
+    - variable.lower-case
     - variable.other.unknown.itr
   scopesEnd:
     - meta.parens.control.for
@@ -290,6 +299,7 @@
     - punctuation.definition.begin.bracket.square
 - source: itr
   scopes:
+    - variable.lower-case
     - variable.other.unknown.itr
 - source: ']'
   scopes:
@@ -309,12 +319,14 @@
     - punctuation.definition.begin.bracket.square
 - source: itr
   scopes:
+    - variable.lower-case
     - variable.other.unknown.itr
 - source: +
   scopes:
     - keyword.operator.arithmetic
 - source: 'n'
   scopes:
+    - variable.lower-case
     - variable.other.unknown.n
 - source: ']'
   scopes:
@@ -349,7 +361,7 @@
     - meta.body.function.definition.special.operator-overload
 - source: DummyContainer
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: operator
   scopesBegin:
@@ -406,6 +418,7 @@
     - storage.type.built-in.primitive
 - source: itr
   scopes:
+    - variable.lower-case
     - variable.other.unknown.itr
 - source: '='
   scopes:
@@ -418,18 +431,21 @@
     - punctuation.terminator.statement
 - source: itr
   scopes:
+    - variable.lower-case
     - variable.other.unknown.itr
 - source: +
   scopes:
     - keyword.operator.arithmetic
 - source: 'n'
   scopes:
+    - variable.lower-case
     - variable.other.unknown.n
 - source: <
   scopes:
     - keyword.operator.comparison
 - source: size
   scopes:
+    - variable.lower-case
     - variable.other.unknown.size
 - source: ;
   scopes:
@@ -439,6 +455,7 @@
     - keyword.operator.increment
 - source: itr
   scopes:
+    - variable.lower-case
     - variable.other.unknown.itr
   scopesEnd:
     - meta.parens.control.for
@@ -462,6 +479,7 @@
     - punctuation.definition.begin.bracket.square
 - source: itr
   scopes:
+    - variable.lower-case
     - variable.other.unknown.itr
 - source: ']'
   scopes:
@@ -481,12 +499,14 @@
     - punctuation.definition.begin.bracket.square
 - source: itr
   scopes:
+    - variable.lower-case
     - variable.other.unknown.itr
 - source: +
   scopes:
     - keyword.operator.arithmetic
 - source: 'n'
   scopes:
+    - variable.lower-case
     - variable.other.unknown.n
 - source: ']'
   scopes:
@@ -529,26 +549,38 @@
   scopesEnd:
     - storage.type.modifier.access.control.private
 - source: T
+  scopesBegin:
+    - meta.declaration
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '*'
   scopes:
     - storage.modifier.pointer
 - source: container
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
+  scopesBegin:
+    - meta.declaration
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: size
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
