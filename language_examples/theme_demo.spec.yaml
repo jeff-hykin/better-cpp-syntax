@@ -20,7 +20,10 @@
 - source: )
   scopes:
     - punctuation.definition.parameters.end.preprocessor
-- source: ' cout '
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -127,6 +130,7 @@
     - storage.modifier.specifier.functional.pre-parameters.inline
 - source: int
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: f
@@ -145,7 +149,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: func
@@ -161,7 +165,7 @@
     - meta.function.definition.parameters
     - meta.parameter
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: (
   scopes:
@@ -205,13 +209,22 @@
 - source: auto
   scopesBegin:
     - meta.body.function.definition
+    - meta.assignment
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' a '
+- source: a
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: 0x
   scopes:
     - keyword.other.unit.hexadecimal
@@ -220,18 +233,31 @@
     - constant.numeric.hexadecimal
 - source: yards
   scopes:
+    - keyword.other.suffix.literal.user-defined.integer
     - keyword.other.unit.user-defined
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: auto
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' c '
+- source: c
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: '0'
   scopes:
     - keyword.other.unit.octal
@@ -254,18 +280,21 @@
     - punctuation.separator.constant.numeric
 - source: '4'
   scopesEnd:
+    - meta.assignment
     - constant.numeric.octal
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: a_pointer
   scopes:
-    - variable.other.object.access
+    - variable.snake-case
+    - variable.other.object.access.a_pointer
 - source: .
   scopes:
     - punctuation.separator.dot-access
 - source: thread
   scopes:
+    - variable.lower-case
     - variable.other.object.property
 - source: '->*'
   scopes:
@@ -278,12 +307,14 @@
     - punctuation.terminator.statement
 - source: a_pointer
   scopes:
-    - variable.other.object.access
+    - variable.snake-case
+    - variable.other.object.access.a_pointer
 - source: .*
   scopes:
     - punctuation.separator.dot-access
 - source: thread
   scopes:
+    - variable.lower-case
     - variable.other.object.property
 - source: '->'
   scopes:
@@ -296,12 +327,14 @@
     - punctuation.terminator.statement
 - source: a_pointer
   scopes:
-    - variable.other.object.access
+    - variable.snake-case
+    - variable.other.object.access.a_pointer
 - source: '->'
   scopes:
     - punctuation.separator.pointer-access
 - source: thread
   scopes:
+    - variable.lower-case
     - variable.other.object.property
 - source: .*
   scopes:
@@ -314,12 +347,14 @@
     - punctuation.terminator.statement
 - source: a_pointer
   scopes:
-    - variable.other.object.access
+    - variable.snake-case
+    - variable.other.object.access.a_pointer
 - source: '->*'
   scopes:
     - punctuation.separator.pointer-access
 - source: thread
   scopes:
+    - variable.lower-case
     - variable.other.object.property
 - source: .
   scopes:
@@ -340,7 +375,7 @@
   scopesBegin:
     - meta.function.definition.special.operator-overload
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: operator
   scopesBegin:
@@ -411,7 +446,7 @@
   scopesBegin:
     - meta.function.definition.special.operator-overload
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: operator
   scopesBegin:
@@ -482,7 +517,7 @@
   scopesBegin:
     - meta.function.definition.special.operator-overload
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: operator
   scopesBegin:
@@ -553,7 +588,7 @@
   scopesBegin:
     - meta.function.definition.special.operator-overload
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: operator
   scopesBegin:
@@ -664,7 +699,7 @@
     - meta.tail.enum
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: main
@@ -773,13 +808,23 @@
   scopesEnd:
     - comment.line.double-slash
 - source: auto
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' a_lambda '
+- source: a_lambda
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.snake-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: '['
   scopes:
     - punctuation.definition.capture.begin.lambda
@@ -849,7 +894,10 @@
     - meta.function.definition.body.lambda
   scopes:
     - punctuation.section.block.begin.bracket.curly.lambda
-- source: '            cout '
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -871,6 +919,7 @@
   scopes:
     - punctuation.section.block.end.bracket.curly.lambda
   scopesEnd:
+    - meta.assignment
     - meta.function.definition.body.lambda
 - source: ;
   scopes:
@@ -884,13 +933,23 @@
   scopesEnd:
     - comment.line.double-slash
 - source: auto
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' thing '
+- source: thing
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: aFunction
   scopes:
     - entity.name.function.call
@@ -914,9 +973,14 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: arguments
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.arguments
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement

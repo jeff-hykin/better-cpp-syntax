@@ -2,7 +2,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: main
@@ -32,34 +32,45 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: const
+  scopesBegin:
+    - meta.parens.control.for
+    - meta.binding
   scopes:
     - storage.modifier.specifier.const
 - source: auto
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '&'
   scopes:
-    - keyword.operator.bitwise
+    - storage.modifier.reference
 - source: '['
-  scopesBegin:
-    - meta.bracket.square.access
   scopes:
-    - punctuation.definition.begin.bracket.square
+    - punctuation.definition.begin.bracket.square.binding
 - source: a
+  scopes:
+    - variable.other.for
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' b'
+- source: b
+  scopes:
+    - variable.other.for
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
-  scopesEnd:
-    - meta.bracket.square.access
+    - punctuation.definition.end.bracket.square.binding
 - source: ':'
   scopes:
     - punctuation.separator.colon.range-based
-- source: ' c'
+  scopesEnd:
+    - meta.binding
+- source: c
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -67,7 +78,8 @@
     - meta.parens
 - source: a
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.a
 - source: '->'
   scopes:
     - punctuation.separator.pointer-access
@@ -78,6 +90,9 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: bug
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.bug
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
@@ -101,31 +116,42 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: const
+  scopesBegin:
+    - meta.parens.control.for
+    - meta.binding
   scopes:
     - storage.modifier.specifier.const
 - source: auto
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '['
-  scopesBegin:
-    - meta.bracket.square.access
   scopes:
-    - punctuation.definition.begin.bracket.square
+    - punctuation.definition.begin.bracket.square.binding
 - source: a
+  scopes:
+    - variable.other.for
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' b'
+- source: b
+  scopes:
+    - variable.other.for
 - source: ']'
   scopes:
-    - punctuation.definition.end.bracket.square
-  scopesEnd:
-    - meta.bracket.square.access
+    - punctuation.definition.end.bracket.square.binding
 - source: ':'
   scopes:
     - punctuation.separator.colon.range-based
-- source: ' c'
+  scopesEnd:
+    - meta.binding
+- source: c
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -133,7 +159,8 @@
     - meta.parens
 - source: a
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.a
 - source: '->'
   scopes:
     - punctuation.separator.pointer-access
@@ -144,6 +171,9 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: bug
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.bug
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member

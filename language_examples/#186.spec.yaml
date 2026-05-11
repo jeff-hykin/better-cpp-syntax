@@ -6,10 +6,16 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: vector
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.vector
 - source: <
   scopes:
     - keyword.operator.comparison
 - source: pair
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.pair
 - source: <
   scopes:
     - keyword.operator.comparison
@@ -30,7 +36,10 @@
 - source: '*'
   scopes:
     - keyword.operator.arithmetic
-- source: 'g '
+- source: g
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.g
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -46,10 +55,16 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: vector
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.vector
 - source: <
   scopes:
     - keyword.operator.comparison
 - source: pair
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.pair
 - source: <
   scopes:
     - keyword.operator.comparison
@@ -73,6 +88,9 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: 'n'
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.n
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square

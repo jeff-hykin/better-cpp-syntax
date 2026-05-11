@@ -2,7 +2,10 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' a '
+- source: a
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.a
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -25,7 +28,10 @@
 - source: '*'
   scopes:
     - keyword.operator.arithmetic
-- source: ' b '
+- source: b
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.b
 - source: '='
   scopes:
     - keyword.operator.assignment

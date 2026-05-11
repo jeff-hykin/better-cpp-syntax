@@ -8,7 +8,10 @@
 - source: '*'
   scopes:
     - keyword.operator.arithmetic
-- source: 'a '
+- source: a
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.a
 - source: '='
   scopes:
     - keyword.operator.assignment

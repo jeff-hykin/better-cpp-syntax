@@ -30,9 +30,15 @@ git_checkout () {
 
 git_checkout_pr () {
     pr_number="$1"
-    git_delete_branch '@__temp__/pull_request'
-    git fetch origin "pull/$pr_number/head:@__temp__/pull_request"
-    git checkout '@__temp__/pull_request'
+    if [ -z "$pr_number" ]
+    then
+        echo "whats the PR number?"
+        read pr_number
+    fi
+    temp_pr_name='@__temp__/pull_request'
+    git_delete_branch "$temp_pr_name"
+    git fetch origin "pull/$pr_number/head:$temp_pr_name"
+    git checkout "$temp_pr_name"
 }
 
 git_commit_hashes () {
@@ -40,7 +46,7 @@ git_commit_hashes () {
 }
 
 git_log () {
-    git log --first-parent --date=short --pretty=format:"%Cblue%ad %h%Cgreen %s %Creset%d"
+    git --no-pager log --reverse --first-parent --date=short --pretty=format:"%Cblue%ad %h%Cgreen %s %Creset%d" "$@"
 }
 
 git_current_commit_hash () {
@@ -65,7 +71,7 @@ git_squash_to () {
 git_squash () {
     args="$@"
     git reset --soft HEAD~2 && git add -A && git commit -m "$args" && echo "squash complete"
-    git_log | head -n5
+    git_log | tail -n5
 }
 
 # 
@@ -451,6 +457,25 @@ git_list_untracked_or_ignored () {
 
 git_url_of_origin () {
     git config --get remote.origin.url
+}
+
+git_squash_to () {
+    commit_hash="$1"
+    commit_message="$2"
+    git reset --soft "$commit_hash" && git add -A && git commit -m "$commit_message" && echo "squash complete"
+}
+
+git_delete_submodule () {
+    path="$1"
+    if ! [ -d "$path" ]
+    then
+        echo "I don't see that folder/path. So this method might not work perfectly"
+        echo "press enter to continue, ctrl+C to cancel"
+        read A
+    fi
+    git submodule deinit -f "$path"
+    rm -rf ".git/modules/$path"
+    git rm -f "$path"
 }
 
 # self submodule

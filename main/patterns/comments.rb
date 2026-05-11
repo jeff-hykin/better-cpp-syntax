@@ -81,7 +81,15 @@ export[:block_comment] = PatternRange.new(
     end_pattern: Pattern.new(
         match: /\*\//,
         tag_as: "punctuation.definition.comment.end"
-    )
+    ),
+    apply_end_pattern_last: true,
+    includes: [
+        # seems useless, but prevents issues like https://github.com/jeff-hykin/better-cpp-syntax/issues/527
+        # note: this is more of a way to turn off the bailout for just this pattern when the macro_bailout is generated
+        # it should be the only pattern that needs this because its the only thing that is run in phase1 of the 
+        # preprocessor (e.g. before macros are handled)
+        Pattern.new(/[^\*]*\n/),
+    ],
 )
 
 # this is kind of a grandfathered-in pattern

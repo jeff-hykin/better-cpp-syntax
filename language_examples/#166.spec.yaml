@@ -20,7 +20,7 @@
     - storage.type.modifier.virtual
 - source: std
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -31,7 +31,7 @@
   scopes:
     - entity.name.type
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.class
@@ -77,7 +77,7 @@
     - storage.type.modifier.access.public
 - source: std
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -88,7 +88,7 @@
   scopes:
     - entity.name.type
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.class

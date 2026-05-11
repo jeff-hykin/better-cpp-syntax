@@ -75,7 +75,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: func
@@ -97,13 +97,22 @@
 - source: auto
   scopesBegin:
     - meta.body.function.definition
+    - meta.assignment
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' a '
+- source: a
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: '['
   scopes:
     - punctuation.definition.capture.begin.lambda
@@ -141,7 +150,7 @@
     - punctuation.separator.scope-resolution.template.call
 - source: shared_ptr
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.type
 - source: <
@@ -151,13 +160,13 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: cc
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
     - meta.template.call
 - source: '>'
   scopes:
@@ -183,6 +192,7 @@
   scopes:
     - punctuation.section.block.end.bracket.curly.lambda
   scopesEnd:
+    - meta.assignment
     - meta.function.definition.body.lambda
 - source: ;
   scopes:

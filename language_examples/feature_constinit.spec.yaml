@@ -10,7 +10,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: foo
@@ -44,7 +44,10 @@
 - source: '*'
   scopes:
     - keyword.operator.arithmetic
-- source: ' c '
+- source: c
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -82,7 +85,10 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' x'
+- source: x
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.x
 - source: ;
   scopes:
     - punctuation.terminator.statement

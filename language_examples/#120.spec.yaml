@@ -35,6 +35,7 @@
     - constant.numeric.hexadecimal
 - source: luyards
   scopes:
+    - keyword.other.suffix.literal.user-defined.integer
     - keyword.other.unit.user-defined
 - source: '0'
   scopes:
@@ -55,10 +56,12 @@
     - constant.numeric.hexadecimal
 - source: x
   scopes:
+    - keyword.other.suffix.literal.user-defined.integer
     - keyword.other.unit.user-defined
 - source: '1'
   scopes:
     - constant.numeric.decimal
 - source: Px
   scopes:
+    - keyword.other.suffix.literal.user-defined.integer
     - keyword.other.unit.user-defined

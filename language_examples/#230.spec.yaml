@@ -2,7 +2,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: func
@@ -24,11 +24,15 @@
 - source: class
   scopesBegin:
     - meta.body.function.definition
+    - meta.assignment
+    - meta.qualified-type
   scopes:
-    - storage.type.class.declare
+    - storage.type.class
 - source: var
   scopes:
-    - entity.name.type.class
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified-type
 - source: '*'
   scopesBegin:
     - storage.modifier.pointer
@@ -36,11 +40,16 @@
   scopesEnd:
     - storage.modifier.pointer
 - source: thing
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - variable.other.object.declare
+    - variable.lower-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: (
   scopesBegin:
     - meta.parens
@@ -72,6 +81,8 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -84,11 +95,16 @@
   scopesEnd:
     - comment.line.double-slash
 - source: struct
+  scopesBegin:
+    - meta.assignment
+    - meta.qualified-type
   scopes:
-    - storage.type.struct.declare
+    - storage.type.struct
 - source: var
   scopes:
-    - entity.name.type.struct
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified-type
 - source: '*'
   scopesBegin:
     - storage.modifier.pointer
@@ -96,11 +112,16 @@
   scopesEnd:
     - storage.modifier.pointer
 - source: thing
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - variable.other.object.declare
+    - variable.lower-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: (
   scopesBegin:
     - meta.parens
@@ -132,6 +153,8 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -144,11 +167,16 @@
   scopesEnd:
     - comment.line.double-slash
 - source: enum
+  scopesBegin:
+    - meta.assignment
+    - meta.qualified-type
   scopes:
-    - storage.type.enum.declare
+    - storage.type.enum
 - source: var
   scopes:
-    - entity.name.type.enum
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified-type
 - source: '*'
   scopesBegin:
     - storage.modifier.pointer
@@ -156,11 +184,16 @@
   scopesEnd:
     - storage.modifier.pointer
 - source: thing
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - variable.other.object.declare
+    - variable.lower-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: (
   scopesBegin:
     - meta.parens
@@ -192,6 +225,8 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -204,11 +239,16 @@
   scopesEnd:
     - comment.line.double-slash
 - source: union
+  scopesBegin:
+    - meta.assignment
+    - meta.qualified-type
   scopes:
-    - storage.type.union.declare
+    - storage.type.union
 - source: var
   scopes:
-    - entity.name.type.union
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified-type
 - source: '*'
   scopesBegin:
     - storage.modifier.pointer
@@ -216,11 +256,16 @@
   scopesEnd:
     - storage.modifier.pointer
 - source: thing
+  scopesBegin:
+    - meta.assignment
   scopes:
-    - variable.other.object.declare
+    - variable.lower-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: (
   scopesBegin:
     - meta.parens
@@ -252,6 +297,8 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement

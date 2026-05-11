@@ -2,7 +2,10 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' foo '
+- source: foo
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.foo
 - source: '='
   scopes:
     - keyword.operator.assignment

@@ -125,18 +125,21 @@ phrase = Pattern.new(
 ## Readable Regex Guide
 
 Regex is pretty hard to read, so this repo uses a library to help.
+
+### Pattern API Overview
+
 - `Pattern.new(*attributes)` or `.then(*attributes)` creates a new "shy" group
   - example: `Pattern.new(/foo/)` => `/(?:foo)/
 - `.or(*attributes)` adds an alternation (`|`)
   - example: `Pattern.new(/foo/).or(/bar/)` => `/foo|(?:bar)/`
   - please note you may need more shy groups depending on order
-    `Pattern.new(/foo/).or(/bar/).maybe(@spaces)` becomes (simplified) `/(?:foo|bar)\s*/`
+    `Pattern.new(/foo/).or(/bar/).maybe(@spaces)` becomes (simplified) `/(?:foo|bar)\s*/` NOT `/(?:foo|bar\s*)/` 
 - `maybe(*attributes)` or `.maybe(*attributes)` causes the pattern to match zero or one times (`?`)
   - example `maybe(/foo/)` => `/(?:foo)?/`
-- `zeroOrMoreTimes(*attributes)` or `.zeroOrMoreTimes(*attributes)` causes the pattern to be matched zero or more times (`*`)
-  - example `zeroOrMoreTimes(/foo/)` => `/(?:foo)*/`
-- `oneOrMoreTimes(*attributes)` or `.oneOrMoreTimes(*attributes)` causes the pattern to be matched one or more times (`+`)
-  - example `oneOrMoreTimes(/foo/)` => `/(?:foo)+/`
+- `zeroOrMoreOf(*attributes)` or `.zeroOrMoreOf(*attributes)` causes the pattern to be matched zero or more times (`*`)
+  - example `zeroOrMoreOf(/foo/)` => `/(?:foo)*/`
+- `oneOrMoreOf(*attributes)` or `.oneOrMoreOf(*attributes)` causes the pattern to be matched one or more times (`+`)
+  - example `oneOrMoreOf(/foo/)` => `/(?:foo)+/`
 - `lookBehindFor(regex)` or `.lookBehindFor(regex)` add a positive lookbehind
   - example `lookBehindFor(/foo/)` => `/(?<=foo)/`
 - `lookBehindToAvoid(regex)` or `.lookBehindToAvoid(regex)` add a negative lookbehind
@@ -153,15 +156,91 @@ Regex is pretty hard to read, so this repo uses a library to help.
   - example `Pattern.new(match: /foo|bar/, reference: "foobar").matchResultOf("foobar")` => `/(foo|bar)\1/`
   - matches: `foofoo` and `barbar` but not `foobar`
 
-helpers that are marked as accepting `*attributes` can accept either a regular expression, a hash that provides more info, or a variable that is either of those.
 
-the hash provided to the helper patterns can have the following keys:
-  - `match:` the regular expression that should be matched
-  - `tag_as:` the scope-name to give this sub-expression
-  - `reference:` a name used to refer to this sub-expression in a `tag_as` or `back_reference`
-  - `comment:` unused, use regular ruby comments
-  - `should_partial_match`, `should_not_partial_match`, `should_fully_match`, and `should_not_fully_match` see unit testing
+### Pattern API Details
 
+- The `*attributes` can be:
+    - A regular expression: `Pattern.new(/stuff/)`
+    - Another pattern: `Pattern.new(Pattern.new(/blah/))`)
+    - Or a bunch of named arguments: `Pattern.new({ match: /stuff/, })`
+
+Here's a comprehesive list of named arguments (not all can be used together)
+
+```ruby
+Pattern.new(
+    # unit tests
+    should_partial_match: [ "example text", ],
+    should_fully_match:   [ "example text", ],
+    should_not_partial_match: [ "example text", ],
+    should_not_fully_match:   [ "example text", ],
+    
+    # typical arguments
+    match: //,     # regex or another pattern
+    tag_as: "",    # string (textmate scope, which can contain space-sperated scopes)
+    comment: "",   # a comment that will show up in the final generated-grammar file (rarely used)
+    includes: [
+        :other_pattern_name,
+        # alternatively include Pattern.new OR PatternRange.new directly
+        PatternRange.new(
+            # stuff 
+        ),
+    ],
+    # NOTE! if "includes:" is used then Textmate will ignore any sub-"tag_as"
+    #       if "match:" is regex then this is not a problem (there are no sub-"tag_as"'s)
+    #       BUT something like match: Pattern.new(match:/sub-thing1/,).then(match:/sub-thing2/, tag_as: "blah")
+    #       then the tag_as: "blah" will get 
+    #       and instead let the included patterns do all the tagging
+    
+    
+    # 
+    # repetition arguments
+    # 
+    at_least: 3.times,
+    at_most: 5.times,
+    how_many_times?: 5.times, # repeat exactly 5 times
+    
+    # the follow two only works in repeating patterns (like at_least: ... or zeroOrMoreOf(), or oneOrMoreOf())
+    as_few_as_possible?: false,
+    # equivlent to regex lazy option
+    # default value is false
+    # see https://stackoverflow.com/questions/2301285/what-do-lazy-and-greedy-mean-in-the-context-of-regular-expressions
+    # "as_few_as_possible?:" has an equivlent alias "lazy?:"
+    dont_back_track?: false,
+    # this is equivlent to regex atomic groups (can be efficient)
+    # default value is false
+    # http://www.rexegg.com/regex-disambiguation.html#atomic
+    # "dont_back_track?:" has an equivlent alias "possessive?:"
+    
+    # 
+    # advanced
+    # 
+    word_cannot_be_any_of: [ "word1" ], # default=[]
+    # this is highly useful for matching var-names while not matching builtin-keywords
+    # HOWEVERY only use this if
+    # 1. you're matching the whole word, not a small part of a word
+    # 2. the pattern always matches something (the pattern cant match an empty string)
+    # 3. what you consider a "word" matches the regex boundary's (\b) definition, meaning;
+    #    underscore is not a seperator, dash is a seperator, etc
+    # this has limited usecase but is very useful when needed
+    
+    reference: "", # to create a name that can be referenced later for (regex backreferences)
+    preserve_references?: false, # default=false, setting to true will allow for 
+    # reference name conflict. Usually the names are scrambled to prevent name-conflict
+    
+    # 
+    # internal API (dont use directly, but listed here for comprehesiveness sake)
+    # 
+    backreference_key: "reference_name", # use matchResultOf(), which is equivlent to regex backreference
+    subroutine_key: "reference_name",    # use recursivelyMatch(), which is equivlent to regex subroutine
+    type: :lookAheadFor, # only valid values are :lookAheadFor, :lookAheadToAvoid, :lookBehindFor, :lookBehindToAvoid
+                         # just used as a means of implementing lookAheadFor(), lookAheadToAvoid(), etc
+    placeholder: "name", # useful for recursive includes or patterns; grammar[:a_pattern] will return a placeholder
+                         # if the pattern has not been created yet (e.g. grammar[:a_pattern] = a_pattern)
+                         # when a grammar is exported unresolved placeholders will throw an error
+    adjectives: [ :isAKeyword, ],   # a list of adjectives that describe the pattern, part of an untested grammar.tokenMatching() feature
+    pattern_filter: ->(pattern) {}, # part of untested grammar.tokenMatching() feature, only works with placeholders
+)
+```
 
 ### PatternRange
 `PatternRange.new` is used to create a begin/end pattern rule.
@@ -181,10 +260,21 @@ PatternRange.new(
     should_fully_match: [],
     should_not_fully_match: [],
     
+    # 
     # advanced options
-    tag_contents_as: "",
-    while_pattern: Pattern.new(), # replaces "end_pattern" but the underlying behavior is strange, see: https://github.com/jeff-hykin/fornix/blob/877b89c5d4b2e51c6bf6bd019d3b34b04aaabe72/documentation/library/textmate_while.md#L1
-    apply_end_pattern_last: false, # boolean, see https://www.apeth.com/nonblog/stories/textmatebundle.html
+    # 
+    tag_contents_as: "", # NOTE; this is an alternative to "tag_as:" not to be used in combination
+    while_pattern: Pattern.new(),
+    # replaces "end_pattern" but the underlying behavior is strange, see: https://github.com/jeff-hykin/fornix/blob/74272281599174dcfc4ef163b770b2d5a1c5dc05/documentation/library/textmate_while.md#L1
+    apply_end_pattern_last: false,
+    # default=false, rarely used but can be important
+    # see https://www.apeth.com/nonblog/stories/textmatebundle.html
+    # also has an alias "end_pattern_last:"
+    # also (for legacy reasons) has an alias "applyEndPatternLast:"
+    
+    tag_start_as: "", # not really used, instead just do start_pattern: Pattern.new(match:/blah/, tag_as:"blah")
+    tag_end_as:   "", # not really used, instead just do end_pattern: Pattern.new(match:/blah/, tag_as:"blah")
+    tag_while_as: "", # not really used, instead just do while_pattern: Pattern.new(match:/blah/, tag_as:"blah")
 )
 ```
 

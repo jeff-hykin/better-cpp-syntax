@@ -10,7 +10,10 @@
 - source: a
   scopes:
     - entity.name.function.preprocessor
-- source: ' a                                     '
+- source: a
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.a
 - source: \
   scopes:
     - constant.character.escape.line-continuation

@@ -2,7 +2,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: func
@@ -48,7 +48,10 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' N'
+- source: 'N'
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.N
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -64,10 +67,15 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' i '
+- source: i
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.i
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -77,11 +85,17 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: ' i '
+- source: i
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.i
 - source: <=
   scopes:
     - keyword.operator.comparison
-- source: ' N'
+- source: 'N'
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.N
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -89,6 +103,11 @@
   scopes:
     - keyword.operator.increment
 - source: i
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.i
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -159,10 +178,16 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: i
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.i
 - source: '=='
   scopes:
     - keyword.operator.comparison
 - source: 'N'
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.N
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -175,21 +200,29 @@
   scopes:
     - punctuation.terminator.statement
 - source: static
+  scopesBegin:
+    - meta.declaration
   scopes:
     - storage.modifier.specifier.static
 - source: int
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: perm
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+- source: '['
   scopesBegin:
     - meta.bracket.square.access
   scopes:
-    - variable.other.object
-- source: '['
-  scopes:
     - punctuation.definition.begin.bracket.square
-- source: 'N '
+- source: 'N'
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.N
 - source: +
   scopes:
     - keyword.operator.arithmetic
@@ -200,6 +233,7 @@
   scopes:
     - punctuation.definition.end.bracket.square
   scopesEnd:
+    - meta.declaration
     - meta.bracket.square.access
 - source: ;
   scopes:
@@ -213,10 +247,15 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' i '
+- source: i
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.i
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -226,11 +265,17 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: ' i '
+- source: i
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.i
 - source: <=
   scopes:
     - keyword.operator.comparison
-- source: ' N'
+- source: 'N'
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.N
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -238,6 +283,11 @@
   scopes:
     - keyword.operator.increment
 - source: i
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.i
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -252,6 +302,9 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: i
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.i
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -260,7 +313,10 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' i'
+- source: i
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.i
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -277,7 +333,10 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
-- source: 'perm '
+- source: perm
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.perm
 - source: +
   scopes:
     - keyword.operator.arithmetic
@@ -287,7 +346,10 @@
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' perm '
+- source: perm
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.perm
 - source: +
   scopes:
     - keyword.operator.arithmetic
@@ -297,11 +359,17 @@
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' N'
+- source: 'N'
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.N
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' gen'
+- source: gen
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.gen
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call

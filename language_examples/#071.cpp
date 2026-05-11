@@ -15,4 +15,17 @@ usertype user_value{'A'};
 scoped::templated<type> value;
 compound<typename templated::type *>::type value;
 int a[] = {1,2,3};
-void function_declaration(int *, usertype user_value);
+function_declaration(int *, usertype user_value);
+
+int main() {
+    int* a;
+    int b;
+    usertype user_value[] = {1,2,3};
+    usertype* user_value[] = {1,2,3};
+    usertype* user_value[1];
+    usertype user_value{'A'};
+    scoped::templated<type> value;
+    compound<typename templated::type *>::type value;
+    int a[] = {1,2,3};
+    function_declaration(int *, usertype user_value);
+}

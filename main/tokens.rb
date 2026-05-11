@@ -266,7 +266,7 @@ tokens = [
     { representation: "__asm__"                    , name: "__asm__"                    },
     # 
     { representation: "concept"                    , name: "concept"                    , isCurrentlyAMiscKeyword: true },
-    { representation: "requires"                   , name: "requires"                   , isCurrentlyAMiscKeyword: true },
+    { representation: "requires"                   , name: "requires"                   , canAppearAfterParametersBeforeBody: true, isFunctionLike: true },       
     { representation: "export"                     , name: "export"                     , isCurrentlyAMiscKeyword: true },
     { representation: "atomic_cancel"              , name: "atomic_cancel"              },
     { representation: "atomic_commit"              , name: "atomic_commit"              },

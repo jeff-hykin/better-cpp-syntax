@@ -2,7 +2,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: func
@@ -36,7 +36,10 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'cout '
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -50,6 +53,8 @@
 - source: T
   scopes:
     - meta.arguments.operator.typeid
+    - variable.upper-case
+    - variable.other.unknown.T
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.operator.typeid
@@ -81,7 +86,10 @@
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' valueT '
+- source: valueT
+  scopes:
+    - variable.camel-case
+    - variable.other.unknown.valueT
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -93,6 +101,9 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: endl
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.endl
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -138,7 +149,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: func
@@ -172,7 +183,10 @@
   scopes:
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
-- source: 'cout '
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -186,6 +200,8 @@
 - source: T
   scopes:
     - meta.arguments.operator.typeid
+    - variable.upper-case
+    - variable.other.unknown.T
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.operator.typeid
@@ -217,7 +233,10 @@
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
-- source: ' valueT '
+- source: valueT
+  scopes:
+    - variable.camel-case
+    - variable.other.unknown.valueT
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -229,6 +248,9 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: endl
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.endl
 - source: ;
   scopes:
     - punctuation.terminator.statement

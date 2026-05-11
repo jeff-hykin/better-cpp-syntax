@@ -2,7 +2,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: bar
@@ -26,7 +26,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: bar
@@ -55,7 +55,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: bar
@@ -91,7 +91,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: bar
@@ -107,7 +107,7 @@
     - meta.function.definition.parameters
     - meta.parameter
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: (
   scopes:
@@ -144,7 +144,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: bar
@@ -160,7 +160,7 @@
     - meta.function.definition.parameters
     - meta.parameter
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: (
   scopes:
@@ -200,7 +200,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: bar
@@ -220,7 +220,10 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' value'
+- source: value
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.value
   scopesEnd:
     - meta.function.definition.parameters
     - meta.parameter
@@ -237,7 +240,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: bar
@@ -260,7 +263,10 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' value'
+- source: value
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.value
   scopesEnd:
     - meta.function.definition.parameters
     - meta.parameter
@@ -277,7 +283,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: bar
@@ -293,7 +299,7 @@
     - meta.function.definition.parameters
     - meta.parameter
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: (
   scopes:
@@ -317,7 +323,10 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' value'
+- source: value
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.value
   scopesEnd:
     - meta.function.definition.parameters
     - meta.parameter
@@ -334,7 +343,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: bar
@@ -350,7 +359,7 @@
     - meta.function.definition.parameters
     - meta.parameter
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: (
   scopes:
@@ -377,7 +386,10 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' value'
+- source: value
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.value
   scopesEnd:
     - meta.function.definition.parameters
     - meta.parameter

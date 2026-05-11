@@ -51,6 +51,9 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: x
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.x
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -113,6 +116,9 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: x
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.x
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -244,14 +250,32 @@
     - punctuation.definition.parameters.end.preprocessor
 - source: DOCTEST_PRAGMA_TO_STR
   scopes:
+    - entity.name.function.call.upper-case
     - entity.name.function.call
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
-- source: clang diagnostic ignored w
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
+- source: clang
+  scopesBegin:
+    - variable.lower-case
+  scopes:
+    - variable.other.unknown.clang
+- source: diagnostic
+  scopes:
+    - variable.other.unknown.diagnostic
+- source: ignored
+  scopes:
+    - variable.other.unknown.ignored
+- source: w
+  scopes:
+    - variable.other.unknown.w
+  scopesEnd:
+    - variable.lower-case
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: '#'
   scopesBegin:
     - keyword.control.directive.define
@@ -375,7 +399,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: DOCTEST_CLANG_SUPPRESS_WARNING
   scopesBegin:
@@ -448,7 +472,10 @@
 - source: elif
   scopesEnd:
     - keyword.control.directive.elif
-- source: ' DOCTEST_GCC'
+- source: DOCTEST_GCC
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.DOCTEST_GCC
 - source: '#'
   scopesBegin:
     - meta.preprocessor.macro
@@ -687,14 +714,33 @@
     - punctuation.definition.parameters.end.preprocessor
 - source: DOCTEST_PRAGMA_TO_STR
   scopes:
+    - entity.name.function.call.upper-case
     - entity.name.function.call
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
-- source: GCC diagnostic ignored w
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
+- source: GCC
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.GCC
+- source: diagnostic
+  scopesBegin:
+    - variable.lower-case
+  scopes:
+    - variable.other.unknown.diagnostic
+- source: ignored
+  scopes:
+    - variable.other.unknown.ignored
+- source: w
+  scopes:
+    - variable.other.unknown.w
+  scopesEnd:
+    - variable.lower-case
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: '#'
   scopesBegin:
     - keyword.control.directive.define
@@ -904,7 +950,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: DOCTEST_GCC_SUPPRESS_WARNING
   scopesBegin:
@@ -934,7 +980,10 @@
 - source: elif
   scopesEnd:
     - keyword.control.directive.elif
-- source: ' DOCTEST_MSVC'
+- source: DOCTEST_MSVC
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.DOCTEST_MSVC
 - source: '#'
   scopesBegin:
     - meta.preprocessor.macro
@@ -992,6 +1041,9 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: push
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.push
 - source: )
   scopesBegin:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -1063,7 +1115,15 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
-- source: 'disable : w'
+- source: disable
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.disable
+- source: ' : '
+- source: w
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.w
 - source: )
   scopesBegin:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -1126,6 +1186,9 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: pop
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.pop
 - source: )
   scopesBegin:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -1192,7 +1255,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: DOCTEST_MSVC_SUPPRESS_WARNING
   scopesBegin:

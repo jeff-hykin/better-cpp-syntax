@@ -1,0 +1,2033 @@
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.include
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: iostream
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.other.lt-gt.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: fstream
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.other.lt-gt.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: sstream
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.other.lt-gt.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: '"'
+  scopesBegin:
+    - string.quoted.double.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: Stress_ball.h
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: '"'
+  scopesBegin:
+    - string.quoted.double.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: Collection.h
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.preprocessor.include
+    - string.quoted.double.include
+- source: void
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: test_stress_balls
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: A
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.A
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: srand
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: time
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopesBegin:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: )
+  scopesEnd:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' open input files'
+  scopesEnd:
+    - comment.line.double-slash
+- source: ifstream
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: input_file1
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: stress_ball1.data
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: if
+  scopes:
+    - keyword.control.if
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: '!'
+  scopes:
+    - keyword.operator.logical
+- source: input_file1
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.input_file1
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: '>>> Cannot open the file: stress_ball1.data'
+- source: \n
+  scopes:
+    - constant.character.escape
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: exit
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ifstream
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: input_file2
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: stress_ball2.data
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: if
+  scopes:
+    - keyword.control.if
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: '!'
+  scopes:
+    - keyword.operator.logical
+- source: input_file2
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.input_file2
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: '>>> Cannot open the file: stress_ball2.data'
+- source: \n
+  scopes:
+    - constant.character.escape
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: exit
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' Making collections'
+  scopesEnd:
+    - comment.line.double-slash
+- source: CollectionSB
+  scopesBegin:
+    - meta.declaration
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: c1
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: input_file1
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.input_file1
+- source: '>>'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: c1
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c1
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: CollectionSB
+  scopesBegin:
+    - meta.declaration
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: c2
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: input_file2
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.input_file2
+- source: '>>'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: c2
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c2
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' optional:'
+- source: //
+  scopes:
+    - punctuation.definition.comment
+- source: CollectionSB c1(5);
+- source: //
+  scopes:
+    - punctuation.definition.comment
+- source: CollectionSB c2(10);
+- source: //
+  scopes:
+    - punctuation.definition.comment
+- source: print collections
+  scopesEnd:
+    - comment.line.double-slash
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: endl
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.endl
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'CollectionSB 1:'
+- source: \n
+  scopes:
+    - constant.character.escape
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: c1
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.c1
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: print_items
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: endl
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.endl
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'CollectionSB 2:'
+- source: \n
+  scopes:
+    - constant.character.escape
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: c2
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.c2
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: print_items
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: endl
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.endl
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: CollectionSB
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: c3
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
+- source: make_union
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: c1
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c1
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: c2
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c2
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+  scopesEnd:
+    - meta.assignment
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: endl
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.endl
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'CollectionSB 3:'
+- source: \n
+  scopes:
+    - constant.character.escape
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: c3
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c3
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: endl
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.endl
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'total no. of stress balls = '
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: c3
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.c3
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: total_items
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: endl
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.endl
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'total no. of small stress balls = '
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: c3
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.c3
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: total_items
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: Stress_ball_sizes
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: small
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.small
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: endl
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.endl
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'total no. of medium stress balls = '
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: c3
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.c3
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: total_items
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: Stress_ball_sizes
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: medium
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.medium
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: endl
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.endl
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'total no. of large stress balls = '
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: c3
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.c3
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: total_items
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: Stress_ball_sizes
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: large
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.large
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: endl
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.endl
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'total no. of red stress balls = '
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: c3
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.c3
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: total_items
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: Stress_ball_colors
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: red
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.red
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: endl
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.endl
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: Stress_ball
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: sb
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: Stress_ball_colors
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: green
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.green
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: Stress_ball_sizes
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: small
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.small
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: if
+  scopes:
+    - keyword.control.if
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: c3
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.c3
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: contains
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: sb
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.sb
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'CollectionSB 3 contains (green, small) stress ball'
+- source: \n
+  scopes:
+    - constant.character.escape
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: else
+  scopes:
+    - keyword.control.else
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'CollectionSB 3 does not contain (green, small) stress ball'
+- source: \n
+  scopes:
+    - constant.character.escape
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: \n
+  scopes:
+    - constant.character.escape
+- source: 'Remove all (green, small) stress ball'
+- source: \n
+  scopes:
+    - constant.character.escape
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: while
+  scopes:
+    - keyword.control.while
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: c3
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.c3
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: contains
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: sb
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.sb
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: c3
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.c3
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: remove_this_item
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: sb
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.sb
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'total no. of stress balls = '
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: c3
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.c3
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: total_items
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: endl
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.endl
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: if
+  scopes:
+    - keyword.control.if
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: c3
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.c3
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: contains
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: sb
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.sb
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'CollectionSB 3 contains (green, small) stress ball'
+- source: \n
+  scopes:
+    - constant.character.escape
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: else
+  scopes:
+    - keyword.control.else
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'CollectionSB 3 does not contain (green, small) stress ball'
+- source: \n
+  scopes:
+    - constant.character.escape
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'Add (green, small) stress ball'
+- source: \n
+  scopes:
+    - constant.character.escape
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: c3
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.c3
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: insert_item
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: sb
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.sb
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: if
+  scopes:
+    - keyword.control.if
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: c3
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.c3
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: contains
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: sb
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.sb
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'CollectionSB 3 contains (green, small) stress ball'
+- source: \n
+  scopes:
+    - constant.character.escape
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: else
+  scopes:
+    - keyword.control.else
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'CollectionSB 3 does not contain (green, small) stress ball'
+- source: \n
+  scopes:
+    - constant.character.escape
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: CollectionSB
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: c4
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: c3
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c3
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: make a copy
+  scopesEnd:
+    - comment.line.double-slash
+- source: sort_by_size
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: c3
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c3
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: Sort_choice
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: bubble_sort
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.bubble_sort
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: endl
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.endl
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'CollectionSB 3 sorted by bubble sort:'
+- source: \n
+  scopes:
+    - constant.character.escape
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: c3
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c3
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: c3
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c3
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: c4
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c4
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: sort_by_size
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: c3
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c3
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: Sort_choice
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: quick_sort
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.quick_sort
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: endl
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.endl
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'CollectionSB 3 sorted by quick sort:'
+- source: \n
+  scopes:
+    - constant.character.escape
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: c3
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c3
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: endl
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.endl
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: c3
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c3
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: c4
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c4
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: sort_by_size
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: c3
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c3
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: Sort_choice
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: merge_sort
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.merge_sort
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: endl
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.endl
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'CollectionSB 3 sorted by merge sort:'
+- source: \n
+  scopes:
+    - constant.character.escape
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: c3
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c3
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: endl
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.endl
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: Make empty collection 3
+- source: \n
+  scopes:
+    - constant.character.escape
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: c3
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.c3
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: make_empty
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: if
+  scopes:
+    - keyword.control.if
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: c3
+  scopes:
+    - variable.lower-case
+    - variable.other.object.access.c3
+- source: .
+  scopes:
+    - punctuation.separator.dot-access
+- source: is_empty
+  scopes:
+    - entity.name.function.member
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.member
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.member
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: CollectionSB 3 is empty
+- source: \n
+  scopes:
+    - constant.character.escape
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: endl
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.endl
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'CollectionSB 3:'
+- source: \n
+  scopes:
+    - constant.character.escape
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: c3
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c3
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: endl
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.endl
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: Make copy of collection 1 to collection 3
+- source: \n
+  scopes:
+    - constant.character.escape
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: c3
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c3
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: c1
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c1
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: endl
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.endl
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'CollectionSB 3:'
+- source: \n
+  scopes:
+    - constant.character.escape
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: c3
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c3
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: endl
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.endl
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'Swap collections 2 and 3:'
+- source: \n
+  scopes:
+    - constant.character.escape
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: swap
+  scopes:
+    - entity.name.function.call
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
+- source: c2
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c2
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: c3
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c3
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: endl
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.endl
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: 'CollectionSB 3:'
+- source: \n
+  scopes:
+    - constant.character.escape
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.double
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: c3
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c3
+- source: '<<'
+  scopes:
+    - keyword.operator.bitwise.shift
+- source: endl
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.endl
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition

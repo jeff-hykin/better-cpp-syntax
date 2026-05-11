@@ -2,7 +2,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: main
@@ -27,7 +27,10 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' a'
+- source: a
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.a
 - source: //
   scopesBegin:
     - comment.line.double-slash
@@ -67,7 +70,7 @@
     - meta.body.function.definition
 - source: int
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: main
@@ -92,7 +95,10 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' a'
+- source: a
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.a
 - source: //
   scopesBegin:
     - comment.line.double-slash
@@ -107,6 +113,9 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: ARRAY_SIZE
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.ARRAY_SIZE
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
