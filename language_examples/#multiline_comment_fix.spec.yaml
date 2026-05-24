@@ -1,0 +1,39 @@
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.macro
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: ' '
+- source: FRAME_BUFFER_SIZE
+  scopes:
+    - entity.name.function.preprocessor
+- source: ' '
+- source: '1302083'
+  scopes:
+    - constant.numeric.decimal
+- source: ' '
+- source: /*
+  scopesBegin:
+    - comment.block
+  scopes:
+    - punctuation.definition.comment.begin
+- source: ' maximum frame length, in bytes, after'
+- source: |+
+
+
+- source: '                                     "'
+- source: Digital Cinema System Specification Version 1.2
+- source: |+
+
+
+- source: '                                     with Errata as of 30 August 2012" '
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end
+  scopesEnd:
+    - comment.block
+    - meta.preprocessor.macro

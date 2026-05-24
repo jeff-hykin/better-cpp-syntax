@@ -6,6 +6,7 @@ grammar = Grammar.new_exportable_grammar
 
 grammar.external_repos = [
     :comments,
+    :block_comment,
     :identifier,
     :language_constants,
     :line_continuation_character,
@@ -324,6 +325,7 @@ identifier = grammar[:identifier]
                 )
             ),
             # everything after the parameters
+            :block_comment,
             :macro_context,
             :macro_argument,
         ]
