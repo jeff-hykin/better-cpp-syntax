@@ -274,6 +274,7 @@ grammar = Grammar.new(
             :functional_specifiers_pre_parameters,      # TODO: these probably need to be moved inside the function definition pattern
             :storage_types,
             # misc
+            :pack_indexing,
             :lambdas,
             :attributes_context, # this is here because it needs to be lower than :operators. TODO: once all the contexts are cleaned up, this should be put in a better spot
             :parentheses,
@@ -2203,6 +2204,23 @@ grammar = Grammar.new(
                 )
         ],
         )
+
+#
+# Pack indexing
+#
+    grammar[:pack_indexing] = PatternRange.new(
+        start_pattern: Pattern.new(
+            match: identifier,
+        ).maybe(@spaces).then(
+            match: /\.\.\./,
+        ).maybe(@spaces).then(
+            match: /\[/,
+        ),
+        end_pattern: Pattern.new(
+            match: /\]/,
+        ),
+        includes: [:evaluation_context]
+    )
 
 #
 # Lambdas

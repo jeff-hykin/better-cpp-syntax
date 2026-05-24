@@ -1,0 +1,140 @@
+- source: template
+  scopes:
+    - storage.type.template
+- source: <
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.definition
+- source: typename
+  scopesBegin:
+    - meta.template.definition
+  scopes:
+    - storage.type.template.argument.typename
+- source: ...
+  scopes:
+    - punctuation.vararg-ellipses.template.definition
+- source: T
+  scopes:
+    - entity.name.type.template
+  scopesEnd:
+    - meta.template.definition
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.definition
+- source: constexpr
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - storage.modifier.constexpr
+- source: auto
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: first_plus_last
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: T
+  scopesBegin:
+    - meta.function.definition.parameters
+    - meta.parameter
+  scopes:
+    - entity.name.type.parameter
+- source: ...
+  scopes:
+    - punctuation.vararg-ellipses
+- source: values
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '->'
+  scopes:
+    - punctuation.separator.pointer-access
+- source: T
+  scopes:
+    - variable.other.property
+- source: ...
+- source: '['
+  scopesBegin:
+    - meta.bracket.square.access
+  scopes:
+    - punctuation.definition.begin.bracket.square
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+  scopes:
+    - punctuation.definition.end.bracket.square
+  scopesEnd:
+    - meta.bracket.square.access
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: return
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - keyword.control.return
+- source: 'T...['
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: 'values...['
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+- source: +
+  scopes:
+    - keyword.operator.arithmetic
+- source: 'values...['
+- source: sizeof...
+  scopes:
+    - keyword.operator.functionlike
+    - keyword.operator.sizeof.variadic
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.operator.sizeof.variadic
+- source: values
+  scopes:
+    - meta.arguments.operator.sizeof.variadic
+    - variable.lower-case
+    - variable.other.unknown.values
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.operator.sizeof.variadic
+- source: '-'
+  scopes:
+    - keyword.operator.arithmetic
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ']'
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition
