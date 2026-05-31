@@ -50,7 +50,7 @@ grammar = Grammar.new(
     grammar.import(PathFor[:pattern]["std_space"])
     std_space                    = grammar[:std_space]
     basic_space                  = zeroOrMoreOf(match: /\s/, dont_back_track?: true).lookBehindToAvoid(@standard_character)
-    universal_character          = Pattern.new(/\\u[0-9a-fA-F]{4}/).or(/\\U[0-9a-fA-F]{8}/)
+    universal_character          = Pattern.new(/\\u[0-9a-fA-F]{4}/).or(/\\U[0-9a-fA-F]{8}/).or(/\\u\{[0-9a-fA-F]+\}/).or(/\\N\{[^}\n]+\}/)
     first_character              = Pattern.new(/[a-zA-Z_]/).or(universal_character)
     subsequent_character         = Pattern.new(/[a-zA-Z0-9_]/).or(universal_character)
     identifier                   = grammar[:identifier] = first_character.then(zeroOrMoreOf(subsequent_character))
