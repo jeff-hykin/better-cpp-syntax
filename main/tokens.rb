@@ -224,6 +224,8 @@ tokens = [
     { representation: "mutable"                , name: "mutable"            , isLambdaSpecifier: true },
     { representation: "constexpr"              , name: "constexpr"          , isLambdaSpecifier: true },
     { representation: "consteval"              , name: "consteval"          , isLambdaSpecifier: true },
+    { representation: "static"                 , name: "static"             , isLambdaSpecifier: true },
+    { representation: "noexcept"               , name: "noexcept"           , isLambdaSpecifier: true, isFunctionLike: true},
     # accessor
     { representation: "private"               , name: "private"             , isAccessSpecifier: true, isInheritanceSpecifier: true },
     { representation: "protected"             , name: "protected"           , isAccessSpecifier: true, isInheritanceSpecifier: true },

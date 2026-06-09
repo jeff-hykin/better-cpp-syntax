@@ -2228,6 +2228,17 @@ grammar = Grammar.new(
         )
     )
     array_of_invalid_function_names = @cpp_tokens.representationsThat(:canAppearBeforeLambdaCapture)
+    array_of_function_like_lambda_specifiers = @cpp_tokens.tokens.select { |each| each[:isLambdaSpecifier] && each[:isFunctionLike] }
+    grammar[:function_like_lambda_specifiers] = array_of_function_like_lambda_specifiers.map do |each|
+        name = each[:name]
+        functionCallGenerator[
+            repository_name: "#{name}_operator",
+            match_name: variableBounds[/#{name}/],
+            tag_name_as: "keyword.operator.functionlike keyword.operator.#{name}",
+            tag_content_as: "arguments.operator.#{name}",
+            tag_parenthese_as: "operator.#{name}"
+        ]
+    end
     non_variable_name = /#{array_of_invalid_function_names.map { |each| '\W'+each+'|^'+each } .join('|')}/
     grammar[:lambdas] = lambdas = PatternRange.new(
         start_pattern: Pattern.new(
@@ -2293,6 +2304,7 @@ grammar = Grammar.new(
                 includes: [ :function_parameter_context ]
             ),
             # specifiers
+            :function_like_lambda_specifiers,
             Pattern.new(
                 match: variableBounds[ @cpp_tokens.that(:isLambdaSpecifier) ],
                 tag_as: "storage.modifier.lambda.$match"
