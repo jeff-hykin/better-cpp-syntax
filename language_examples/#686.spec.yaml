@@ -1,0 +1,144 @@
+- source: int
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: main
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: auto
+  scopesBegin:
+    - meta.body.function.definition
+    - meta.assignment
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: trivial_lambda_1
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.other.unknown.trivial_lambda_1
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
+- source: '['
+  scopes:
+    - punctuation.definition.capture.begin.lambda
+- source: ']'
+  scopes:
+    - punctuation.definition.capture.end.lambda
+- source: (
+  scopesBegin:
+    - meta.function.definition.parameters.lambda
+  scopes:
+    - punctuation.definition.parameters.begin.lambda
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.lambda
+  scopesEnd:
+    - meta.function.definition.parameters.lambda
+- source: static
+  scopes:
+    - storage.modifier.lambda.static
+- source: noexcept
+  scopes:
+    - keyword.operator.functionlike
+    - keyword.operator.noexcept
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.operator.noexcept
+- source: 'true'
+  scopes:
+    - meta.arguments.operator.noexcept
+    - constant.language.true
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.operator.noexcept
+- source: '{'
+  scopesBegin:
+    - meta.function.definition.body.lambda
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.lambda
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.lambda
+  scopesEnd:
+    - meta.assignment
+    - meta.function.definition.body.lambda
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: auto
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: trivial_lambda_2
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.other.unknown.trivial_lambda_2
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
+- source: '['
+  scopes:
+    - punctuation.definition.capture.begin.lambda
+- source: ']'
+  scopes:
+    - punctuation.definition.capture.end.lambda
+- source: (
+  scopesBegin:
+    - meta.function.definition.parameters.lambda
+  scopes:
+    - punctuation.definition.parameters.begin.lambda
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.lambda
+  scopesEnd:
+    - meta.function.definition.parameters.lambda
+- source: mutable
+  scopes:
+    - storage.modifier.lambda.mutable
+- source: noexcept
+  scopes:
+    - storage.modifier.lambda.noexcept
+- source: '{'
+  scopesBegin:
+    - meta.function.definition.body.lambda
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.lambda
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.lambda
+  scopesEnd:
+    - meta.assignment
+    - meta.function.definition.body.lambda
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition
