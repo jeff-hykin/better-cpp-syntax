@@ -2800,8 +2800,8 @@ grammar = Grammar.new(
                 # ((-?\d+)|\*(-?\d+\$)?)?              # minimum field width
                 # (\.((-?\d+)|\*(-?\d+\$)?)?)?         # precision
                 # (hh|h|ll|l|j|t|z|q|L|vh|vl|v|hv|hl)? # length modifier
-                # [diouxXDOUeEfFgGaACcSspn%]           # conversion type
-                match: "(?x) (?!%')(?!%\")%\n(\\d+\\$)?\t\t\t\t\t\t   # field (argument #)\n[#0\\- +']*\t\t\t\t\t\t  # flags\n[,;:_]?\t\t\t\t\t\t\t  # separator character (AltiVec)\n((-?\\d+)|\\*(-?\\d+\\$)?)?\t\t  # minimum field width\n(\\.((-?\\d+)|\\*(-?\\d+\\$)?)?)?\t# precision\n(hh|h|ll|l|j|t|z|q|L|vh|vl|v|hv|hl)? # length modifier\n[diouxXDOUeEfFgGaACcSspn%]\t\t   # conversion type",
+                # [diouxXbBDOUeEfFgGaACcSspn%]           # conversion type
+                match: "(?x) (?!%')(?!%\")%\n(\\d+\\$)?\t\t\t\t\t\t   # field (argument #)\n[#0\\- +']*\t\t\t\t\t\t  # flags\n[,;:_]?\t\t\t\t\t\t\t  # separator character (AltiVec)\n((-?\\d+)|\\*(-?\\d+\\$)?)?\t\t  # minimum field width\n(\\.((-?\\d+)|\\*(-?\\d+\\$)?)?)?\t# precision\n(hh|h|ll|l|j|t|z|q|L|vh|vl|v|hv|hl)? # length modifier\n[diouxXbBDOUeEfFgGaACcSspn%]\t\t   # conversion type",
                 name: "constant.other.placeholder"
             },
             # I don't think these are actual escapes, and they incorrectly mark valid strings
