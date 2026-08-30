@@ -1,1 +1,0 @@
-../extensions/git/during_clean.sh

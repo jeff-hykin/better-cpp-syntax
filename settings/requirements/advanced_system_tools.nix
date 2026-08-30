@@ -1,1 +1,0 @@
-../extensions/nix/shell.nix

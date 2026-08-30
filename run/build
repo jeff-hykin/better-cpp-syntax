@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+ruby "./main/main.rb" && echo built successfully && echo '
+    const fs = require("fs")
+    JSON.parse(fs.readFileSync("./package.json"))
+' | node

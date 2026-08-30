@@ -19,22 +19,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Setup Node.js for use with actions
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
-          node-version: 10.x
+          node-version: 18.x
       - name: Setup Ruby for use with actions
-        uses: eregon/use-ruby-action@v1
+        uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 2.6
+          ruby-version: 2.7
       - name: test
         run: |
           gem install bundler
           bundler install
           npm ci
-          export FORNIX_FOLDER="$PWD"
-          commands/project/build
-          commands/project/test
+          run/build
+          run/test
         env:
           CI: true
