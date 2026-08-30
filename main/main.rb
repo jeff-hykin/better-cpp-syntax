@@ -901,12 +901,15 @@ grammar = Grammar.new(
             template_call
         ).then(/::/)
     )
-    inline_scope_resolution = ->(tag_extension) do
+    # NOTE: dont_back_track? must be disabled when whatever follows can also start with a `name::`
+    #       (ex: out-of-class constructors/destructors), otherwise the possessive quantifier
+    #       eats the class name and the match can never complete
+    inline_scope_resolution = ->(tag_extension, dont_back_track=true) do
         Pattern.new(
             match: Pattern.new(
                 maybe(/::/).zeroOrMoreOf(
                     match: one_scope_resolution.reTag(keep: false),
-                    dont_back_track?: true
+                    dont_back_track?: dont_back_track
                 )
             ),
             includes: [
@@ -1579,7 +1582,8 @@ grammar = Grammar.new(
                             includes: [:evaluation_context]
                         ),
                         grammar[:comma],
-                        :comments,
+                        # member init lists are commonly split across #ifdef branches
+                        :ever_present_context,
                     ]
                 ),
                 # parameters
@@ -1625,7 +1629,7 @@ grammar = Grammar.new(
     ]
     grammar[:constructor_root] = constructor[
         leading_space.then(optional_calling_convention).then(
-            inline_scope_resolution[".constructor"]
+            inline_scope_resolution[".constructor", false]
         ).then(
             match: Pattern.new(
                 Pattern.new(
@@ -1710,7 +1714,7 @@ grammar = Grammar.new(
     ]
     grammar[:destructor_root] = destructor[
         std_space.then(optional_calling_convention).then(
-            inline_scope_resolution[".destructor"]
+            inline_scope_resolution[".destructor", false]
         ).then(
             match: Pattern.new(
                 Pattern.new(

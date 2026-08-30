@@ -48,41 +48,44 @@
   scopesEnd:
     - meta.block.class
 - source: modem_t
+  scopesBegin:
+    - meta.function.definition.special.member.destructor
   scopes:
-    - support.type.posix-reserved
-    - support.type.built-in.posix-reserved
+    - entity.name.type.destructor
 - source: '::'
-- source: '~'
   scopes:
-    - keyword.operator.bitwise
-- source: modem_t
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.destructor
+- source: ~modem_t
   scopes:
-    - support.type.posix-reserved
-    - support.type.built-in.posix-reserved
+    - entity.name.function.definition.special.member.destructor
 - source: (
   scopesBegin:
-    - meta.parens
+    - meta.head.function.definition.special.member.destructor
   scopes:
-    - punctuation.section.parens.begin.bracket.round
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.member.destructor
 - source: void
   scopes:
+    - meta.function.definition.parameters.special.member.destructor
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round
-  scopesEnd:
-    - meta.parens
+    - punctuation.section.parameters.end.bracket.round.special.member.destructor
 - source: '{'
-  scopesBegin:
-    - meta.block
   scopes:
-    - punctuation.section.block.begin.bracket.curly
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.member.destructor
+  scopesEnd:
+    - meta.head.function.definition.special.member.destructor
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly
+    - meta.body.function.definition.special.member.destructor
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.member.destructor
   scopesEnd:
-    - meta.block
+    - meta.function.definition.special.member.destructor
 - source: class
   scopesBegin:
     - meta.block.class
@@ -128,32 +131,34 @@
   scopesEnd:
     - meta.block.class
 - source: other_t
+  scopesBegin:
+    - meta.function.definition.special.member.destructor
   scopes:
-    - support.type.posix-reserved
-    - support.type.built-in.posix-reserved
+    - entity.name.type.destructor
 - source: '::'
-- source: '~'
   scopes:
-    - keyword.operator.bitwise
-- source: other_t
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.destructor
+- source: ~other_t
   scopes:
-    - support.type.posix-reserved
-    - support.type.built-in.posix-reserved
+    - entity.name.function.definition.special.member.destructor
 - source: (
   scopesBegin:
-    - meta.parens
+    - meta.head.function.definition.special.member.destructor
   scopes:
-    - punctuation.section.parens.begin.bracket.round
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.member.destructor
 - source: )
   scopes:
-    - punctuation.section.parens.end.bracket.round
-  scopesEnd:
-    - meta.parens
+    - punctuation.section.parameters.end.bracket.round.special.member.destructor
 - source: '{'
-  scopesBegin:
-    - meta.block
   scopes:
-    - punctuation.section.block.begin.bracket.curly
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.member.destructor
+  scopesEnd:
+    - meta.head.function.definition.special.member.destructor
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly
+    - meta.body.function.definition.special.member.destructor
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.member.destructor

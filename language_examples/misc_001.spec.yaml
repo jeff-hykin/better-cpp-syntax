@@ -123,69 +123,90 @@
   scopes:
     - punctuation.terminator.statement
 - source: Rule
+  scopesBegin:
+    - meta.function.definition.special.constructor
   scopes:
-    - entity.name.scope-resolution.function.call
+    - entity.name.type.constructor
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution.function.call
+    - punctuation.separator.scope-resolution.constructor
 - source: Rule
   scopes:
-    - entity.name.function.call
+    - entity.name.function.definition.special.constructor
 - source: (
+  scopesBegin:
+    - meta.head.function.definition.special.constructor
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.parameters.begin.bracket.round.special.constructor
 - source: const
+  scopesBegin:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
   scopes:
     - storage.modifier.specifier.const
 - source: Rule
   scopes:
-    - variable.other.unknown.Rule
+    - entity.name.type.parameter
 - source: '&'
   scopes:
-    - keyword.operator.bitwise
+    - storage.modifier.reference
 - source: other
   scopes:
-    - variable.lower-case
-    - variable.other.unknown.other
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
-- source: ' :'
+    - punctuation.section.parameters.end.bracket.round.special.constructor
+- source: ':'
+  scopes:
+    - punctuation.separator.initializers
 - source: blank_
   scopes:
-    - entity.name.function.call
+    - entity.name.function.call.initializer
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
 - source: Blank
+  scopesBegin:
+    - meta.parameter.initialization
   scopes:
     - variable.other.unknown.Blank
 - source: '{}'
+  scopesEnd:
+    - meta.parameter.initialization
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: type
   scopes:
-    - entity.name.function.call
+    - entity.name.function.call.initializer
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
 - source: BlankType
   scopes:
+    - meta.parameter.initialization
     - variable.other.unknown.BlankType
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
 - source: '{'
-  scopesBegin:
-    - meta.block
   scopes:
-    - punctuation.section.block.begin.bracket.curly
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.constructor
+  scopesEnd:
+    - meta.head.function.definition.special.constructor
 - source: '*'
+  scopesBegin:
+    - meta.body.function.definition.special.constructor
   scopes:
     - keyword.operator.arithmetic
 - source: this
@@ -203,9 +224,11 @@
     - punctuation.terminator.statement
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.constructor
   scopesEnd:
-    - meta.block
+    - meta.function.definition.special.constructor
+    - meta.body.function.definition.special.constructor
 - source: static
   scopesBegin:
     - meta.function.definition

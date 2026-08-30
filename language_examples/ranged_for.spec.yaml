@@ -446,43 +446,56 @@
   scopesEnd:
     - comment.block.documentation
 - source: InvalidPathError
+  scopesBegin:
+    - meta.function.definition.special.constructor
   scopes:
-    - entity.name.scope-resolution.function.call
+    - entity.name.type.constructor
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution.function.call
+    - punctuation.separator.scope-resolution.constructor
 - source: InvalidPathError
   scopes:
-    - entity.name.function.call
+    - entity.name.function.definition.special.constructor
 - source: (
+  scopesBegin:
+    - meta.head.function.definition.special.constructor
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.parameters.begin.bracket.round.special.constructor
 - source: const
+  scopesBegin:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
   scopes:
     - storage.modifier.specifier.const
 - source: Path
   scopes:
-    - variable.other.unknown.Path
+    - entity.name.type.parameter
 - source: '&'
   scopes:
-    - keyword.operator.bitwise
+    - storage.modifier.reference
 - source: path
   scopes:
-    - variable.lower-case
-    - variable.other.unknown.path
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
-- source: ' :'
+    - punctuation.section.parameters.end.bracket.round.special.constructor
+- source: ':'
+  scopes:
+    - punctuation.separator.initializers
 - source: EvalError
   scopes:
-    - entity.name.function.call
+    - entity.name.function.call.initializer
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
 - source: '"'
   scopesBegin:
+    - meta.parameter.initialization
     - string.quoted.double
   scopes:
     - punctuation.definition.string.begin
@@ -503,35 +516,42 @@
   scopes:
     - variable.lower-case
     - variable.other.unknown.path
+  scopesEnd:
+    - meta.parameter.initialization
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: path
   scopes:
-    - entity.name.function.call
+    - entity.name.function.call.initializer
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
 - source: path
   scopes:
+    - meta.parameter.initialization
     - variable.lower-case
     - variable.other.unknown.path
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
 - source: '{'
-  scopesBegin:
-    - meta.block
   scopes:
-    - punctuation.section.block.begin.bracket.curly
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.constructor
+  scopesEnd:
+    - meta.head.function.definition.special.constructor
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly
+    - meta.body.function.definition.special.constructor
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.constructor
   scopesEnd:
-    - meta.block
+    - meta.function.definition.special.constructor
 - source: StringMap
   scopesBegin:
     - meta.function.definition
@@ -75818,35 +75838,38 @@
   scopes:
     - punctuation.terminator.statement
 - source: RegisterPrimOp
+  scopesBegin:
+    - meta.function.definition.special.constructor
   scopes:
-    - entity.name.scope-resolution.function.call
+    - entity.name.type.constructor
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution.function.call
+    - punctuation.separator.scope-resolution.constructor
 - source: RegisterPrimOp
   scopes:
-    - entity.name.function.call
+    - entity.name.function.definition.special.constructor
 - source: (
+  scopesBegin:
+    - meta.head.function.definition.special.constructor
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.parameters.begin.bracket.round.special.constructor
 - source: std
+  scopesBegin:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
   scopes:
-    - entity.name.scope-resolution
+    - entity.name.scope-resolution.parameter
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution
+    - punctuation.separator.scope-resolution.parameter
 - source: string
-  scopesBegin:
-    - variable.lower-case
   scopes:
-    - variable.other.unknown.string
+    - entity.name.type.parameter
 - source: name
   scopes:
-    - variable.other.unknown.name
-  scopesEnd:
-    - variable.lower-case
+    - variable.parameter
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -75856,27 +75879,31 @@
     - storage.type.built-in
 - source: arity
   scopes:
-    - variable.lower-case
-    - variable.other.unknown.arity
+    - variable.parameter
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: PrimOpFun
   scopes:
-    - variable.other.unknown.PrimOpFun
+    - entity.name.type.parameter
 - source: fun
   scopes:
-    - variable.lower-case
-    - variable.other.unknown.fun
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.parameters.end.bracket.round.special.constructor
 - source: '{'
-  scopesBegin:
-    - meta.block
   scopes:
-    - punctuation.section.block.begin.bracket.curly
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.constructor
+  scopesEnd:
+    - meta.head.function.definition.special.constructor
 - source: if
+  scopesBegin:
+    - meta.body.function.definition.special.constructor
   scopes:
     - keyword.control.if
 - source: (
@@ -75993,41 +76020,55 @@
     - punctuation.terminator.statement
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.constructor
   scopesEnd:
-    - meta.block
+    - meta.body.function.definition.special.constructor
 - source: RegisterPrimOp
   scopes:
-    - entity.name.scope-resolution.function.call
+    - entity.name.type.constructor
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution.function.call
+    - punctuation.separator.scope-resolution.constructor
 - source: RegisterPrimOp
   scopes:
-    - entity.name.function.call
+    - entity.name.function.definition.special.constructor
 - source: (
+  scopesBegin:
+    - meta.head.function.definition.special.constructor
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.parameters.begin.bracket.round.special.constructor
 - source: Info
+  scopesBegin:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
   scopes:
-    - variable.other.unknown.Info
-- source: '&&'
-  scopes:
-    - keyword.operator.logical
+    - entity.name.type.parameter
+- source: '&'
+  scopesBegin:
+    - storage.modifier.reference
+- source: '&'
+  scopesEnd:
+    - storage.modifier.reference
 - source: info
   scopes:
-    - variable.lower-case
-    - variable.other.unknown.info
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.parameters.end.bracket.round.special.constructor
 - source: '{'
-  scopesBegin:
-    - meta.block
   scopes:
-    - punctuation.section.block.begin.bracket.curly
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.constructor
+  scopesEnd:
+    - meta.head.function.definition.special.constructor
 - source: if
+  scopesBegin:
+    - meta.body.function.definition.special.constructor
   scopes:
     - keyword.control.if
 - source: (
@@ -76105,9 +76146,11 @@
     - punctuation.terminator.statement
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.constructor
   scopesEnd:
-    - meta.block
+    - meta.function.definition.special.constructor
+    - meta.body.function.definition.special.constructor
 - source: void
   scopesBegin:
     - meta.function.definition
