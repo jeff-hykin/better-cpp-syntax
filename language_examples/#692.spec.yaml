@@ -1,0 +1,159 @@
+- source: class
+  scopesBegin:
+    - meta.block.class
+  scopes:
+    - meta.head.class
+    - storage.type.class
+- source: modem_t
+  scopes:
+    - entity.name.type.class
+- source: '{'
+  scopes:
+    - meta.head.class
+    - punctuation.section.block.begin.bracket.curly.class
+- source: ~modem_t
+  scopesBegin:
+    - meta.body.class
+    - meta.function.definition.special.member.destructor
+    - meta.head.function.definition.special.member.destructor
+  scopes:
+    - entity.name.function.destructor
+    - entity.name.function.definition.special.member.destructor
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.member.destructor
+- source: void
+  scopes:
+    - meta.function.definition.parameters.special.member.destructor
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.member.destructor
+  scopesEnd:
+    - meta.function.definition.special.member.destructor
+    - meta.head.function.definition.special.member.destructor
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.class
+  scopesEnd:
+    - meta.body.class
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.class
+- source: modem_t
+  scopes:
+    - support.type.posix-reserved
+    - support.type.built-in.posix-reserved
+- source: '::'
+- source: '~'
+  scopes:
+    - keyword.operator.bitwise
+- source: modem_t
+  scopes:
+    - support.type.posix-reserved
+    - support.type.built-in.posix-reserved
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: void
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: class
+  scopesBegin:
+    - meta.block.class
+  scopes:
+    - meta.head.class
+    - storage.type.class
+- source: other_t
+  scopes:
+    - entity.name.type.class
+- source: '{'
+  scopes:
+    - meta.head.class
+    - punctuation.section.block.begin.bracket.curly.class
+- source: ~other_t
+  scopesBegin:
+    - meta.body.class
+    - meta.function.definition.special.member.destructor
+    - meta.head.function.definition.special.member.destructor
+  scopes:
+    - entity.name.function.destructor
+    - entity.name.function.definition.special.member.destructor
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.member.destructor
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.member.destructor
+  scopesEnd:
+    - meta.function.definition.special.member.destructor
+    - meta.head.function.definition.special.member.destructor
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.class
+  scopesEnd:
+    - meta.body.class
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.class
+- source: other_t
+  scopes:
+    - support.type.posix-reserved
+    - support.type.built-in.posix-reserved
+- source: '::'
+- source: '~'
+  scopes:
+    - keyword.operator.bitwise
+- source: other_t
+  scopes:
+    - support.type.posix-reserved
+    - support.type.built-in.posix-reserved
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly

@@ -1677,8 +1677,13 @@ grammar = Grammar.new(
                         match: /\)/,
                         tag_as: "punctuation.section.parameters.end.bracket.round.special.member.destructor"
                         ),
-                    # destructors cant have arguments
-                    includes: []
+                    # destructors cant have arguments, but `(void)` is a valid way of saying "no arguments"
+                    includes: [
+                        Pattern.new(
+                            match: variableBounds[/void/],
+                            tag_as: "storage.type.primitive storage.type.built-in.primitive",
+                        ),
+                    ]
                 ),
                 :qualifiers_and_specifiers_post_parameters,
                 # initial context is here for things like noexcept()
@@ -2377,7 +2382,7 @@ grammar = Grammar.new(
                         match: /class|struct/,
                         tag_as: "storage.type.enum.enum-key.$match",
                     )
-                ).then(@spaces.or(inline_attribute).or(lookAheadFor(/{/))).maybe(@spaces).maybe(
+                ).then(@spaces.or(inline_attribute).or(lookAheadFor(/{/)).or(lookAheadFor(/:/))).maybe(@spaces).maybe(
                     match: variable_name,
                     tag_as: "entity.name.type.enum",
                 ).maybe(

@@ -1,0 +1,111 @@
+- source: enum
+  scopesBegin:
+    - meta.block.enum
+    - meta.head.enum
+  scopes:
+    - storage.type.enum
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.type-specifier
+- source: int
+  scopes:
+    - storage.type.integral.int
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.enum
+  scopesEnd:
+    - meta.head.enum
+- source: one
+  scopesBegin:
+    - meta.body.enum
+    - meta.enum.definition
+  scopes:
+    - variable.other.enummember
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: two
+  scopes:
+    - variable.other.enummember
+  scopesEnd:
+    - meta.enum.definition
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.enum
+  scopesEnd:
+    - meta.body.enum
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: enum
+  scopesBegin:
+    - meta.head.enum
+  scopes:
+    - storage.type.enum
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.type-specifier
+- source: int
+  scopes:
+    - storage.type.integral.int
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.enum
+  scopesEnd:
+    - meta.head.enum
+- source: three
+  scopesBegin:
+    - meta.body.enum
+  scopes:
+    - meta.enum.definition
+    - variable.other.enummember
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.enum
+  scopesEnd:
+    - meta.body.enum
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: enum
+  scopesBegin:
+    - meta.head.enum
+  scopes:
+    - storage.type.enum
+- source: class
+  scopes:
+    - storage.type.enum.enum-key.class
+- source: Color
+  scopes:
+    - entity.name.type.enum
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.type-specifier
+- source: unsigned
+  scopes:
+    - storage.type.integral.unsigned
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.enum
+  scopesEnd:
+    - meta.head.enum
+- source: red
+  scopesBegin:
+    - meta.body.enum
+  scopes:
+    - meta.enum.definition
+    - variable.other.enummember
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.enum
+  scopesEnd:
+    - meta.body.enum
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
