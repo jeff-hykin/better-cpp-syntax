@@ -1,0 +1,197 @@
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.macro
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: SOME_MACRO
+  scopes:
+    - entity.name.function.preprocessor
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+  scopesEnd:
+    - meta.preprocessor.macro
+- source: struct
+  scopesBegin:
+    - meta.block.struct
+  scopes:
+    - meta.head.struct
+    - storage.type.struct
+- source: SSomeStruct
+  scopes:
+    - entity.name.type.struct
+- source: '{'
+  scopes:
+    - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
+- source: SSomeStruct
+  scopesBegin:
+    - meta.body.struct
+    - meta.function.definition.special.constructor
+    - meta.head.function.definition.special.constructor
+  scopes:
+    - entity.name.function.constructor
+    - entity.name.function.definition.special.constructor
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.special.constructor
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.constructor
+- source: ':'
+  scopes:
+    - punctuation.separator.initializers
+- source: foo
+  scopes:
+    - entity.name.function.call.initializer
+- source: (
+  scopes:
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
+- source: '0'
+  scopes:
+    - meta.parameter.initialization
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.conditional.if
+  scopes:
+    - punctuation.definition.directive
+- source: if
+  scopesEnd:
+    - keyword.control.directive.conditional.if
+- source: SOME_MACRO
+  scopes:
+    - meta.preprocessor.conditional
+    - entity.name.function.preprocessor
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: bar
+  scopes:
+    - entity.name.function.call.initializer
+- source: (
+  scopes:
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
+- source: '0'
+  scopes:
+    - meta.parameter.initialization
+    - constant.numeric.decimal
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.endif
+  scopes:
+    - punctuation.definition.directive
+- source: endif
+  scopesEnd:
+    - keyword.control.directive.endif
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' SOME_MACRO'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.constructor
+  scopesEnd:
+    - meta.head.function.definition.special.constructor
+- source: '}'
+  scopes:
+    - meta.body.function.definition.special.constructor
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.constructor
+  scopesEnd:
+    - meta.function.definition.special.constructor
+- source: public
+  scopesBegin:
+    - storage.type.modifier.access.control.public
+- source: ':'
+  scopes:
+    - punctuation.separator.colon.access.control
+  scopesEnd:
+    - storage.type.modifier.access.control.public
+- source: int
+  scopesBegin:
+    - meta.declaration
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: foo
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.conditional.if
+  scopes:
+    - punctuation.definition.directive
+- source: if
+  scopesEnd:
+    - keyword.control.directive.conditional.if
+- source: SOME_MACRO
+  scopes:
+    - meta.preprocessor.conditional
+    - entity.name.function.preprocessor
+- source: int
+  scopesBegin:
+    - meta.declaration
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: bar
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.endif
+  scopes:
+    - punctuation.definition.directive
+- source: endif
+  scopesEnd:
+    - keyword.control.directive.endif
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' SOME_MACRO'
+  scopesEnd:
+    - comment.line.double-slash
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.struct
+  scopesEnd:
+    - meta.body.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement

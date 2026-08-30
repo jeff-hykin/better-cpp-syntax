@@ -1,7 +1,10 @@
 - source: typedef
   scopes:
     - keyword.other.typedef
-- source: ' foo'
+- source: foo
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.foo
 - source: int
   scopes:
     - storage.type.primitive

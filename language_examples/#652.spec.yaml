@@ -1,0 +1,198 @@
+- source: struct
+  scopesBegin:
+    - meta.block.struct
+  scopes:
+    - meta.head.struct
+    - storage.type.struct
+- source: foo
+  scopes:
+    - entity.name.type.struct
+- source: '{'
+  scopes:
+    - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
+- source: void
+  scopesBegin:
+    - meta.body.struct
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.function.pointer
+- source: '*'
+  scopes:
+    - punctuation.definition.function.pointer.dereference
+- source: bar1
+  scopes:
+    - variable.other.definition.pointer.function
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round.function.pointer
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.function.pointer
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.function.pointer
+- source: noexcept
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.noexcept
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: void
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.function.pointer
+- source: '*'
+  scopes:
+    - punctuation.definition.function.pointer.dereference
+- source: bar2
+  scopes:
+    - variable.other.definition.pointer.function
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round.function.pointer
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.function.pointer
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.function.pointer
+- source: noexcept
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.noexcept
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: void
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: (
+  scopes:
+    - punctuation.section.parens.begin.bracket.round.function.pointer
+- source: '*'
+  scopes:
+    - punctuation.definition.function.pointer.dereference
+- source: bar3
+  scopes:
+    - variable.other.definition.pointer.function
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round.function.pointer
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round.function.pointer
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.function.pointer
+- source: noexcept
+  scopes:
+    - storage.modifier.specifier.functional.post-parameters.noexcept
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.struct
+  scopesEnd:
+    - meta.body.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.struct
+- source: void
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: baz
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: static_assert
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - keyword.other.static-assert
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.static-assert
+- source: 'false'
+  scopes:
+    - constant.language.false
+- source: ','
+  scopesBegin:
+    - meta.static-assert.message
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: '"'
+  scopesBegin:
+    - string.quoted.double
+  scopes:
+    - punctuation.definition.string.begin
+- source: some string
+- source: '"'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.static-assert.message
+    - string.quoted.double
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.static-assert
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: int
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: x
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
+- source: '0'
+  scopes:
+    - constant.numeric.decimal
+  scopesEnd:
+    - meta.assignment
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition

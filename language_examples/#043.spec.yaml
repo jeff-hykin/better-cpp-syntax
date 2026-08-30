@@ -2,7 +2,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: main
@@ -42,6 +42,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: is_signed_v
+  scopes:
+    - variable.other.unknown.is_signed_v
 - source: <
   scopes:
     - keyword.operator.comparison

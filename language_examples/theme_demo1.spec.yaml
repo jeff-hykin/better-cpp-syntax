@@ -38,7 +38,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: thing
@@ -122,7 +122,7 @@
   scopesBegin:
     - meta.function.definition.special.operator-overload
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: operator
@@ -169,9 +169,12 @@
       punctuation.section.block.begin.bracket.curly.function.definition.special.operator-overload
   scopesEnd:
     - meta.head.function.definition.special.operator-overload
-- source: '    cout '
+- source: cout
   scopesBegin:
     - meta.body.function.definition.special.operator-overload
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -209,7 +212,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: main
@@ -282,7 +285,10 @@
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
     - meta.parens
-- source: ' cout '
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -323,7 +329,10 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'c '
+- source: c
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -340,7 +349,10 @@
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
     - meta.parens
-- source: ' cout '
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -391,7 +403,10 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'c '
+- source: c
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c
 - source: '>'
   scopes:
     - keyword.operator.comparison
@@ -408,7 +423,10 @@
     - punctuation.section.parens.end.bracket.round
   scopesEnd:
     - meta.parens
-- source: ' cout '
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift

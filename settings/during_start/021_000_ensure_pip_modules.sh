@@ -1,1 +1,0 @@
-../extensions/python/commands/ensure_pip_modules

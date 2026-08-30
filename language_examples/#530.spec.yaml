@@ -14,27 +14,30 @@
 - source: int
   scopesBegin:
     - meta.body.struct
+    - meta.assignment
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' x '
+- source: x
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: f
-  scopesBegin:
-    - meta.function.definition.special.constructor
-    - meta.head.function.definition.special.constructor
   scopes:
-    - entity.name.function.constructor
-    - entity.name.function.definition.special.constructor
+    - entity.name.function.call
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.special.constructor
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: R
   scopesBegin:
-    - meta.function.definition.parameters.special.constructor
-    - meta.parameter
     - string.quoted.double.raw
     - punctuation.definition.string.begin
   scopes:
@@ -47,46 +50,65 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
-    - meta.function.definition.parameters.special.constructor
-    - meta.parameter
     - string.quoted.double.raw
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.special.constructor
+    - punctuation.section.arguments.end.bracket.round.function.call
   scopesEnd:
-    - meta.function.definition.special.constructor
-    - meta.head.function.definition.special.constructor
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' y '
+- source: 'y'
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: '100'
   scopes:
     - constant.numeric.decimal
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: const
+  scopesBegin:
+    - meta.assignment
   scopes:
     - storage.modifier.specifier.const
 - source: char
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '*'
   scopes:
-    - keyword.operator.arithmetic
-- source: ' z '
+    - storage.modifier.pointer
+- source: z
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: '"'
   scopesBegin:
     - string.quoted.double
@@ -97,6 +119,7 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
+    - meta.assignment
     - string.quoted.double
 - source: ;
   scopes:
@@ -123,27 +146,30 @@
 - source: int
   scopesBegin:
     - meta.body.struct
+    - meta.assignment
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' x1 '
+- source: x1
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: f
-  scopesBegin:
-    - meta.function.definition.special.constructor
-    - meta.head.function.definition.special.constructor
   scopes:
-    - entity.name.function.constructor
-    - entity.name.function.definition.special.constructor
+    - entity.name.function.call
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.special.constructor
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: R
   scopesBegin:
-    - meta.function.definition.parameters.special.constructor
-    - meta.parameter
     - string.quoted.double.raw
     - punctuation.definition.string.begin
   scopes:
@@ -156,40 +182,41 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
-    - meta.function.definition.parameters.special.constructor
-    - meta.parameter
     - string.quoted.double.raw
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.special.constructor
+    - punctuation.section.arguments.end.bracket.round.function.call
   scopesEnd:
-    - meta.function.definition.special.constructor
-    - meta.head.function.definition.special.constructor
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' x2 '
+- source: x2
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: f
-  scopesBegin:
-    - meta.function.definition.special.constructor
-    - meta.head.function.definition.special.constructor
   scopes:
-    - entity.name.function.constructor
-    - entity.name.function.definition.special.constructor
+    - entity.name.function.call
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.special.constructor
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: R
   scopesBegin:
-    - meta.function.definition.parameters.special.constructor
-    - meta.parameter
     - string.quoted.double.raw
     - punctuation.definition.string.begin
   scopes:
@@ -202,43 +229,45 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
-    - meta.function.definition.parameters.special.constructor
-    - meta.parameter
     - string.quoted.double.raw
 - source: )
   scopes:
-    - punctuation.section.parameters.end.bracket.round.special.constructor
+    - punctuation.section.arguments.end.bracket.round.function.call
   scopesEnd:
-    - meta.function.definition.special.constructor
-    - meta.head.function.definition.special.constructor
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' x3 '
+- source: x3
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: f
-  scopesBegin:
-    - meta.function.definition.special.constructor
-    - meta.head.function.definition.special.constructor
   scopes:
-    - entity.name.function.constructor
-    - entity.name.function.definition.special.constructor
+    - entity.name.function.call
 - source: (
   scopes:
-    - punctuation.section.parameters.begin.bracket.round.special.constructor
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: g
-  scopesBegin:
-    - meta.function.definition.parameters.special.constructor
-    - meta.parameter
   scopes:
-    - entity.name.type.parameter
+    - entity.name.function.call
 - source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.function.call
 - source: R
   scopesBegin:
     - string.quoted.double.raw
@@ -253,47 +282,67 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
-    - meta.function.definition.parameters.special.constructor
-    - meta.parameter
     - string.quoted.double.raw
 - source: )
-  scopes:
-    - punctuation.section.parameters.end.bracket.round.special.constructor
+  scopesBegin:
+    - punctuation.section.arguments.end.bracket.round.function.call
 - source: )
   scopesEnd:
-    - meta.function.definition.special.constructor
-    - meta.head.function.definition.special.constructor
+    - meta.assignment
+    - punctuation.section.arguments.end.bracket.round.function.call
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: int
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' y '
+- source: 'y'
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: '100'
   scopes:
     - constant.numeric.decimal
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: const
+  scopesBegin:
+    - meta.assignment
   scopes:
     - storage.modifier.specifier.const
 - source: char
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '*'
   scopes:
-    - keyword.operator.arithmetic
-- source: ' z '
+    - storage.modifier.pointer
+- source: z
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: '"'
   scopesBegin:
     - string.quoted.double
@@ -304,6 +353,7 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
+    - meta.assignment
     - string.quoted.double
 - source: ;
   scopes:

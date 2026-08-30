@@ -23,7 +23,10 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' a'
+- source: a
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.a
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -31,7 +34,10 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' b'
+- source: b
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.b
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -39,7 +45,10 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' str '
+- source: str
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.str
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -84,7 +93,10 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' c'
+- source: c
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -92,7 +104,10 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' d'
+- source: d
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.d
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -100,7 +115,10 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' ch '
+- source: ch
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.ch
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -122,7 +140,10 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' e'
+- source: e
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.e
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -130,7 +151,10 @@
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' f'
+- source: f
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.f
 - source: ;
   scopes:
     - punctuation.terminator.statement

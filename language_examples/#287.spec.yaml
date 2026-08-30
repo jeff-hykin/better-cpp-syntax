@@ -1,4 +1,7 @@
-- source: 'a '
+- source: a
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.a
 - source: '*'
   scopesBegin:
     - keyword.operator.arithmetic
@@ -11,7 +14,10 @@
 - source: '*'
   scopesEnd:
     - keyword.operator.arithmetic
-- source: 'a '
+- source: a
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.a
 - source: '&&'
   scopesBegin:
     - keyword.operator.logical
@@ -39,7 +45,10 @@
 - source: '*'
   scopes:
     - keyword.operator.arithmetic
-- source: ' string '
+- source: string
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.string
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -59,7 +68,8 @@
     - punctuation.terminator.statement
 - source: DEBUG_UART_PORT
   scopes:
-    - variable.other.object.access
+    - variable.upper-case
+    - variable.other.object.access.DEBUG_UART_PORT
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -71,10 +81,12 @@
     - punctuation.section.arguments.begin.bracket.round.function.member
 - source: F
   scopes:
+    - entity.name.function.call.upper-case
     - entity.name.function.call
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: '"'
   scopesBegin:
     - string.quoted.double
@@ -98,6 +110,7 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member

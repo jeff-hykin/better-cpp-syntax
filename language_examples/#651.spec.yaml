@@ -1,0 +1,205 @@
+- source: int
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: main
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: constexpr
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - storage.modifier.specifier.functional.pre-parameters.constexpr
+- source: std
+  scopesBegin:
+    - meta.qualified-type
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: size_t
+  scopes:
+    - storage.type
+    - storage.type.built-in
+  scopesEnd:
+    - meta.qualified-type
+- source: highlight
+  scopes:
+    - variable.lower-case
+    - variable.other.object.construction
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: '::'
+  scopesBegin:
+    - meta.qualified-type
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: size_t
+  scopes:
+    - storage.type
+    - storage.type.built-in
+  scopesEnd:
+    - meta.qualified-type
+- source: highlight2
+  scopes:
+    - variable.lower-case
+    - variable.other.object.construction
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '::'
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: size_t
+  scopes:
+    - storage.type
+    - storage.type.built-in
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: highlight3
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.highlight3
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '::'
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: size_t
+  scopes:
+    - storage.type
+    - storage.type.built-in
+- source: constexpr
+  scopes:
+    - storage.modifier.specifier.functional.pre-parameters.constexpr
+- source: highlight4
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.highlight4
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: constexpr
+  scopes:
+    - storage.modifier.specifier.functional.pre-parameters.constexpr
+- source: '::'
+  scopesBegin:
+    - meta.qualified-type
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: std
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: size_t
+  scopes:
+    - storage.type
+    - storage.type.built-in
+  scopesEnd:
+    - meta.qualified-type
+- source: no_highlight
+  scopes:
+    - variable.snake-case
+    - variable.other.object.construction
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition

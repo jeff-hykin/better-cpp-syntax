@@ -1,0 +1,92 @@
+- source: using
+  scopesBegin:
+    - meta.declaration.type.alias
+  scopes:
+    - keyword.other.using.directive
+- source: b
+  scopes:
+    - entity.name.type
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: int
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.declaration.type.alias
+- source: void
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: f
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: for
+  scopesBegin:
+    - meta.body.function.definition
+  scopes:
+    - keyword.control.for
+- source: (
+  scopesBegin:
+    - meta.parens
+  scopes:
+    - punctuation.section.parens.begin.bracket.round
+- source: using
+  scopesBegin:
+    - meta.parens.control.for
+    - meta.declaration.type.alias
+  scopes:
+    - keyword.other.using.directive
+- source: a
+  scopes:
+    - entity.name.type
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: int
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.declaration.type.alias
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.parens.control.for
+- source: )
+  scopes:
+    - punctuation.section.parens.end.bracket.round
+  scopesEnd:
+    - meta.parens
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition

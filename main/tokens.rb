@@ -119,6 +119,9 @@ tokens = [
     { representation: "double"               , name: "double"                         , isPrimitive: true, isType: true},
     { representation: "bool"                 , name: "bool"                           , isPrimitive: true, isType: true},
     { representation: "wchar_t"              , name: "wchar_t"                        , isPrimitive: true, isType: true},
+    { representation: "char8_t"              , name: "char8_t"                        , isPrimitive: true, isType: true},
+    { representation: "char16_t"             , name: "char16_t"                       , isPrimitive: true, isType: true},
+    { representation: "char32_t"             , name: "char32_t"                       , isPrimitive: true, isType: true},
     # other types
     { representation: "u_char"               , name: "u_char"               , isType: true },
     { representation: "u_short"              , name: "u_short"              , isType: true },
@@ -266,7 +269,7 @@ tokens = [
     { representation: "__asm__"                    , name: "__asm__"                    },
     # 
     { representation: "concept"                    , name: "concept"                    , isCurrentlyAMiscKeyword: true },
-    { representation: "requires"                   , name: "requires"                   , isCurrentlyAMiscKeyword: true },
+    { representation: "requires"                   , name: "requires"                   , canAppearAfterParametersBeforeBody: true, isFunctionLike: true },       
     { representation: "export"                     , name: "export"                     , isCurrentlyAMiscKeyword: true },
     { representation: "atomic_cancel"              , name: "atomic_cancel"              },
     { representation: "atomic_commit"              , name: "atomic_commit"              },

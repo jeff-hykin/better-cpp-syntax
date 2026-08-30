@@ -1,0 +1,164 @@
+- source: class
+  scopesBegin:
+    - meta.block.class
+  scopes:
+    - meta.head.class
+    - storage.type.class
+- source: modem_t
+  scopes:
+    - entity.name.type.class
+- source: '{'
+  scopes:
+    - meta.head.class
+    - punctuation.section.block.begin.bracket.curly.class
+- source: ~modem_t
+  scopesBegin:
+    - meta.body.class
+    - meta.function.definition.special.member.destructor
+    - meta.head.function.definition.special.member.destructor
+  scopes:
+    - entity.name.function.destructor
+    - entity.name.function.definition.special.member.destructor
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.member.destructor
+- source: void
+  scopes:
+    - meta.function.definition.parameters.special.member.destructor
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.member.destructor
+  scopesEnd:
+    - meta.function.definition.special.member.destructor
+    - meta.head.function.definition.special.member.destructor
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.class
+  scopesEnd:
+    - meta.body.class
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.class
+- source: modem_t
+  scopesBegin:
+    - meta.function.definition.special.member.destructor
+  scopes:
+    - entity.name.type.destructor
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.destructor
+- source: ~modem_t
+  scopes:
+    - entity.name.function.definition.special.member.destructor
+- source: (
+  scopesBegin:
+    - meta.head.function.definition.special.member.destructor
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.member.destructor
+- source: void
+  scopes:
+    - meta.function.definition.parameters.special.member.destructor
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.member.destructor
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.member.destructor
+  scopesEnd:
+    - meta.head.function.definition.special.member.destructor
+- source: '}'
+  scopes:
+    - meta.body.function.definition.special.member.destructor
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.member.destructor
+  scopesEnd:
+    - meta.function.definition.special.member.destructor
+- source: class
+  scopesBegin:
+    - meta.block.class
+  scopes:
+    - meta.head.class
+    - storage.type.class
+- source: other_t
+  scopes:
+    - entity.name.type.class
+- source: '{'
+  scopes:
+    - meta.head.class
+    - punctuation.section.block.begin.bracket.curly.class
+- source: ~other_t
+  scopesBegin:
+    - meta.body.class
+    - meta.function.definition.special.member.destructor
+    - meta.head.function.definition.special.member.destructor
+  scopes:
+    - entity.name.function.destructor
+    - entity.name.function.definition.special.member.destructor
+- source: (
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.member.destructor
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.member.destructor
+  scopesEnd:
+    - meta.function.definition.special.member.destructor
+    - meta.head.function.definition.special.member.destructor
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.class
+  scopesEnd:
+    - meta.body.class
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.class
+- source: other_t
+  scopesBegin:
+    - meta.function.definition.special.member.destructor
+  scopes:
+    - entity.name.type.destructor
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.destructor
+- source: ~other_t
+  scopes:
+    - entity.name.function.definition.special.member.destructor
+- source: (
+  scopesBegin:
+    - meta.head.function.definition.special.member.destructor
+  scopes:
+    - >-
+      punctuation.section.parameters.begin.bracket.round.special.member.destructor
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round.special.member.destructor
+- source: '{'
+  scopes:
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.member.destructor
+  scopesEnd:
+    - meta.head.function.definition.special.member.destructor
+- source: '}'
+  scopes:
+    - meta.body.function.definition.special.member.destructor
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.member.destructor

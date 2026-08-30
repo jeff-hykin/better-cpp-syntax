@@ -11,7 +11,7 @@
     - keyword.operator.assignment
 - source: B
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: ;
   scopes:
@@ -27,7 +27,7 @@
     - keyword.operator.assignment
 - source: std
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -38,7 +38,7 @@
   scopes:
     - entity.name.type
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -61,17 +61,26 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.decltype
-- source: 'a '
+- source: a
   scopesBegin:
     - meta.arguments.decltype
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.a
 - source: '?'
   scopes:
     - keyword.operator.ternary
-- source: ' b '
+- source: b
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.b
 - source: ':'
   scopes:
     - keyword.operator.ternary
-- source: ' c'
+- source: c
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c
   scopesEnd:
     - meta.arguments.decltype
 - source: )
@@ -111,7 +120,7 @@
     - keyword.operator.assignment
 - source: B
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: ;
   scopes:
@@ -127,7 +136,7 @@
     - keyword.operator.assignment
 - source: std
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -138,7 +147,7 @@
   scopes:
     - entity.name.type
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -161,17 +170,26 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.decltype
-- source: 'a '
+- source: a
   scopesBegin:
     - meta.arguments.decltype
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.a
 - source: '?'
   scopes:
     - keyword.operator.ternary
-- source: ' b '
+- source: b
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.b
 - source: ':'
   scopes:
     - keyword.operator.ternary
-- source: ' c'
+- source: c
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c
   scopesEnd:
     - meta.arguments.decltype
 - source: )
@@ -194,7 +212,7 @@
     - meta.tail.struct
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: foo
@@ -227,7 +245,7 @@
     - keyword.operator.assignment
 - source: B
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: ;
   scopes:
@@ -243,7 +261,7 @@
     - keyword.operator.assignment
 - source: std
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -254,7 +272,7 @@
   scopes:
     - entity.name.type
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -277,17 +295,26 @@
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.decltype
-- source: 'a '
+- source: a
   scopesBegin:
     - meta.arguments.decltype
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.a
 - source: '?'
   scopes:
     - keyword.operator.ternary
-- source: ' b '
+- source: b
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.b
 - source: ':'
   scopes:
     - keyword.operator.ternary
-- source: ' c'
+- source: c
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c
   scopesEnd:
     - meta.arguments.decltype
 - source: )

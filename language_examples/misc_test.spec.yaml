@@ -60,14 +60,25 @@
 - source: int
   scopesBegin:
     - meta.body.class
+    - meta.declaration
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' width'
+- source: width
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' height'
+- source: height
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.height
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -83,7 +94,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: set_values
@@ -124,7 +135,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: area
@@ -148,11 +159,17 @@
     - meta.body.function.definition
   scopes:
     - keyword.control.return
-- source: ' width'
+- source: width
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.width
 - source: '*'
   scopes:
     - keyword.operator.arithmetic
 - source: height
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.height
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -176,7 +193,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: Rectangle
@@ -225,21 +242,33 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '  width '
+- source: width
   scopesBegin:
     - meta.body.function.definition
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.width
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' x'
+- source: x
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.x
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  height '
+- source: height
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.height
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' y'
+- source: 'y'
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.y
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -250,7 +279,7 @@
     - meta.body.function.definition
 - source: int
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: main
@@ -269,15 +298,27 @@
     - punctuation.section.block.begin.bracket.curly.function.definition
   scopesEnd:
     - meta.head.function.definition
-- source: '  Rectangle rect'
+- source: Rectangle
   scopesBegin:
     - meta.body.function.definition
+    - meta.declaration
+  scopes:
+    - meta.qualified-type
+    - entity.name.type
+- source: rect
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: rect
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.rect
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -302,7 +343,10 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '  cout '
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -322,7 +366,8 @@
     - keyword.operator.bitwise.shift
 - source: rect
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.rect
 - source: .
   scopes:
     - punctuation.separator.dot-access

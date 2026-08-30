@@ -88,7 +88,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ChassisSubsystem
@@ -127,6 +127,9 @@
   scopes:
     - keyword.operator.arithmetic
 - source: func
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.func
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.initializer
@@ -135,7 +138,10 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: Args...
+- source: Args
+  scopes:
+    - variable.other.unknown.Args
+- source: ...
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -175,10 +181,15 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: auto
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' i '
+- source: i
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.i
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -188,18 +199,29 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: ' i '
+- source: i
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.i
 - source: <
   scopes:
     - keyword.operator.comparison
-- source: ' DRIVEN_WHEEL_COUNT'
+- source: DRIVEN_WHEEL_COUNT
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.DRIVEN_WHEEL_COUNT
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: ' i'
+- source: i
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.i
 - source: ++
   scopes:
     - keyword.operator.increment
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -224,6 +246,9 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: i
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.i
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -250,7 +275,11 @@
 - source: (
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: args...
+- source: args
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.args
+- source: ...
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -285,6 +314,9 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: i
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.i
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -311,7 +343,11 @@
 - source: (
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: args...
+- source: args
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.args
+- source: ...
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -340,44 +376,65 @@
     - meta.function.definition
     - meta.body.function.definition
 - source: ChassisSubsystem
+  scopesBegin:
+    - meta.function.definition.special.constructor
   scopes:
-    - entity.name.scope-resolution.function.call
+    - entity.name.type.constructor
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution.function.call
+    - punctuation.separator.scope-resolution.constructor
 - source: ChassisSubsystem
   scopes:
-    - entity.name.function.call
+    - entity.name.function.definition.special.constructor
 - source: (
+  scopesBegin:
+    - meta.head.function.definition.special.constructor
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.parameters.begin.bracket.round.special.constructor
 - source: tap
+  scopesBegin:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
   scopes:
-    - entity.name.scope-resolution
+    - entity.name.scope-resolution.parameter
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution
+    - punctuation.separator.scope-resolution.parameter
 - source: Drivers
+  scopes:
+    - entity.name.type.parameter
 - source: '*'
   scopes:
-    - keyword.operator.arithmetic
-- source: ' drivers'
+    - storage.modifier.pointer
+- source: drivers
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
-- source: '    :'
+    - punctuation.section.parameters.end.bracket.round.special.constructor
+- source: ':'
+  scopes:
+    - punctuation.separator.initializers
 - source: ChassisSubsystemInterface
   scopes:
-    - entity.name.function.call
+    - entity.name.function.call.initializer
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
 - source: drivers
+  scopes:
+    - meta.parameter.initialization
+    - variable.lower-case
+    - variable.other.unknown.drivers
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -395,19 +452,31 @@
     - entity.name.function.preprocessor
 - source: railWheel
   scopes:
-    - entity.name.function.call
+    - entity.name.function.call.initializer
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
 - source: drivers
+  scopesBegin:
+    - meta.parameter.initialization
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.drivers
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' RAIL_WHEEL_ID'
+- source: RAIL_WHEEL_ID
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.RAIL_WHEEL_ID
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' CHAS_BUS'
+- source: CHAS_BUS
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.CHAS_BUS
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -427,10 +496,11 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
+    - meta.parameter.initialization
     - string.quoted.double
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -444,19 +514,31 @@
     - keyword.control.directive.else
 - source: leftBackWheel
   scopes:
-    - entity.name.function.call
+    - entity.name.function.call.initializer
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
 - source: drivers
+  scopesBegin:
+    - meta.parameter.initialization
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.drivers
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' LEFT_BACK_WHEEL_ID'
+- source: LEFT_BACK_WHEEL_ID
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.LEFT_BACK_WHEEL_ID
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' CHAS_BUS'
+- source: CHAS_BUS
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.CHAS_BUS
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -476,28 +558,41 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
+    - meta.parameter.initialization
     - string.quoted.double
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: leftFrontWheel
   scopes:
-    - entity.name.function.call
+    - entity.name.function.call.initializer
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
 - source: drivers
+  scopesBegin:
+    - meta.parameter.initialization
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.drivers
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' LEFT_FRONT_WHEEL_ID'
+- source: LEFT_FRONT_WHEEL_ID
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.LEFT_FRONT_WHEEL_ID
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' CHAS_BUS'
+- source: CHAS_BUS
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.CHAS_BUS
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -517,28 +612,41 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
+    - meta.parameter.initialization
     - string.quoted.double
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: rightFrontWheel
   scopes:
-    - entity.name.function.call
+    - entity.name.function.call.initializer
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
 - source: drivers
+  scopesBegin:
+    - meta.parameter.initialization
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.drivers
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' RIGHT_FRONT_WHEEL_ID'
+- source: RIGHT_FRONT_WHEEL_ID
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.RIGHT_FRONT_WHEEL_ID
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' CHAS_BUS'
+- source: CHAS_BUS
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.CHAS_BUS
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -558,28 +666,41 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
+    - meta.parameter.initialization
     - string.quoted.double
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: rightBackWheel
   scopes:
-    - entity.name.function.call
+    - entity.name.function.call.initializer
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
 - source: drivers
+  scopesBegin:
+    - meta.parameter.initialization
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.drivers
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' RIGHT_BACK_WHEEL_ID'
+- source: RIGHT_BACK_WHEEL_ID
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.RIGHT_BACK_WHEEL_ID
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' CHAS_BUS'
+- source: CHAS_BUS
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.CHAS_BUS
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -599,10 +720,11 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
+    - meta.parameter.initialization
     - string.quoted.double
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -620,19 +742,31 @@
     - entity.name.function.preprocessor
 - source: leftBackYaw
   scopes:
-    - entity.name.function.call
+    - entity.name.function.call.initializer
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
 - source: drivers
+  scopesBegin:
+    - meta.parameter.initialization
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.drivers
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' LEFT_BACK_YAW_ID'
+- source: LEFT_BACK_YAW_ID
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.LEFT_BACK_YAW_ID
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' CHAS_BUS'
+- source: CHAS_BUS
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.CHAS_BUS
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -652,28 +786,41 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
+    - meta.parameter.initialization
     - string.quoted.double
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: leftFrontYaw
   scopes:
-    - entity.name.function.call
+    - entity.name.function.call.initializer
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
 - source: drivers
+  scopesBegin:
+    - meta.parameter.initialization
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.drivers
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' LEFT_FRONT_YAW_ID'
+- source: LEFT_FRONT_YAW_ID
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.LEFT_FRONT_YAW_ID
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' CHAS_BUS'
+- source: CHAS_BUS
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.CHAS_BUS
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -693,28 +840,41 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
+    - meta.parameter.initialization
     - string.quoted.double
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: rightFrontYaw
   scopes:
-    - entity.name.function.call
+    - entity.name.function.call.initializer
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
 - source: drivers
+  scopesBegin:
+    - meta.parameter.initialization
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.drivers
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' RIGHT_FRONT_YAW_ID'
+- source: RIGHT_FRONT_YAW_ID
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.RIGHT_FRONT_YAW_ID
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' CHAS_BUS'
+- source: CHAS_BUS
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.CHAS_BUS
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -734,28 +894,41 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
+    - meta.parameter.initialization
     - string.quoted.double
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: rightBackYaw
   scopes:
-    - entity.name.function.call
+    - entity.name.function.call.initializer
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
 - source: drivers
+  scopesBegin:
+    - meta.parameter.initialization
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.drivers
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' RIGHT_BACK_YAW_ID'
+- source: RIGHT_BACK_YAW_ID
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.RIGHT_BACK_YAW_ID
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' CHAS_BUS'
+- source: CHAS_BUS
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.CHAS_BUS
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -775,10 +948,11 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
+    - meta.parameter.initialization
     - string.quoted.double
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -796,11 +970,14 @@
     - keyword.control.directive.endif
 - source: targetRPMs
   scopes:
-    - entity.name.function.call
+    - entity.name.function.call.initializer
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
 - source: Matrix
+  scopesBegin:
+    - meta.parameter.initialization
   scopes:
     - entity.name.scope-resolution.function.call
 - source: <
@@ -818,14 +995,14 @@
     - punctuation.separator.delimiter.comma.template.argument
 - source: DRIVEN_WHEEL_COUNT
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.template.argument
 - source: MOTORS_PER_WHEEL
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '>'
   scopes:
@@ -844,21 +1021,26 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: )
-  scopesBegin:
+  scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
-- source: )
   scopesEnd:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - meta.parameter.initialization
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: motors
   scopes:
-    - entity.name.function.call
+    - entity.name.function.call.initializer
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
 - source: Matrix
+  scopesBegin:
+    - meta.parameter.initialization
   scopes:
     - entity.name.scope-resolution.function.call
 - source: <
@@ -869,7 +1051,7 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: DJIMotor
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '*'
   scopes:
@@ -879,14 +1061,14 @@
     - punctuation.separator.delimiter.comma.template.argument
 - source: DRIVEN_WHEEL_COUNT
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.template.argument
 - source: MOTORS_PER_WHEEL
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '>'
   scopes:
@@ -905,34 +1087,39 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: )
-  scopesBegin:
+  scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
-- source: )
   scopesEnd:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - meta.parameter.initialization
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: wheelLocationMatrix
   scopes:
-    - entity.name.function.call
+    - entity.name.function.call.initializer
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
 - source: //
   scopes:
     - comment.line.double-slash
     - punctuation.definition.comment
 - source: '{'
-  scopesBegin:
-    - meta.block
   scopes:
-    - punctuation.section.block.begin.bracket.curly
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.constructor
+  scopesEnd:
+    - meta.head.function.definition.special.constructor
 - source: '#'
   scopesBegin:
+    - meta.body.function.definition.special.constructor
     - keyword.control.directive.conditional.ifdef
   scopes:
     - punctuation.definition.directive
@@ -952,6 +1139,9 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: RAIL
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.RAIL
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -973,6 +1163,9 @@
   scopes:
     - keyword.operator.bitwise
 - source: railWheel
+  scopes:
+    - variable.camel-case
+    - variable.other.unknown.railWheel
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1001,6 +1194,9 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: LB
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.LB
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -1022,6 +1218,9 @@
   scopes:
     - keyword.operator.bitwise
 - source: leftBackWheel
+  scopes:
+    - variable.camel-case
+    - variable.other.unknown.leftBackWheel
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1034,6 +1233,9 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: LF
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.LF
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -1055,6 +1257,9 @@
   scopes:
     - keyword.operator.bitwise
 - source: leftFrontWheel
+  scopes:
+    - variable.camel-case
+    - variable.other.unknown.leftFrontWheel
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1067,6 +1272,9 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: RF
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.RF
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -1088,6 +1296,9 @@
   scopes:
     - keyword.operator.bitwise
 - source: rightFrontWheel
+  scopes:
+    - variable.camel-case
+    - variable.other.unknown.rightFrontWheel
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1100,6 +1311,9 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: RB
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.RB
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -1121,6 +1335,9 @@
   scopes:
     - keyword.operator.bitwise
 - source: rightBackWheel
+  scopes:
+    - variable.camel-case
+    - variable.other.unknown.rightBackWheel
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1166,6 +1383,7 @@
     - constant.numeric.decimal
 - source: f
   scopes:
+    - keyword.other.suffix.literal.built-in.floating-point
     - keyword.other.unit.suffix.floating-point
 - source: ;
   scopes:
@@ -1209,6 +1427,7 @@
     - constant.numeric.decimal
 - source: f
   scopes:
+    - keyword.other.suffix.literal.built-in.floating-point
     - keyword.other.unit.suffix.floating-point
 - source: ;
   scopes:
@@ -1241,11 +1460,17 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' WHEELBASE_WIDTH '
+- source: WHEELBASE_WIDTH
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.WHEELBASE_WIDTH
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' WHEELBASE_LENGTH'
+- source: WHEELBASE_LENGTH
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.WHEELBASE_LENGTH
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1288,6 +1513,7 @@
     - constant.numeric.decimal
 - source: f
   scopes:
+    - keyword.other.suffix.literal.built-in.floating-point
     - keyword.other.unit.suffix.floating-point
 - source: ;
   scopes:
@@ -1331,6 +1557,7 @@
     - constant.numeric.decimal
 - source: f
   scopes:
+    - keyword.other.suffix.literal.built-in.floating-point
     - keyword.other.unit.suffix.floating-point
 - source: ;
   scopes:
@@ -1371,11 +1598,17 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'WHEELBASE_WIDTH '
+- source: WHEELBASE_WIDTH
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.WHEELBASE_WIDTH
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' WHEELBASE_LENGTH'
+- source: WHEELBASE_LENGTH
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.WHEELBASE_LENGTH
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -1426,6 +1659,7 @@
     - constant.numeric.decimal
 - source: f
   scopes:
+    - keyword.other.suffix.literal.built-in.floating-point
     - keyword.other.unit.suffix.floating-point
 - source: ;
   scopes:
@@ -1469,6 +1703,7 @@
     - constant.numeric.decimal
 - source: f
   scopes:
+    - keyword.other.suffix.literal.built-in.floating-point
     - keyword.other.unit.suffix.floating-point
 - source: ;
   scopes:
@@ -1501,11 +1736,17 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' WHEELBASE_WIDTH '
+- source: WHEELBASE_WIDTH
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.WHEELBASE_WIDTH
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' WHEELBASE_LENGTH'
+- source: WHEELBASE_LENGTH
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.WHEELBASE_LENGTH
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1548,6 +1789,7 @@
     - constant.numeric.decimal
 - source: f
   scopes:
+    - keyword.other.suffix.literal.built-in.floating-point
     - keyword.other.unit.suffix.floating-point
 - source: ;
   scopes:
@@ -1591,6 +1833,7 @@
     - constant.numeric.decimal
 - source: f
   scopes:
+    - keyword.other.suffix.literal.built-in.floating-point
     - keyword.other.unit.suffix.floating-point
 - source: ;
   scopes:
@@ -1631,11 +1874,17 @@
     - meta.parens
   scopes:
     - punctuation.section.parens.begin.bracket.round
-- source: 'WHEELBASE_WIDTH '
+- source: WHEELBASE_WIDTH
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.WHEELBASE_WIDTH
 - source: +
   scopes:
     - keyword.operator.arithmetic
-- source: ' WHEELBASE_LENGTH'
+- source: WHEELBASE_LENGTH
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.WHEELBASE_LENGTH
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -1675,6 +1924,9 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: LB
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.LB
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -1696,6 +1948,9 @@
   scopes:
     - keyword.operator.bitwise
 - source: leftBackYaw
+  scopes:
+    - variable.camel-case
+    - variable.other.unknown.leftBackYaw
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1708,6 +1963,9 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: LF
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.LF
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -1729,6 +1987,9 @@
   scopes:
     - keyword.operator.bitwise
 - source: leftFrontYaw
+  scopes:
+    - variable.camel-case
+    - variable.other.unknown.leftFrontYaw
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1741,6 +2002,9 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: RF
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.RF
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -1762,6 +2026,9 @@
   scopes:
     - keyword.operator.bitwise
 - source: rightFrontYaw
+  scopes:
+    - variable.camel-case
+    - variable.other.unknown.rightFrontYaw
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1774,6 +2041,9 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: RB
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.RB
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -1795,6 +2065,9 @@
   scopes:
     - keyword.operator.bitwise
 - source: rightBackYaw
+  scopes:
+    - variable.camel-case
+    - variable.other.unknown.rightBackYaw
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -1812,14 +2085,16 @@
     - keyword.control.directive.endif
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.constructor
   scopesEnd:
-    - meta.block
+    - meta.function.definition.special.constructor
+    - meta.body.function.definition.special.constructor
 - source: void
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ChassisSubsystem
@@ -1864,6 +2139,9 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: initialize
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.initialize
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -1877,7 +2155,7 @@
     - meta.body.function.definition
 - source: void
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ChassisSubsystem
@@ -1919,7 +2197,7 @@
     - meta.body.function.definition
 - source: void
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ChassisSubsystem
@@ -1975,7 +2253,7 @@
     - punctuation.section.block.end.bracket.curly.function.definition
 - source: void
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ChassisSubsystem
@@ -2031,7 +2309,7 @@
     - punctuation.section.block.end.bracket.curly.function.definition
 - source: void
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: ChassisSubsystem

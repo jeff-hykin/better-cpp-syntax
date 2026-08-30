@@ -2,7 +2,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: function
@@ -25,12 +25,14 @@
   scopesBegin:
     - meta.body.function.definition
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.a
 - source: '->'
   scopes:
     - punctuation.separator.pointer-access
 - source: b
   scopes:
+    - variable.lower-case
     - variable.other.object.property
 - source: '->'
   scopes:
@@ -49,12 +51,14 @@
     - punctuation.terminator.statement
 - source: a
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.a
 - source: .
   scopes:
     - punctuation.separator.dot-access
 - source: b
   scopes:
+    - variable.lower-case
     - variable.other.object.property
 - source: .
   scopes:

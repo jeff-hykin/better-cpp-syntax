@@ -15,7 +15,7 @@
   scopesBegin:
     - meta.body.struct
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: (
@@ -41,7 +41,7 @@
     - punctuation.terminator.statement
 - source: int
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '*'
@@ -70,7 +70,7 @@
     - punctuation.terminator.statement
 - source: int
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '&'
@@ -105,7 +105,7 @@
     - punctuation.terminator.statement
 - source: int
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '*'
@@ -176,7 +176,7 @@
   scopesBegin:
     - meta.body.union
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: (

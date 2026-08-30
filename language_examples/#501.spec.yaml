@@ -2,7 +2,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: main
@@ -24,13 +24,22 @@
 - source: auto
   scopesBegin:
     - meta.body.function.definition
+    - meta.assignment
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' a '
+- source: a
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: ''''
   scopesBegin:
     - string.quoted.single
@@ -43,11 +52,15 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
+    - meta.assignment
     - string.quoted.single
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '    cout '
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -71,6 +84,9 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: a
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.a
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -96,13 +112,23 @@
   scopes:
     - punctuation.terminator.statement
 - source: auto
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' b '
+- source: b
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: '"'
   scopesBegin:
     - string.quoted.double
@@ -119,11 +145,15 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
+    - meta.assignment
     - string.quoted.double
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '    cout '
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -147,6 +177,9 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: b
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.b
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -172,13 +205,23 @@
   scopes:
     - punctuation.terminator.statement
 - source: auto
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' c '
+- source: c
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: '"'
   scopesBegin:
     - string.quoted.double
@@ -192,11 +235,15 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
+    - meta.assignment
     - string.quoted.double
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '    cout '
+- source: cout
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.cout
 - source: '<<'
   scopes:
     - keyword.operator.bitwise.shift
@@ -220,6 +267,9 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: c
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -245,13 +295,23 @@
   scopes:
     - punctuation.terminator.statement
 - source: auto
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' c '
+- source: c
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: '"'
   scopesBegin:
     - string.quoted.double
@@ -265,18 +325,29 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
+    - meta.assignment
     - string.quoted.double
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: auto
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' c '
+- source: c
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: '"'
   scopesBegin:
     - string.quoted.double
@@ -290,6 +361,7 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
+    - meta.assignment
     - string.quoted.double
 - source: ;
   scopes:

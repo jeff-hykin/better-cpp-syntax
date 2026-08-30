@@ -38,7 +38,7 @@
     - storage.type.modifier.access.public
 - source: ClassA
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '{'
   scopes:
@@ -135,7 +135,7 @@
     - storage.type.modifier.access.public
 - source: foo
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -146,7 +146,7 @@
   scopes:
     - entity.name.type
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma.inheritance
@@ -155,7 +155,7 @@
     - storage.type.modifier.access.public
 - source: foo
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.scope-resolution
 - source: '::'
@@ -166,7 +166,7 @@
   scopes:
     - entity.name.type
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
 - source: '{'
   scopes:
     - punctuation.section.block.begin.bracket.curly.class

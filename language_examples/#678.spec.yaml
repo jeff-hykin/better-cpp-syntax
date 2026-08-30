@@ -1,0 +1,55 @@
+- source: char8_t
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: a
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.a
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: char16_t
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: b
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.b
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: char32_t
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: c
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.c
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: wchar_t
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: d
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.d
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: char
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: e
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.e
+- source: ;
+  scopes:
+    - punctuation.terminator.statement

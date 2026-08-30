@@ -53,3 +53,19 @@ int other;
         {
             
 
+#define thing /*
+    this should be a comment
+*/
+
+#if thing /*
+    this should be a comment
+*/
+
+#define test test2 /* line 1
+          The timeout is set to 5x to ensure we don't timeout too early. */
+
+/* test comment */
+typedef enum{
+    A= 0,
+    B= 1
+} BB;

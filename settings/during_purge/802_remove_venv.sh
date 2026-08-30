@@ -1,1 +1,0 @@
-../extensions/python/during_purge.sh

@@ -21,13 +21,22 @@
   scopesEnd:
     - storage.type.modifier.access.control.private
 - source: double
+  scopesBegin:
+    - meta.declaration
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '*'
   scopes:
-    - keyword.operator.arithmetic
-- source: ' elem'
+    - storage.modifier.pointer
+- source: elem
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -40,10 +49,19 @@
   scopesEnd:
     - comment.line.double-slash
 - source: int
+  scopesBegin:
+    - meta.declaration
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' sz'
+- source: sz
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -107,6 +125,9 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: s
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.s
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -129,6 +150,8 @@
 - source: s
   scopes:
     - meta.parameter.initialization
+    - variable.lower-case
+    - variable.other.unknown.s
 - source: '}'
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call.initializer
@@ -157,10 +180,15 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round
 - source: int
+  scopesBegin:
+    - meta.parens.control.for
   scopes:
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' i '
+- source: i
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.i
 - source: '='
   scopes:
     - keyword.operator.assignment
@@ -170,11 +198,17 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: ' i '
+- source: i
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.i
 - source: '!='
   scopes:
     - keyword.operator.comparison
-- source: ' s'
+- source: s
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.s
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -182,6 +216,11 @@
   scopes:
     - keyword.operator.increment
 - source: i
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.i
+  scopesEnd:
+    - meta.parens.control.for
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -196,6 +235,9 @@
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: i
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.i
 - source: ']'
   scopes:
     - punctuation.definition.end.bracket.square
@@ -256,7 +298,10 @@
     - keyword.operator.delete.array.bracket
   scopesEnd:
     - keyword.operator.wordlike
-- source: ' elem'
+- source: elem
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.elem
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -279,7 +324,7 @@
   scopesBegin:
     - meta.function.definition.special.operator-overload
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: '&'
@@ -323,7 +368,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: size

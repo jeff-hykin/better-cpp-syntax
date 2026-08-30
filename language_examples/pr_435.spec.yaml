@@ -13,7 +13,7 @@
 - source: task
   scopesBegin:
     - meta.function.definition
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.type
 - source: <
@@ -25,7 +25,7 @@
   scopes:
     - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
     - meta.template.call
 - source: tcp_echo_server
   scopesBegin:
@@ -46,15 +46,19 @@
 - source: char
   scopesBegin:
     - meta.body.function.definition
+    - meta.declaration
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: data
+  scopes:
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+- source: '['
   scopesBegin:
     - meta.bracket.square.access
-  scopes:
-    - variable.other.object
-- source: '['
   scopes:
     - punctuation.definition.begin.bracket.square
 - source: '1024'
@@ -64,6 +68,7 @@
   scopes:
     - punctuation.definition.end.bracket.square
   scopesEnd:
+    - meta.declaration
     - meta.bracket.square.access
 - source: ;
   scopes:
@@ -78,9 +83,11 @@
     - punctuation.section.parens.begin.bracket.round
 - source: ;
   scopesBegin:
+    - meta.parens.control.for
     - punctuation.terminator.statement
 - source: ;
   scopesEnd:
+    - meta.parens.control.for
     - punctuation.terminator.statement
 - source: )
   scopes:
@@ -93,19 +100,30 @@
   scopes:
     - punctuation.section.block.begin.bracket.curly
 - source: size_t
+  scopesBegin:
+    - meta.assignment
   scopes:
+    - meta.qualified-type
     - storage.type
     - storage.type.built-in
-- source: ' n '
+- source: 'n'
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: co_await
   scopes:
     - keyword.control.co_await
 - source: socket
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.socket
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -122,12 +140,17 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: data
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.data
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.member
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -141,6 +164,9 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: socket
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.socket
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
@@ -151,10 +177,16 @@
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: data
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.data
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
-- source: ' n'
+- source: 'n'
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.n
 - source: )
   scopesBegin:
     - punctuation.section.arguments.end.bracket.round.function.call
@@ -176,7 +208,7 @@
     - meta.body.function.definition
 - source: generator
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.type
 - source: <
@@ -192,7 +224,7 @@
   scopes:
     - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
     - meta.template.call
 - source: iota
   scopesBegin:
@@ -250,7 +282,10 @@
 - source: co_yield
   scopes:
     - keyword.control.co_yield
-- source: ' n'
+- source: 'n'
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.n
 - source: ++
   scopes:
     - keyword.operator.increment
@@ -264,7 +299,7 @@
     - meta.body.function.definition
 - source: lazy
   scopesBegin:
-    - meta.qualified_type
+    - meta.qualified-type
   scopes:
     - entity.name.type
 - source: <
@@ -280,7 +315,7 @@
   scopes:
     - punctuation.section.angle-brackets.end.template.call
   scopesEnd:
-    - meta.qualified_type
+    - meta.qualified-type
     - meta.template.call
 - source: f
   scopesBegin:

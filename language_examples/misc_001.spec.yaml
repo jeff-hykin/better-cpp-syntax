@@ -82,6 +82,9 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: move
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.move
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -96,6 +99,9 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: vector
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.vector
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -110,63 +116,97 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: hash_combine
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.hash_combine
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: Rule
+  scopesBegin:
+    - meta.function.definition.special.constructor
   scopes:
-    - entity.name.scope-resolution.function.call
+    - entity.name.type.constructor
 - source: '::'
   scopes:
     - punctuation.separator.namespace.access
-    - punctuation.separator.scope-resolution.function.call
+    - punctuation.separator.scope-resolution.constructor
 - source: Rule
   scopes:
-    - entity.name.function.call
+    - entity.name.function.definition.special.constructor
 - source: (
+  scopesBegin:
+    - meta.head.function.definition.special.constructor
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.parameters.begin.bracket.round.special.constructor
 - source: const
+  scopesBegin:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
   scopes:
     - storage.modifier.specifier.const
-- source: ' Rule '
+- source: Rule
+  scopes:
+    - entity.name.type.parameter
 - source: '&'
   scopes:
-    - keyword.operator.bitwise
+    - storage.modifier.reference
 - source: other
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.function.definition.parameters.special.constructor
+    - meta.parameter
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
-- source: ' :'
+    - punctuation.section.parameters.end.bracket.round.special.constructor
+- source: ':'
+  scopes:
+    - punctuation.separator.initializers
 - source: blank_
   scopes:
-    - entity.name.function.call
+    - entity.name.function.call.initializer
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
-- source: 'Blank{}'
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
+- source: Blank
+  scopesBegin:
+    - meta.parameter.initialization
+  scopes:
+    - variable.other.unknown.Blank
+- source: '{}'
+  scopesEnd:
+    - meta.parameter.initialization
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
 - source: ','
   scopes:
     - punctuation.separator.delimiter.comma
 - source: type
   scopes:
-    - entity.name.function.call
+    - entity.name.function.call.initializer
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.function.call
+    - >-
+      punctuation.section.arguments.begin.bracket.round.function.call.initializer
 - source: BlankType
+  scopes:
+    - meta.parameter.initialization
+    - variable.other.unknown.BlankType
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.end.bracket.round.function.call.initializer
 - source: '{'
-  scopesBegin:
-    - meta.block
   scopes:
-    - punctuation.section.block.begin.bracket.curly
+    - >-
+      punctuation.section.block.begin.bracket.curly.function.definition.special.constructor
+  scopesEnd:
+    - meta.head.function.definition.special.constructor
 - source: '*'
+  scopesBegin:
+    - meta.body.function.definition.special.constructor
   scopes:
     - keyword.operator.arithmetic
 - source: this
@@ -175,15 +215,20 @@
 - source: '='
   scopes:
     - keyword.operator.assignment
-- source: ' other'
+- source: other
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.other
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: '}'
   scopes:
-    - punctuation.section.block.end.bracket.curly
+    - >-
+      punctuation.section.block.end.bracket.curly.function.definition.special.constructor
   scopesEnd:
-    - meta.block
+    - meta.function.definition.special.constructor
+    - meta.body.function.definition.special.constructor
 - source: static
   scopesBegin:
     - meta.function.definition
@@ -191,7 +236,7 @@
     - storage.modifier.static
 - source: void
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: destroy_value
@@ -239,7 +284,8 @@
     - punctuation.section.parens.begin.bracket.round.conditional.switch
 - source: rule
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.rule
 - source: '->'
   scopes:
     - punctuation.separator.pointer-access
@@ -270,6 +316,8 @@
     - punctuation.separator.namespace.access
     - punctuation.separator.scope-resolution
 - source: BlankType
+  scopes:
+    - variable.other.unknown.BlankType
 - source: ':'
   scopes:
     - punctuation.separator.colon.case
@@ -280,12 +328,14 @@
     - keyword.control.return
 - source: rule
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.rule
 - source: '->'
   scopes:
     - punctuation.separator.pointer-access
 - source: blank
   scopes:
+    - variable.lower-case
     - variable.other.object.property
 - source: .
   scopes:
@@ -318,7 +368,7 @@
   scopesBegin:
     - meta.function.definition.special.operator-overload
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - entity.name.type
 - source: '&'
   scopes:
@@ -386,13 +436,17 @@
 - source: ;
   scopes:
     - punctuation.terminator.statement
-- source: '    type '
+- source: type
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.type
 - source: '='
   scopes:
     - keyword.operator.assignment
 - source: other
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.other
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -414,6 +468,9 @@
   scopes:
     - punctuation.section.parens.begin.bracket.round.conditional.switch
 - source: type
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.type
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round.conditional.switch
@@ -430,7 +487,9 @@
     - meta.conditional.case
   scopes:
     - keyword.control.case
-- source: ' BlankType'
+- source: BlankType
+  scopes:
+    - variable.other.unknown.BlankType
 - source: ':'
   scopes:
     - punctuation.separator.colon.case
@@ -449,6 +508,9 @@
   scopes:
     - keyword.operator.bitwise
 - source: blank_
+  scopes:
+    - variable.snake-case
+    - variable.other.unknown.blank_
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -462,7 +524,8 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: other
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.other
 - source: .
   scopes:
     - punctuation.separator.dot-access
@@ -486,7 +549,9 @@
     - meta.conditional.case
   scopes:
     - keyword.control.case
-- source: ' CharacterSetType'
+- source: CharacterSetType
+  scopes:
+    - variable.other.unknown.CharacterSetType
 - source: ':'
   scopes:
     - punctuation.separator.colon.case
@@ -505,6 +570,8 @@
   scopes:
     - keyword.operator.bitwise
 - source: charater_set_
+  scopes:
+    - variable.other.unknown.charater_set_
 - source: )
   scopes:
     - punctuation.section.parens.end.bracket.round
@@ -518,7 +585,8 @@
     - punctuation.section.arguments.begin.bracket.round.function.call
 - source: other
   scopes:
-    - variable.other.object.access
+    - variable.lower-case
+    - variable.other.object.access.other
 - source: .
   scopes:
     - punctuation.separator.dot-access

@@ -1,1 +1,0 @@
-../extensions/ruby/when_purging.sh

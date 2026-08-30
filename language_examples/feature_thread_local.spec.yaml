@@ -23,7 +23,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: foo
@@ -45,6 +45,7 @@
 - source: static
   scopesBegin:
     - meta.body.function.definition
+    - meta.assignment
   scopes:
     - storage.modifier.specifier.static
 - source: thread_local
@@ -52,22 +53,35 @@
     - storage.modifier.specifier.thread_local
 - source: int
   scopes:
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
-- source: ' bar '
+- source: bar
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
 - source: '='
   scopes:
     - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
 - source: '1'
   scopes:
     - constant.numeric.decimal
+  scopesEnd:
+    - meta.assignment
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: return
   scopes:
     - keyword.control.return
-- source: ' bar'
+- source: bar
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.bar
 - source: ;
   scopes:
     - punctuation.terminator.statement

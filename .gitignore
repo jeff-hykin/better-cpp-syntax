@@ -602,13 +602,6 @@ dkms.conf
 # Executables
 *.out
 
-#
-# home folder files
-#
-# ignore files in folder foo
-settings/path_injection/*
-# but keep the folder
-!settings/path_injection/.keep
 # ignore files in folder foo
 settings/.cache/*
 # but keep the folder

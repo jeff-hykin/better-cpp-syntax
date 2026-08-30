@@ -1,1 +1,0 @@
-../extensions/os_mac/during_purge.sh

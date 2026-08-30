@@ -1,1 +1,0 @@
-../extensions/nix/during_clean.sh

@@ -15,16 +15,16 @@
   scopesBegin:
     - meta.body.struct
   scopes:
-    - keyword.other.static_assert
+    - keyword.other.static-assert
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.static_assert
+    - punctuation.section.arguments.begin.bracket.round.static-assert
 - source: 'true'
   scopes:
     - constant.language.true
 - source: ','
   scopesBegin:
-    - meta.static_assert.message
+    - meta.static-assert.message
   scopes:
     - punctuation.separator.delimiter.comma
 - source: '"'
@@ -37,24 +37,27 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
-    - meta.static_assert.message
+    - meta.static-assert.message
     - string.quoted.double
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.static_assert
+    - punctuation.section.arguments.end.bracket.round.static-assert
 - source: ;
   scopes:
     - punctuation.terminator.statement
 - source: static_assert
   scopes:
-    - keyword.other.static_assert
+    - keyword.other.static-assert
 - source: (
   scopes:
-    - punctuation.section.arguments.begin.bracket.round.static_assert
+    - punctuation.section.arguments.begin.bracket.round.static-assert
 - source: bar
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.bar
 - source: ','
   scopesBegin:
-    - meta.static_assert.message
+    - meta.static-assert.message
   scopes:
     - punctuation.separator.delimiter.comma
 - source: '"'
@@ -67,11 +70,11 @@
   scopes:
     - punctuation.definition.string.end
   scopesEnd:
-    - meta.static_assert.message
+    - meta.static-assert.message
     - string.quoted.double
 - source: )
   scopes:
-    - punctuation.section.arguments.end.bracket.round.static_assert
+    - punctuation.section.arguments.end.bracket.round.static-assert
 - source: ;
   scopes:
     - punctuation.terminator.statement
@@ -105,7 +108,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: bar

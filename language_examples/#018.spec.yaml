@@ -2,7 +2,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: function
@@ -138,7 +138,7 @@
   scopesBegin:
     - meta.arguments.decltype
   scopes:
-    - variable.other.object.access
+    - variable.other.unknown.a_storage_of_callable
 - source: .
   scopes:
     - punctuation.separator.dot-access

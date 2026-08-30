@@ -61,19 +61,25 @@
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.decltype
-- source: ' B '
+- source: B
+  scopes:
+    - variable.upper-case
+    - variable.other.unknown.B
 - source: '='
   scopes:
     - keyword.operator.assignment
 - source: A
   scopes:
+    - entity.name.function.call.upper-case
     - entity.name.function.call
 - source: (
   scopes:
     - punctuation.section.arguments.begin.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: )
   scopes:
     - punctuation.section.arguments.end.bracket.round.function.call
+    - punctuation.section.arguments.begin.bracket.round.function.call.upper-case
 - source: ;
   scopes:
     - punctuation.terminator.statement

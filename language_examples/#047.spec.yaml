@@ -14,7 +14,7 @@
   scopesBegin:
     - meta.function.definition
   scopes:
-    - meta.qualified_type
+    - meta.qualified-type
     - storage.type.primitive
     - storage.type.built-in.primitive
 - source: foo
@@ -36,14 +36,22 @@
 - source: enum
   scopesBegin:
     - meta.body.function.definition
+    - meta.declaration
+    - meta.qualified-type
   scopes:
-    - storage.type.enum.declare
+    - storage.type.enum
 - source: bar
   scopes:
-    - entity.name.type.enum
+    - entity.name.type
+  scopesEnd:
+    - meta.qualified-type
 - source: b
   scopes:
-    - variable.other.object.declare
+    - meta.declaration
+    - variable.lower-case
+    - variable.other.declare
+  scopesEnd:
+    - meta.declaration
 - source: ;
   scopes:
     - punctuation.terminator.statement
