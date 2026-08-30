@@ -119,6 +119,9 @@ tokens = [
     { representation: "double"               , name: "double"                         , isPrimitive: true, isType: true},
     { representation: "bool"                 , name: "bool"                           , isPrimitive: true, isType: true},
     { representation: "wchar_t"              , name: "wchar_t"                        , isPrimitive: true, isType: true},
+    { representation: "char8_t"              , name: "char8_t"                        , isPrimitive: true, isType: true},
+    { representation: "char16_t"             , name: "char16_t"                       , isPrimitive: true, isType: true},
+    { representation: "char32_t"             , name: "char32_t"                       , isPrimitive: true, isType: true},
     # other types
     { representation: "u_char"               , name: "u_char"               , isType: true },
     { representation: "u_short"              , name: "u_short"              , isType: true },

@@ -2684,8 +2684,8 @@
     - meta.function.definition
   scopes:
     - meta.qualified-type
-    - support.type.posix-reserved
-    - support.type.built-in.posix-reserved
+    - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: do_get_utf8_code_point
   scopesBegin:
     - meta.head.function.definition
@@ -2731,8 +2731,8 @@
     - meta.assignment
   scopes:
     - meta.qualified-type
-    - support.type.posix-reserved
-    - support.type.built-in.posix-reserved
+    - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: cpnt
   scopesBegin:
     - meta.assignment
@@ -3365,8 +3365,8 @@
     - meta.assignment
   scopes:
     - meta.qualified-type
-    - support.type.posix-reserved
-    - support.type.built-in.posix-reserved
+    - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: next
   scopesBegin:
     - meta.assignment
@@ -12686,8 +12686,8 @@
     - meta.assignment
   scopes:
     - meta.qualified-type
-    - support.type.posix-reserved
-    - support.type.built-in.posix-reserved
+    - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: cpnt
   scopesBegin:
     - meta.assignment
@@ -13007,8 +13007,8 @@
     - keyword.operator.comparison
 - source: char32_t
   scopes:
-    - support.type.posix-reserved
-    - support.type.built-in.posix-reserved
+    - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: '>'
   scopes:
     - keyword.operator.comparison

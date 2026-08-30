@@ -9071,8 +9071,8 @@
     - meta.assignment
   scopes:
     - meta.qualified-type
-    - support.type.posix-reserved
-    - support.type.built-in.posix-reserved
+    - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: cpnt
   scopesBegin:
     - meta.assignment
@@ -9392,8 +9392,8 @@
     - keyword.operator.comparison
 - source: char32_t
   scopes:
-    - support.type.posix-reserved
-    - support.type.built-in.posix-reserved
+    - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: '>'
   scopes:
     - keyword.operator.comparison

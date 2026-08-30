@@ -58,7 +58,7 @@ def doxygen(variable_name)
         "c",
         "cite",
         "copybrief",
-        "copydetail",
+        "copydetails",
         "copydoc",
         "def",
         "dir",

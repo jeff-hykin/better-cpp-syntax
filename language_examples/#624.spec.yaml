@@ -1,0 +1,49 @@
+- source: /**
+  scopesBegin:
+    - comment.block.documentation
+  scopes:
+    - punctuation.definition.comment.begin.documentation
+- source: ' * '
+- source: \copydetails
+  scopes:
+    - storage.type.class.doxygen
+- source: ' Example::method()'
+- source: ' * '
+- source: \copybrief
+  scopes:
+    - storage.type.class.doxygen
+- source: ' Example::method()'
+- source: ' * '
+- source: \copydoc
+  scopes:
+    - storage.type.class.doxygen
+- source: ' Example::method()'
+- source: '*/'
+  scopes:
+    - punctuation.definition.comment.end.documentation
+  scopesEnd:
+    - comment.block.documentation
+- source: void
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: example
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+  scopesEnd:
+    - meta.function.definition
+    - meta.head.function.definition
+- source: ;
+  scopes:
+    - punctuation.terminator.statement

@@ -137,8 +137,8 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: char16_t
   scopes:
-    - support.type.posix-reserved
-    - support.type.built-in.posix-reserved
+    - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
@@ -171,8 +171,8 @@
     - punctuation.section.angle-brackets.begin.template.call
 - source: char32_t
   scopes:
-    - support.type.posix-reserved
-    - support.type.built-in.posix-reserved
+    - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: '>'
   scopes:
     - punctuation.section.angle-brackets.end.template.call
