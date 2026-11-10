@@ -3305,7 +3305,8 @@
     - punctuation.definition.lambda.return-type
 - source: Ret
   scopes:
-    - storage.type.return-type.lambda
+    - meta.qualified-type
+    - entity.name.type
 - source: '{'
   scopesBegin:
     - meta.function.definition.body.lambda
@@ -31785,9 +31786,14 @@
 - source: '->'
   scopes:
     - punctuation.definition.lambda.return-type
-- source: void*
+- source: void
   scopes:
-    - storage.type.return-type.lambda
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - storage.modifier.pointer
 - source: '{'
   scopesBegin:
     - meta.function.definition.body.lambda

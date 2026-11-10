@@ -888,7 +888,8 @@
     - punctuation.definition.lambda.return-type
 - source: Ret
   scopes:
-    - storage.type.return-type.lambda
+    - meta.qualified-type
+    - entity.name.type
 - source: '{'
   scopesBegin:
     - meta.function.definition.body.lambda

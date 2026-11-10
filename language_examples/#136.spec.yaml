@@ -67,7 +67,9 @@
     - punctuation.definition.lambda.return-type
 - source: bool
   scopes:
-    - storage.type.return-type.lambda
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: '#'
   scopesBegin:
     - keyword.control.directive.define

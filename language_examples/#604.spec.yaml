@@ -61,7 +61,9 @@
     - punctuation.definition.lambda.return-type
 - source: auto
   scopes:
-    - storage.type.return-type.lambda
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: /*
   scopesBegin:
     - comment.block

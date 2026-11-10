@@ -6089,8 +6089,10 @@
               "include": "#comments"
             },
             {
-              "match": "\\S+",
-              "name": "storage.type.return-type.lambda.cpp"
+              "include": "#simple_type"
+            },
+            {
+              "include": "#storage_types"
             }
           ]
         },
