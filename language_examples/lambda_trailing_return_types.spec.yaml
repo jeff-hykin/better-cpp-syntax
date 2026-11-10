@@ -1,0 +1,1094 @@
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.include
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: utility
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - string.quoted.other.lt-gt.include
+- source: '#'
+  scopesBegin:
+    - keyword.control.directive.include
+  scopes:
+    - punctuation.definition.directive
+- source: include
+  scopesEnd:
+    - keyword.control.directive.include
+- source: <
+  scopesBegin:
+    - string.quoted.other.lt-gt.include
+  scopes:
+    - punctuation.definition.string.begin
+- source: vector
+- source: '>'
+  scopes:
+    - punctuation.definition.string.end
+  scopesEnd:
+    - meta.preprocessor.include
+    - string.quoted.other.lt-gt.include
+- source: namespace
+  scopesBegin:
+    - meta.block.namespace
+    - meta.head.namespace
+  scopes:
+    - keyword.other.namespace.definition
+    - storage.type.namespace.definition
+- source: boost
+  scopes:
+    - entity.name.scope-resolution.namespace.block
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.namespace.block
+- source: asio
+  scopes:
+    - entity.name.namespace
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.namespace
+  scopesEnd:
+    - meta.head.namespace
+- source: template
+  scopesBegin:
+    - meta.body.namespace
+  scopes:
+    - storage.type.template
+- source: <
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.definition
+- source: typename
+  scopesBegin:
+    - meta.template.definition
+  scopes:
+    - storage.type.template.argument.typename
+- source: T
+  scopes:
+    - entity.name.type.template
+  scopesEnd:
+    - meta.template.definition
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.definition
+- source: struct
+  scopesBegin:
+    - meta.block.struct
+  scopes:
+    - meta.head.struct
+    - storage.type.struct
+- source: awaitable
+  scopes:
+    - entity.name.type.struct
+- source: '{'
+  scopes:
+    - meta.head.struct
+    - punctuation.section.block.begin.bracket.curly.struct
+- source: '}'
+  scopes:
+    - meta.body.struct
+    - punctuation.section.block.end.bracket.curly.struct
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+  scopesEnd:
+    - meta.block.struct
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.namespace
+  scopesEnd:
+    - meta.block.namespace
+    - meta.body.namespace
+- source: void
+  scopesBegin:
+    - meta.function.definition
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: lambda_trailing_return_types
+  scopesBegin:
+    - meta.head.function.definition
+  scopes:
+    - entity.name.function.definition
+- source: (
+  scopes:
+    - punctuation.section.parameters.begin.bracket.round
+- source: )
+  scopes:
+    - punctuation.section.parameters.end.bracket.round
+- source: '{'
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.function.definition
+  scopesEnd:
+    - meta.head.function.definition
+- source: //
+  scopesBegin:
+    - meta.body.function.definition
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' #691: the return-type token must not swallow the body or semicolon.'
+  scopesEnd:
+    - comment.line.double-slash
+- source: auto
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: empty
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
+- source: '['
+  scopes:
+    - punctuation.definition.capture.begin.lambda
+- source: ']'
+  scopes:
+    - punctuation.definition.capture.end.lambda
+- source: (
+  scopesBegin:
+    - meta.function.definition.parameters.lambda
+  scopes:
+    - punctuation.definition.parameters.begin.lambda
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.lambda
+  scopesEnd:
+    - meta.function.definition.parameters.lambda
+- source: '->'
+  scopes:
+    - punctuation.definition.lambda.return-type
+- source: auto
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '{'
+  scopesBegin:
+    - meta.function.definition.body.lambda
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.lambda
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.lambda
+  scopesEnd:
+    - meta.assignment
+    - meta.function.definition.body.lambda
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: //
+  scopesBegin:
+    - comment.line.double-slash
+  scopes:
+    - punctuation.definition.comment
+- source: ' #704: the body must start even without whitespace before its brace.'
+  scopesEnd:
+    - comment.line.double-slash
+- source: auto
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: add
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
+- source: '['
+  scopes:
+    - punctuation.definition.capture.begin.lambda
+- source: '&'
+  scopes:
+    - meta.lambda.capture
+    - keyword.operator.bitwise
+- source: ']'
+  scopes:
+    - punctuation.definition.capture.end.lambda
+- source: (
+  scopesBegin:
+    - meta.function.definition.parameters.lambda
+  scopes:
+    - punctuation.definition.parameters.begin.lambda
+- source: int
+  scopesBegin:
+    - meta.parameter
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: a
+  scopes:
+    - variable.parameter
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: b
+  scopes:
+    - variable.parameter
+  scopesEnd:
+    - meta.parameter
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.lambda
+  scopesEnd:
+    - meta.function.definition.parameters.lambda
+- source: '->'
+  scopes:
+    - punctuation.definition.lambda.return-type
+- source: int
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '{'
+  scopesBegin:
+    - meta.function.definition.body.lambda
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.lambda
+- source: return
+  scopes:
+    - keyword.control.return
+- source: a
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.a
+- source: +
+  scopes:
+    - keyword.operator.arithmetic
+- source: b
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.b
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.lambda
+  scopesEnd:
+    - meta.assignment
+    - meta.function.definition.body.lambda
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: auto
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: qualified
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
+- source: '['
+  scopes:
+    - punctuation.definition.capture.begin.lambda
+- source: ']'
+  scopes:
+    - punctuation.definition.capture.end.lambda
+- source: '->'
+  scopes:
+    - punctuation.definition.lambda.return-type
+- source: boost
+  scopesBegin:
+    - meta.qualified-type
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: asio
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: awaitable
+  scopes:
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: void
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified-type
+    - meta.template.call
+- source: '{'
+  scopesBegin:
+    - meta.function.definition.body.lambda
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.lambda
+- source: return
+  scopes:
+    - keyword.control.return
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.lambda
+  scopesEnd:
+    - meta.assignment
+    - meta.function.definition.body.lambda
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: auto
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: qualified_spaced
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.snake-case
+    - variable.other.assignment
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
+- source: '['
+  scopes:
+    - punctuation.definition.capture.begin.lambda
+- source: ']'
+  scopes:
+    - punctuation.definition.capture.end.lambda
+- source: (
+  scopesBegin:
+    - meta.function.definition.parameters.lambda
+  scopes:
+    - punctuation.definition.parameters.begin.lambda
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.lambda
+  scopesEnd:
+    - meta.function.definition.parameters.lambda
+- source: '->'
+  scopes:
+    - punctuation.definition.lambda.return-type
+- source: boost
+  scopesBegin:
+    - meta.qualified-type
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: asio
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: awaitable
+  scopes:
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: void
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified-type
+    - meta.template.call
+- source: '{'
+  scopesBegin:
+    - meta.function.definition.body.lambda
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.lambda
+- source: return
+  scopes:
+    - keyword.control.return
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.lambda
+  scopesEnd:
+    - meta.assignment
+    - meta.function.definition.body.lambda
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: auto
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: nested
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
+- source: '['
+  scopes:
+    - punctuation.definition.capture.begin.lambda
+- source: ']'
+  scopes:
+    - punctuation.definition.capture.end.lambda
+- source: (
+  scopesBegin:
+    - meta.function.definition.parameters.lambda
+  scopes:
+    - punctuation.definition.parameters.begin.lambda
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.lambda
+  scopesEnd:
+    - meta.function.definition.parameters.lambda
+- source: '->'
+  scopes:
+    - punctuation.definition.lambda.return-type
+- source: std
+  scopesBegin:
+    - meta.qualified-type
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: vector
+  scopes:
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: std
+  scopes:
+    - entity.name.scope-resolution.template.call
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution.template.call
+- source: pair
+  scopesBegin:
+    - meta.qualified-type
+  scopes:
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: int
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: ','
+  scopes:
+    - punctuation.separator.delimiter.comma.template.argument
+- source: long
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified-type
+    - meta.template.call
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified-type
+    - meta.template.call
+- source: '{'
+  scopesBegin:
+    - meta.function.definition.body.lambda
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.lambda
+- source: return
+  scopes:
+    - keyword.control.return
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.lambda
+  scopesEnd:
+    - meta.assignment
+    - meta.function.definition.body.lambda
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: auto
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: multiline
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
+- source: '['
+  scopes:
+    - punctuation.definition.capture.begin.lambda
+- source: ']'
+  scopes:
+    - punctuation.definition.capture.end.lambda
+- source: (
+  scopesBegin:
+    - meta.function.definition.parameters.lambda
+  scopes:
+    - punctuation.definition.parameters.begin.lambda
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.lambda
+  scopesEnd:
+    - meta.function.definition.parameters.lambda
+- source: '->'
+  scopes:
+    - punctuation.definition.lambda.return-type
+- source: boost
+  scopesBegin:
+    - meta.qualified-type
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: asio
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: awaitable
+  scopes:
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: void
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified-type
+    - meta.template.call
+- source: '{'
+  scopesBegin:
+    - meta.function.definition.body.lambda
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.lambda
+- source: return
+  scopes:
+    - keyword.control.return
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.lambda
+  scopesEnd:
+    - meta.assignment
+    - meta.function.definition.body.lambda
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: auto
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: pointer
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
+- source: '['
+  scopes:
+    - punctuation.definition.capture.begin.lambda
+- source: ']'
+  scopes:
+    - punctuation.definition.capture.end.lambda
+- source: (
+  scopesBegin:
+    - meta.function.definition.parameters.lambda
+  scopes:
+    - punctuation.definition.parameters.begin.lambda
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.lambda
+  scopesEnd:
+    - meta.function.definition.parameters.lambda
+- source: '->'
+  scopes:
+    - punctuation.definition.lambda.return-type
+- source: void
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '*'
+  scopes:
+    - storage.modifier.pointer
+- source: '{'
+  scopesBegin:
+    - meta.function.definition.body.lambda
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.lambda
+- source: return
+  scopes:
+    - keyword.control.return
+- source: nullptr
+  scopes:
+    - constant.language.nullptr
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.lambda
+  scopesEnd:
+    - meta.assignment
+    - meta.function.definition.body.lambda
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: auto
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: reference
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
+- source: '['
+  scopes:
+    - punctuation.definition.capture.begin.lambda
+- source: ']'
+  scopes:
+    - punctuation.definition.capture.end.lambda
+- source: (
+  scopesBegin:
+    - meta.function.definition.parameters.lambda
+  scopes:
+    - punctuation.definition.parameters.begin.lambda
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.lambda
+  scopesEnd:
+    - meta.function.definition.parameters.lambda
+- source: '->'
+  scopes:
+    - punctuation.definition.lambda.return-type
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: int
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '&'
+  scopes:
+    - storage.modifier.reference
+- source: '{'
+  scopesBegin:
+    - meta.function.definition.body.lambda
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.lambda
+- source: static
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - storage.modifier.specifier.static
+- source: const
+  scopes:
+    - storage.modifier.specifier.const
+- source: int
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: value
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
+- source: '1'
+  scopes:
+    - constant.numeric.decimal
+  scopesEnd:
+    - meta.assignment
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: return
+  scopes:
+    - keyword.control.return
+- source: value
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.value
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.lambda
+  scopesEnd:
+    - meta.assignment
+    - meta.function.definition.body.lambda
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: auto
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: expression
+  scopesBegin:
+    - meta.assignment
+  scopes:
+    - variable.lower-case
+    - variable.other.assignment
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+  scopesEnd:
+    - meta.assignment
+- source: '['
+  scopes:
+    - punctuation.definition.capture.begin.lambda
+- source: ']'
+  scopes:
+    - punctuation.definition.capture.end.lambda
+- source: (
+  scopesBegin:
+    - meta.function.definition.parameters.lambda
+  scopes:
+    - punctuation.definition.parameters.begin.lambda
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.lambda
+  scopesEnd:
+    - meta.function.definition.parameters.lambda
+- source: '->'
+  scopes:
+    - punctuation.definition.lambda.return-type
+- source: decltype
+  scopes:
+    - keyword.operator.functionlike
+    - keyword.other.decltype
+    - storage.type.decltype
+- source: (
+  scopes:
+    - punctuation.section.arguments.begin.bracket.round.decltype
+- source: '1'
+  scopesBegin:
+    - meta.arguments.decltype
+  scopes:
+    - constant.numeric.decimal
+- source: +
+  scopes:
+    - keyword.operator.arithmetic
+- source: '2'
+  scopes:
+    - constant.numeric.decimal
+  scopesEnd:
+    - meta.arguments.decltype
+- source: )
+  scopes:
+    - punctuation.section.arguments.end.bracket.round.decltype
+- source: '{'
+  scopesBegin:
+    - meta.function.definition.body.lambda
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.lambda
+- source: return
+  scopes:
+    - keyword.control.return
+- source: '3'
+  scopes:
+    - constant.numeric.decimal
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.lambda
+  scopesEnd:
+    - meta.assignment
+    - meta.function.definition.body.lambda
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.function.definition
+  scopesEnd:
+    - meta.function.definition
+    - meta.body.function.definition
+- source: '#'
+  scopesBegin:
+    - meta.preprocessor.macro
+    - keyword.control.directive.define
+  scopes:
+    - punctuation.definition.directive
+- source: define
+  scopesEnd:
+    - keyword.control.directive.define
+- source: MAKE_LAMBDA
+  scopes:
+    - entity.name.function.preprocessor
+- source: (
+  scopes:
+    - punctuation.definition.parameters.begin.preprocessor
+- source: name
+  scopes:
+    - meta.function.preprocessor.parameters
+    - variable.parameter.preprocessor
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.preprocessor
+- source: auto
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: name
+  scopes:
+    - variable.lower-case
+    - variable.other.unknown.name
+- source: '='
+  scopes:
+    - keyword.operator.assignment
+- source: '['
+  scopes:
+    - punctuation.definition.capture.begin.lambda
+- source: ']'
+  scopes:
+    - punctuation.definition.capture.end.lambda
+- source: (
+  scopesBegin:
+    - meta.function.definition.parameters.lambda
+  scopes:
+    - punctuation.definition.parameters.begin.lambda
+- source: )
+  scopes:
+    - punctuation.definition.parameters.end.lambda
+  scopesEnd:
+    - meta.function.definition.parameters.lambda
+- source: '->'
+  scopes:
+    - punctuation.definition.lambda.return-type
+- source: boost
+  scopesBegin:
+    - meta.qualified-type
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: asio
+  scopes:
+    - entity.name.scope-resolution
+- source: '::'
+  scopes:
+    - punctuation.separator.namespace.access
+    - punctuation.separator.scope-resolution
+- source: awaitable
+  scopes:
+    - entity.name.type
+- source: <
+  scopesBegin:
+    - meta.template.call
+  scopes:
+    - punctuation.section.angle-brackets.begin.template.call
+- source: void
+  scopes:
+    - storage.type.primitive
+    - storage.type.built-in.primitive
+- source: '>'
+  scopes:
+    - punctuation.section.angle-brackets.end.template.call
+  scopesEnd:
+    - meta.qualified-type
+    - meta.template.call
+- source: '{'
+  scopesBegin:
+    - meta.function.definition.body.lambda
+  scopes:
+    - punctuation.section.block.begin.bracket.curly.lambda
+- source: return
+  scopes:
+    - keyword.control.return
+- source: '{'
+  scopesBegin:
+    - meta.block
+  scopes:
+    - punctuation.section.block.begin.bracket.curly
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly
+  scopesEnd:
+    - meta.block
+- source: ;
+  scopes:
+    - punctuation.terminator.statement
+- source: '}'
+  scopes:
+    - punctuation.section.block.end.bracket.curly.lambda

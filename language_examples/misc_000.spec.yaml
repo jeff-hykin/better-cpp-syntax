@@ -5328,7 +5328,8 @@
     - punctuation.definition.lambda.return-type
 - source: Ret
   scopes:
-    - storage.type.return-type.lambda
+    - meta.qualified-type
+    - entity.name.type
 - source: '{'
   scopesBegin:
     - meta.function.definition.body.lambda
@@ -7149,7 +7150,8 @@
     - punctuation.definition.lambda.return-type
 - source: Ret
   scopes:
-    - storage.type.return-type.lambda
+    - meta.qualified-type
+    - entity.name.type
 - source: '{'
   scopesBegin:
     - meta.function.definition.body.lambda
@@ -7226,7 +7228,8 @@
     - punctuation.definition.lambda.return-type
 - source: Ret
   scopes:
-    - storage.type.return-type.lambda
+    - meta.qualified-type
+    - entity.name.type
 - source: '{'
   scopesBegin:
     - meta.function.definition.body.lambda
@@ -7449,7 +7452,9 @@
     - punctuation.definition.lambda.return-type
 - source: int
   scopes:
-    - storage.type.return-type.lambda
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: '{'
   scopesBegin:
     - meta.function.definition.body.lambda
@@ -7608,7 +7613,8 @@
     - punctuation.definition.lambda.return-type
 - source: Ret
   scopes:
-    - storage.type.return-type.lambda
+    - meta.qualified-type
+    - entity.name.type
 - source: '{'
   scopesBegin:
     - meta.function.definition.body.lambda
@@ -7748,7 +7754,8 @@
     - punctuation.definition.lambda.return-type
 - source: Ret
   scopes:
-    - storage.type.return-type.lambda
+    - meta.qualified-type
+    - entity.name.type
 - source: '{'
   scopesBegin:
     - meta.function.definition.body.lambda
@@ -7792,7 +7799,9 @@
     - punctuation.definition.lambda.return-type
 - source: int
   scopes:
-    - storage.type.return-type.lambda
+    - meta.qualified-type
+    - storage.type.primitive
+    - storage.type.built-in.primitive
 - source: '{'
   scopesBegin:
     - meta.function.definition.body.lambda

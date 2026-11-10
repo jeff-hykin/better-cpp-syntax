@@ -2317,10 +2317,8 @@ grammar = Grammar.new(
                     ),
                 includes: [
                     :comments,
-                    Pattern.new(
-                        tag_as: "storage.type.return-type.lambda",
-                        match: /\S+/,
-                    ),
+                    :simple_type,
+                    :storage_types,
                 ],
             ),
             # then find the body
